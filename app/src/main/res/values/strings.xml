@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">FutbolParaTroncos</string>
+    <!-- Pantalla inicial -->
+    <string name="lblFPT">FPT</string>
+    <string name="textUser">Ingrese nombre de usuario</string>
+    <string name="textPass">**********</string>
+    <string name="btnLogin">Iniciar Sesión</string>
+
+    <!-- Pantalla home -->
+    <string name="btnLogout">Cerrar Sesión</string>
+
+
 </resources>
