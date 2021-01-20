@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activity.ActivityMain">
+
+    <TextView
+        android:id="@+id/lblFPT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblFPT"
+        android:textSize="40sp"/>
+
+    <ImageView
+        android:id="@+id/imageBall"
+        android:layout_width="217dp"
+        android:layout_height="339dp"
+        android:src="@drawable/football_ball" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="300sp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/hintNameUser"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="300sp"
+        android:layout_height="35dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/hintTextPass"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnLogin" />
+
+</LinearLayout>

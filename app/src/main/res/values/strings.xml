@@ -1,13 +1,23 @@
 <resources>
-    <string name="app_name">FutbolParaTroncos</string>
-    <!-- Pantalla inicial -->
+    <string name="app_name">FÚTBOL PARA TRONCOS</string>
+    <!-- session -->
     <string name="lblFPT">FPT</string>
-    <string name="textUser">Ingrese nombre de usuario</string>
-    <string name="textPass">**********</string>
+    <string name="hintNameUser">Ingrese nombre de usuario</string>
+    <string name="hintTextPass">**********</string>
     <string name="btnLogin">Iniciar Sesión</string>
 
-    <!-- Pantalla home -->
+    <!-- menu -->
     <string name="btnLogout">Cerrar Sesión</string>
+
+    <!-- fields -->
+    <string name="textFields">CANCHAS</string>
+
+    <!-- comments -->
+    <string name="textComments">COMENTARIOS</string>
+
+    <!-- new comment -->
+    <string name="textNewComment">NUEVO COMENTARIO</string>
+    <string name="btnAddComment">Añadir comentario</string>
 
 
 </resources>
