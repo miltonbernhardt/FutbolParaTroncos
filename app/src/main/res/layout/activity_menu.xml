@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -14,26 +15,50 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/app_name"
+        app:titleTextAppearance="@style/size_title_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="2"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/padding_container">
+
+        <TextView
+            android:id="@+id/textWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/lblWelcome"
+            android:textSize="@dimen/size_title" />
 
         <ImageView
             android:id="@+id/imageLogo"
             android:layout_width="217dp"
-            android:layout_height="339dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:src="@drawable/football_ball" />
 
-        <Button
-            android:id="@+id/btnAddComment"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50sp"
-            android:text="@string/btnLogout" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAddComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/btnLogout"
+                android:textSize="@dimen/size_text_button" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -14,50 +15,68 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/app_name"
+        app:titleTextAppearance="@style/size_title_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingStart="5sp"
-        android:paddingEnd="5sp">
+        android:paddingHorizontal="@dimen/padding_container"
+        android:paddingVertical="@dimen/padding_container">
 
         <TextView
-            android:id="@+id/textFields"
+            android:id="@+id/lblNewComment"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/textNewComment"
-            android:textSize="25sp" />
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/lblNewComment"
+            android:textSize="@dimen/size_title" />
 
         <EditText
-            android:id="@+id/edit_text"
+            android:id="@+id/textComment"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_marginTop="50sp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="top"
             android:inputType="text|textMultiLine" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50sp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnAddComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnAddComment" />
+                android:text="@string/btnAddComment"
+                android:textSize="@dimen/size_text_button" />
 
-            <ImageButton
+            <Space
+                android:layout_width="@dimen/space"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <!--<ImageButton
                 android:id="@+id/btnCamera"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:background="@drawable/camera"
-                android:text="Button" />
+                android:text="Button" />-->
+
+            <Button
+                android:id="@+id/btnCamera"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/camera" />
         </LinearLayout>
 
     </LinearLayout>

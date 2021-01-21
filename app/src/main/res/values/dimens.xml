@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="space_large">16dp</dimen>
-    <dimen name="space_small">8dp</dimen>
+    <!--  MARGIN AND PADDING -->
+    <dimen name="padding_container">5sp</dimen>
 
-    <dimen name="space_for_border_background">4dp</dimen>
+    <!-- FUENTES -->
+    <dimen name="size_title">28sp</dimen>
+    <dimen name="size_subtitle">23sp</dimen>
+    <style name="size_title_toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <dimen name="size_field_text">18sp</dimen>
+    <dimen name="size_text_button">18sp</dimen>
 
-    <dimen name="padding_list_row">8px</dimen>
+    <dimen name="space">13sp</dimen>
 
-    <dimen name="corner_radius">15dp</dimen>
     <dimen name="card_elevation">5dp</dimen>
+    <dimen name="corner_radius">15dp</dimen>
 </resources>

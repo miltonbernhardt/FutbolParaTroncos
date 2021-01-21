@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
+    android:paddingHorizontal="@dimen/padding_container"
+    android:paddingVertical="@dimen/padding_container"
     tools:context=".activity.ActivityMain">
 
     <TextView
-        android:id="@+id/lblFPT"
+        android:id="@+id/lblFTP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lblFPT"
-        android:textSize="40sp"/>
+        android:text="@string/app_name"
+        android:textSize="@dimen/size_title" />
 
     <ImageView
         android:id="@+id/imageBall"
@@ -22,25 +25,37 @@
         android:src="@drawable/football_ball" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/textUsername"
         android:layout_width="300sp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/hintNameUser"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textSize="@dimen/size_field_text" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/textPassword"
         android:layout_width="300sp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/hintTextPass"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textSize="@dimen/size_field_text" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnLogin" />

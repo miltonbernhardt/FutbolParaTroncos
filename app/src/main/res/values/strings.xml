@@ -1,22 +1,23 @@
 <resources>
     <string name="app_name">FÚTBOL PARA TRONCOS</string>
+
     <!-- session -->
-    <string name="lblFPT">FPT</string>
     <string name="hintNameUser">Ingrese nombre de usuario</string>
     <string name="hintTextPass">**********</string>
     <string name="btnLogin">Iniciar Sesión</string>
 
     <!-- menu -->
+    <string name="lblWelcome">BIENVENIDOS!</string>
     <string name="btnLogout">Cerrar Sesión</string>
 
     <!-- fields -->
-    <string name="textFields">CANCHAS</string>
+    <string name="lblFields">CANCHAS</string>
 
     <!-- comments -->
-    <string name="textComments">COMENTARIOS</string>
+    <string name="lblComments">COMENTARIOS</string>
 
     <!-- new comment -->
-    <string name="textNewComment">NUEVO COMENTARIO</string>
+    <string name="lblNewComment">NUEVO COMENTARIO</string>
     <string name="btnAddComment">Añadir comentario</string>
 
 
