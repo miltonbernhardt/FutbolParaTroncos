@@ -2,24 +2,29 @@
     <string name="app_name">FPTs</string>
     <string name="name_title">FÚTBOL PARA TRONCOS</string>
 
-    <!-- activity session -->
-    <string name="hintNameUser">Ingrese nombre de usuario</string>
-    <string name="hintTextPass">Contraseña</string>
-    <string name="btnLogin">Iniciar Sesión</string>
-
-    <!-- activity menu -->
-    <string name="lblWelcome">BIENVENIDOS!</string>
-    <string name="btnLogout">Cerrar Sesión</string>
-
-    <!-- activity fields -->
-    <string name="lblFields">CANCHAS</string>
-
-    <!-- activity comments -->
+    <!-- activity_comments_recycler -->
     <string name="lblComments">COMENTARIOS</string>
 
-    <!-- activity new comment -->
+    <!-- activity_fields -->
+    <string name="lblFields">CANCHAS</string>
+
+    <!-- activity_menu -->
+    <string name="lblWelcome">BIENVENIDOS!</string>
+    <string name="btnLogout">Cerrar sesión</string>
+
+    <!-- activity_new_comment -->
     <string name="lblNewComment">NUEVO COMENTARIO</string>
     <string name="btnAddComment">Añadir comentario</string>
 
+    <!-- activity_session -->
+    <string name="hintNameUser">Ingrese nombre de usuario</string>
+    <string name="hintTextPass">Contraseña</string>
+    <string name="btnLogin">Iniciar sesión</string>
+
+    <!-- row_comment -->
+    <string name="btnReserve">Reservar</string>
+    <string name="btnScore">Reseñar</string>
+
+    <!-- row_field -->
 
 </resources>

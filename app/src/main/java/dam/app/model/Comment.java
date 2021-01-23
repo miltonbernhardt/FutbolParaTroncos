@@ -36,9 +36,8 @@ public class Comment {
     @ColumnInfo(name="comment")
     private String comment;
 
-    //from 0 to 5 with 1 decimal
     @ColumnInfo(name="score")
-    private float score;
+    private int score;
 
     public long getIdUser() {
         return idUser;
@@ -80,11 +79,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public float getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(float score) {
+    public void setScore(int score) {
         this.score = score;
     }
 }
