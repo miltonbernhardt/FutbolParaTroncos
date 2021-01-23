@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/padding_container"
     android:paddingVertical="@dimen/padding_container"
-    tools:context=".activity.ActivityMain">
+    tools:context=".activity.ActivitySession">
 
     <TextView
         android:id="@+id/lblFTP"

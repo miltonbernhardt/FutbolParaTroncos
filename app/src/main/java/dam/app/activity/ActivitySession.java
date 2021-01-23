@@ -1,4 +1,16 @@
 package dam.app.activity;
 
-public class ActivitySession {
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import dam.app.R;
+
+public class ActivitySession extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_session);
+    }
 }
