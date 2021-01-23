@@ -19,7 +19,7 @@
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
-        app:title="@string/app_name"
+        app:title="@string/name_title"
         app:titleTextAppearance="@style/size_title_toolbar" />
 
     <LinearLayout

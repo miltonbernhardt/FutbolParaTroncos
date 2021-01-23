@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">FÚTBOL PARA TRONCOS</string>
+    <string name="app_name">FPTs</string>
+    <string name="name_title">FÚTBOL PARA TRONCOS</string>
 
     <!-- session -->
     <string name="hintNameUser">Ingrese nombre de usuario</string>
-    <string name="hintTextPass">**********</string>
+    <string name="hintTextPass">Contraseña</string>
     <string name="btnLogin">Iniciar Sesión</string>
 
     <!-- menu -->
