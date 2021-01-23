@@ -1,6 +1,7 @@
 package dam.app.dao;
 
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import dam.app.model.Field;
 
+@Dao
 public interface DAOField {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insert(Field field);

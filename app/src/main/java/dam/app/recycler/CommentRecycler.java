@@ -1,4 +1,4 @@
-package dam.app.adapter;
+package dam.app.recycler;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,38 +10,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import dam.app.R;
-import dam.app.activity.ActivityFields;
+import dam.app.activity.ActivityComments;
 import dam.app.model.Field;
 
-public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.ViewHolderField> {
+public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHolderComment> {
 
-    private final ActivityFields activityFields;
+    private final ActivityComments activityComments;
     private final List<Field> fieldList;
 
-    public FieldRecycler(ActivityFields activityFields, List<Field> fieldListParameter){
-        this.activityFields = activityFields;
-        this.fieldList = fieldListParameter;
+    public CommentRecycler(ActivityComments activityComments, List<Field> plateListParameter){
+        this.activityComments = activityComments;
+        this.fieldList = plateListParameter;
     }
 
-    public static class ViewHolderField extends RecyclerView.ViewHolder {
+    public static class ViewHolderComment extends RecyclerView.ViewHolder {
         //ToDo setear bien los campos cuando se termine la vista row_field
         /*ImageView plateImage;
         CardView cardViewPlate;
         TextView textTitle;
         Button btnVer;*/
 
-        public ViewHolderField(@NonNull View itemView) {
+        public ViewHolderComment(@NonNull View itemView) {
             super(itemView);
         }
     }
 
     @NonNull
-    public ViewHolderField onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_field, parent, false);
-        return new ViewHolderField(view);
+    public ViewHolderComment onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_comment, parent, false);
+        return new CommentRecycler.ViewHolderComment(view);
     }
 
-    public void onBindViewHolder(@NonNull final ViewHolderField fieldHolder, int position) {
+    public void onBindViewHolder(@NonNull final CommentRecycler.ViewHolderComment commentHolder, int position) {
         //ToDo setear bien los campos cuando se termine la vista row_field
        /* plateHolder.plate = plateList.get(position);
         plateHolder.cardViewPlate.setTag(position);

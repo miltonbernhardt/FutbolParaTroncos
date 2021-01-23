@@ -1,5 +1,6 @@
 package dam.app.dao;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import dam.app.model.Schedule;
 
+@Dao
 public interface DAOSchedule {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insert(Schedule schedule);

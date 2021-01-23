@@ -23,6 +23,9 @@ public class Field {
     @ColumnInfo(name="phoneOfContact")
     private String phoneOfContact;
 
+    @ColumnInfo(name="rating")
+    private float rating;
+
     public long getId() {
         return id;
     }
@@ -53,5 +56,13 @@ public class Field {
 
     public void setPhoneOfContact(String phoneOfContact) {
         this.phoneOfContact = phoneOfContact;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

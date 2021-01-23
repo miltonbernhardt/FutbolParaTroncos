@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE))
+@Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
 public class Schedule {
     /* ---- RELATIONS ---- */
     @ColumnInfo(name="idField")
@@ -20,7 +21,7 @@ public class Schedule {
     @ColumnInfo(name="id")
     private long id;
 
-    @ColumnInfo(name="id")
+    @ColumnInfo(name="monday")
     private boolean MONDAY = false;
     @ColumnInfo(name="tuesday")
     private boolean TUESDAY = false;

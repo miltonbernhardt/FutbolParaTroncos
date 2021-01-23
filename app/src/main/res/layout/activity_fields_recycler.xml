@@ -4,20 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroundRecycler"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:title="@string/name_title"
-        app:titleTextAppearance="@style/size_title_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,20 +17,12 @@
         android:paddingHorizontal="@dimen/padding_container"
         android:paddingVertical="@dimen/padding_container">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space" />
-
         <TextView
             android:id="@+id/lblNewComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lblFields"
             android:textSize="@dimen/size_title" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerComments"

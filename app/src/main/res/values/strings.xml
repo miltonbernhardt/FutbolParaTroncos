@@ -9,21 +9,25 @@
     <string name="lblFields">CANCHAS</string>
 
     <!-- activity_menu -->
-    <string name="lblWelcome">BIENVENIDOS!</string>
+
     <string name="btnLogout">Cerrar sesión</string>
+    <string name="lblWelcome">BIENVENIDOS!</string>
 
     <!-- activity_new_comment -->
-    <string name="lblNewComment">NUEVO COMENTARIO</string>
+
     <string name="btnAddComment">Añadir comentario</string>
+    <string name="lblNewComment">NUEVO COMENTARIO</string>
 
     <!-- activity_session -->
+
+    <string name="btnLogin">Iniciar sesión</string>
     <string name="hintNameUser">Ingrese nombre de usuario</string>
     <string name="hintTextPass">Contraseña</string>
-    <string name="btnLogin">Iniciar sesión</string>
 
     <!-- row_comment -->
     <string name="btnReserve">Reservar</string>
-    <string name="btnScore">Reseñar</string>
+    <string name="btnReviews">Reseñas</string>
+    <string name="lblTitleFieldRow">Los sin sangre</string>
 
     <!-- row_field -->
 
