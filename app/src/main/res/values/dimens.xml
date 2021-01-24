@@ -6,6 +6,7 @@
     <!-- FUENTES -->
     <dimen name="size_title">28sp</dimen>
     <dimen name="size_subtitle">23sp</dimen>
+    <dimen name="size_sub_subtitle">14sp</dimen>
     <style name="size_title_toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:textSize">25sp</item>
     </style>
@@ -13,8 +14,10 @@
     <dimen name="size_text_button">18sp</dimen>
     <dimen name="size_text_small_button">12sp</dimen>
 
+    <dimen name="size_image_button">26sp</dimen>
+
     <dimen name="space">13sp</dimen>
 
-    <dimen name="card_elevation">5dp</dimen>
-    <dimen name="corner_radius">15dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
 </resources>

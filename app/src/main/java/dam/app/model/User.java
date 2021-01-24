@@ -33,6 +33,13 @@ public class User {
     @ColumnInfo(name="birth")
     private LocalDate birth;
 
+    public User(){
+        userName = "";
+        key = "";
+        phone = "";
+        birth = LocalDate.now();
+    }
+
     public long getId() {
         return id;
     }

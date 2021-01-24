@@ -51,7 +51,6 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.2.6"
     androidTestImplementation "androidx.room:room-testing:2.2.6"
 
-
     //PARA TEST UNITARIOS
 
     testImplementation 'junit:junit:4.13.1'

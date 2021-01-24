@@ -11,7 +11,7 @@
         android:theme="@style/Theme.FutbolParaTroncos"
         android:usesCleartextTraffic="true">
 
-        <activity android:name="dam.app.activity.ActivityFields">
+        <activity android:name="dam.app.activity.ActivitySession">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

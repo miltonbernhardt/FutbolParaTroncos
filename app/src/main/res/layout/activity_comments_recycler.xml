@@ -4,31 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundRecycler"
     android:gravity="center"
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerComments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal|top"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/padding_container"
-        android:paddingVertical="@dimen/padding_container">
-
-        <TextView
-            android:id="@+id/lblNewComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblComments"
-            android:textSize="@dimen/size_title" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerComments"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+        android:background="@color/colorOnPrimaryVariant" />
 
 </LinearLayout>

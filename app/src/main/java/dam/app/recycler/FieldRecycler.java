@@ -39,6 +39,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         CardView cardViewField;
         ImageView imageField;
         RatingBar ratingBarField;
+        TextView lblAddressFieldRow;
         TextView lblTitleFieldRow;
 
         Field field;
@@ -52,10 +53,8 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             imageField = v.findViewById(R.id.imageField);
             ratingBarField = v.findViewById(R.id.ratingBarFieldRow);
             LayerDrawable stars = (LayerDrawable) ratingBarField.getProgressDrawable();
-            //ToDo FielHolder PONERLE BORDE
-            stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(0).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(1).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);//las estrellas vacias
+            lblAddressFieldRow = v.findViewById(R.id.lblAddressFieldRow);
             lblTitleFieldRow = v.findViewById(R.id.lblTitleFieldRow);
         }
     }
@@ -73,16 +72,34 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         fieldHolder.cardViewField.setTag(position);
         fieldHolder.imageField.setTag(position);
         fieldHolder.lblTitleFieldRow.setTag(position);
+        fieldHolder.lblAddressFieldRow.setTag(position);
         fieldHolder.ratingBarField.setTag(position);
 
-        //ToDo FieldRecycler setear todo de acuerdo a lo que haya en la base de datos
+        //ToDo FieldRecycler cambiar esto cuando se haya guardado bien las imágenes
         fieldHolder.field = fieldList.get(position);
         //Si está o no en la bd
-        if(true) fieldHolder.imageField.setImageResource(R.drawable.f5field);
-        else fieldHolder.imageField.setImageResource(R.drawable.no_image_avaible);
+        switch (fieldHolder.field.getImageUUID()){
+            default:
+            case "":
+                fieldHolder.imageField.setImageResource(R.drawable.image_no_image_available);
+                break;
+            case "a":
+                fieldHolder.imageField.setImageResource(R.drawable.image_field_a);
+                break;
+            case "b":
+                fieldHolder.imageField.setImageResource(R.drawable.image_field_b);
+                break;
+            case "c":
+                fieldHolder.imageField.setImageResource(R.drawable.image_field_c);
+                break;
+            case "d":
+                fieldHolder.imageField.setImageResource(R.drawable.image_field_d);
+                break;
+        }
 
-        fieldHolder.lblTitleFieldRow.setText(R.string.lblTitleFieldRow);
-        fieldHolder.ratingBarField.setRating(3.5f);
+        fieldHolder.lblTitleFieldRow.setText(fieldHolder.field.getName().toUpperCase());
+        fieldHolder.lblAddressFieldRow.setText(fieldHolder.field.getAddress().toUpperCase());
+        fieldHolder.ratingBarField.setRating(fieldHolder.field.getRating());
 
 
         fieldHolder.btnLocate.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,9 @@ public class Field {
     @ColumnInfo(name="name")
     private String name;
 
+    @ColumnInfo(name="price")
+    private float price;
+
     //ToDo see when the maps is done
     @ColumnInfo(name="address")
     private String address;
@@ -25,6 +28,14 @@ public class Field {
 
     @ColumnInfo(name="rating")
     private float rating;
+
+    @ColumnInfo(name="imageUUID")
+    private String imageUUID;
+
+    public Field() {
+        name = address = phoneOfContact = imageUUID = "";
+        rating = 0f;
+    }
 
     public long getId() {
         return id;
@@ -40,6 +51,14 @@ public class Field {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public String getAddress() {
@@ -64,5 +83,13 @@ public class Field {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public String getImageUUID() {
+        return imageUUID;
+    }
+
+    public void setImageUUID(String imageUUID) {
+        this.imageUUID = imageUUID;
     }
 }

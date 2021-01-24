@@ -40,6 +40,12 @@ public class Reserve {
     @ColumnInfo(name="finishTime")
     private int finishTime;
 
+    public Reserve(){
+        dateOfReserve = LocalDate.now();
+        startTime = 0;
+        finishTime = 0;
+    }
+
     public long getIdUser() {
         return idUser;
     }

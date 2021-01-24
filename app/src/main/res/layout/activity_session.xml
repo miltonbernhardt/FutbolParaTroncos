@@ -22,7 +22,7 @@
         android:id="@+id/imageBall"
         android:layout_width="217dp"
         android:layout_height="339dp"
-        android:src="@drawable/football_ball" />
+        android:src="@drawable/icon_football_ball" />
 
     <EditText
         android:id="@+id/textUsername"

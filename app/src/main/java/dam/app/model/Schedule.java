@@ -41,6 +41,11 @@ public class Schedule {
     @ColumnInfo(name="closingTime")
     private int closingTime;
 
+    public Schedule (){
+        openingTime = 8;
+        closingTime = 21;
+    }
+
     public long getIdField() {
         return idField;
     }

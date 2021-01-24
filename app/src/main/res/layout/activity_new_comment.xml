@@ -66,7 +66,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:background="@drawable/camera" />
+                android:background="@drawable/icon_camera" />
         </LinearLayout>
 
     </LinearLayout>

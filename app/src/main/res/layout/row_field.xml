@@ -5,101 +5,125 @@
     android:id="@+id/cardViewField"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_container"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="@color/colorOnPrimary"
     app:cardCornerRadius="@dimen/corner_radius"
     app:cardElevation="@dimen/card_elevation"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/padding_container"
-        android:paddingVertical="@dimen/padding_container"
         android:showDividers="none">
-
-        <TextView
-            android:id="@+id/lblTitleFieldRow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_container"
-            android:text="@string/lblTitleFieldRow"
-            android:textSize="@dimen/size_subtitle" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="@dimen/corner_radius"
-            app:cardElevation="@dimen/card_elevation">
-
-            <ImageView
-                android:id="@+id/imageField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:cropToPadding="true"
-                android:scaleType="fitStart"
-                android:src="@drawable/f5field"
-                tools:ignore="ContentDescription" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom|end">
-
-                <RatingBar
-                    android:id="@+id/ratingBarFieldRow"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/padding_container"
-                    android:layout_marginVertical="@dimen/padding_container"
-                    android:rating="3.5"
-                    android:stepSize="0.5" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/padding_container">
+            android:paddingVertical="@dimen/padding_container">
 
-            <Button
-                android:id="@+id/btnReserve"
+            <Space
+                android:layout_width="@dimen/space"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnReserve"
-                android:textSize="@dimen/size_text_small_button" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblTitleFieldRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblTitleFieldRow"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="@dimen/size_subtitle" />
+
+                <TextView
+                    android:id="@+id/lblAddressFieldRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_title"
+                    android:textSize="@dimen/size_sub_subtitle" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/ratingBarFieldRow"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:progressTint="@color/colorPrimaryVariant"
+                android:rating="3.5"
+                android:stepSize="0.5" />
 
             <Space
                 android:layout_width="@dimen/space"
                 android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image_no_image_available"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnReserve"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/btnReserve"
+                android:textColor="@color/colorPrimaryVariant"
+                android:textSize="@dimen/size_text_button" />
+
+            <Button
+                android:id="@+id/btnReviews"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/btnReviews"
+                android:textColor="@color/colorPrimaryVariant"
+                android:textSize="@dimen/size_text_button" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="4" />
 
             <ImageButton
                 android:id="@+id/btnLocate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/size_image_button"
+                android:layout_height="@dimen/size_image_button"
+                android:layout_gravity="center"
+                android:layout_weight="0"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/map32px"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_map_marker"
+                android:tint="@color/colorPrimaryVariant"
                 tools:ignore="ContentDescription" />
 
             <Space
                 android:layout_width="@dimen/space"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btnReviews"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnReviews"
-                android:textSize="@dimen/size_text_small_button" />
+                android:layout_weight="0" />
 
         </LinearLayout>
 

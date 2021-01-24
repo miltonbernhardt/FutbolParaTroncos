@@ -8,10 +8,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorBackgroundRecycler">@android:color/holo_blue_dark</color>
-    <color name="colorPrimary">#C0C7C2</color>
-    <color name="colorPrimaryDark">#6A7dA0</color>
+
+    <color name="colorPrimary">@color/purple_500</color>
+    <color name="colorPrimaryVariant">@color/purple_700</color>
+    <color name="colorOnPrimary">@color/white</color>
+    <color name="colorOnPrimaryVariant">@color/purple_200</color>
+
+    <color name="colorSecondary">@color/teal_200</color>
+    <color name="colorSecondaryVariant">@color/teal_700</color>
+    <color name="colorOnSecondary">@color/black</color>
+
     <color name="colorAccent">#3F51B5</color>
+
     <color name="editTextError">#ED3C4B</color>
     <color name="editTextEnabledValid">#787677</color>
     <color name="editTextNotEnable">#FFFFFF</color>

@@ -41,6 +41,12 @@ public class Comment {
     @ColumnInfo(name="score")
     private int score;
 
+    public Comment(){
+        dateOfComment = LocalDate.now();
+        comment = "";
+        score = 5;
+    }
+
     public long getIdUser() {
         return idUser;
     }

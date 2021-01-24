@@ -13,6 +13,7 @@ import java.util.List;
 import dam.app.R;
 import dam.app.database.AppRepository;
 import dam.app.database.OnResultCallback;
+import dam.app.database.VolatileData;
 import dam.app.model.Field;
 import dam.app.recycler.FieldRecycler;
 
@@ -33,18 +34,11 @@ public class ActivityFields extends AppCompatActivity implements OnResultCallbac
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<Field> a = new ArrayList<>();
-        a.add(new Field());
-        a.add(new Field());
-
-        plateAdapter = new FieldRecycler(this, a);//,this);
+        //ToDo ActivityFields cambiar cuando se hayan almacenado las canchas en la bd
+        plateAdapter = new FieldRecycler(this, VolatileData.getFields());
         recyclerView.setAdapter(plateAdapter);
 
         //repository = AppRepository.getInstance(this.getApplicationContext(),this);
-
-
-        //Toolbar toolbar = findViewById(R.id.toolbarFieldsRecycler);
-        //setSupportActionBar(toolbar);
     }
 
     @Override
