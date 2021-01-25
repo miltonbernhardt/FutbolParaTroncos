@@ -35,6 +35,10 @@ public class Comment {
     @ColumnInfo(name="dateOfComment")
     private LocalDate dateOfComment;
 
+    //Es repetir datos, pero es más esfuerzo si no se hace
+    @ColumnInfo(name="username")
+    private String username;
+
     @ColumnInfo(name="comment")
     private String comment;
 
@@ -93,5 +97,13 @@ public class Comment {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

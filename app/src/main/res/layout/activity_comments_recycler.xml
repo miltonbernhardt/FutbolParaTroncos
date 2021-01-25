@@ -4,14 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOnPrimaryVariant"
     android:gravity="center"
     android:orientation="vertical">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_container"
+        android:paddingTop="@dimen/padding_container">
+
+        <TextView
+            android:id="@+id/lblOrderComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lblOrder"
+            android:textAllCaps="true"
+            android:textColor="@color/colorOnSecondary"
+            android:textSize="@dimen/size_sub_subtitle" />
+
+        <Spinner
+            android:id="@+id/spinnerCommentsOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerComments"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorOnPrimaryVariant" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_container">
+
+        <Button
+            android:id="@+id/btnReserveOnComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnReserve"
+            android:textSize="@dimen/size_text_small_button" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnMakeOpinion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnMakeOpinion"
+            android:textSize="@dimen/size_text_small_button" />
+    </LinearLayout>
 
 </LinearLayout>

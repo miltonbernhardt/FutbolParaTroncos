@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import dam.app.R;
@@ -24,12 +26,13 @@ import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
 
-    private final ActivityFields activityFields;
-    private final List<Field> fieldList;
+    private final ActivityFields activity;
+    private final List<Field> list;
+    private final DecimalFormat df = new DecimalFormat("##.#");
 
-    public FieldRecycler(ActivityFields activityFields, List<Field> fieldListParameter){
-        this.activityFields = activityFields;
-        this.fieldList = fieldListParameter;
+    public FieldRecycler(ActivityFields activity, List<Field> list){
+        this.activity = activity;
+        this.list = list;
     }
 
     public static class FieldHolder extends RecyclerView.ViewHolder {
@@ -40,6 +43,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         ImageView imageField;
         RatingBar ratingBarField;
         TextView lblAddressFieldRow;
+        TextView lblRatingFieldRow;
         TextView lblTitleFieldRow;
 
         Field field;
@@ -49,12 +53,13 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             btnLocate = v.findViewById(R.id.btnLocate);
             btnReserve = v.findViewById(R.id.btnReserve);
             cardViewField = v.findViewById(R.id.cardViewField);
-            btnReviews = v.findViewById(R.id.btnReviews);
+            btnReviews = v.findViewById(R.id.btnOpinions);
             imageField = v.findViewById(R.id.imageField);
             ratingBarField = v.findViewById(R.id.ratingBarFieldRow);
             LayerDrawable stars = (LayerDrawable) ratingBarField.getProgressDrawable();
             stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);//las estrellas vacias
             lblAddressFieldRow = v.findViewById(R.id.lblAddressFieldRow);
+            lblRatingFieldRow = v.findViewById(R.id.lblRatingFieldRow);
             lblTitleFieldRow = v.findViewById(R.id.lblTitleFieldRow);
         }
     }
@@ -65,44 +70,48 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         return new FieldHolder(view);
     }
 
-    public void onBindViewHolder(@NonNull final FieldHolder fieldHolder, int position) {
-        fieldHolder.btnLocate.setTag(position);
-        fieldHolder.btnReserve.setTag(position);
-        fieldHolder.btnReviews.setTag(position);
-        fieldHolder.cardViewField.setTag(position);
-        fieldHolder.imageField.setTag(position);
-        fieldHolder.lblTitleFieldRow.setTag(position);
-        fieldHolder.lblAddressFieldRow.setTag(position);
-        fieldHolder.ratingBarField.setTag(position);
+    public void onBindViewHolder(@NonNull final FieldHolder holder, int position) {
+        holder.btnLocate.setTag(position);
+        holder.btnReserve.setTag(position);
+        holder.btnReviews.setTag(position);
+        holder.cardViewField.setTag(position);
+        holder.imageField.setTag(position);
+        holder.lblAddressFieldRow.setTag(position);
+        holder.lblRatingFieldRow.setTag(position);
+        holder.lblTitleFieldRow.setTag(position);
+        holder.ratingBarField.setTag(position);
 
         //ToDo FieldRecycler cambiar esto cuando se haya guardado bien las imágenes
-        fieldHolder.field = fieldList.get(position);
+        holder.field = list.get(position);
         //Si está o no en la bd
-        switch (fieldHolder.field.getImageUUID()){
+        switch (holder.field.getImageUUID()){
             default:
             case "":
-                fieldHolder.imageField.setImageResource(R.drawable.image_no_image_available);
+                holder.imageField.setImageResource(R.drawable.image_no_image_available);
                 break;
             case "a":
-                fieldHolder.imageField.setImageResource(R.drawable.image_field_a);
+                holder.imageField.setImageResource(R.drawable.image_field_a);
                 break;
             case "b":
-                fieldHolder.imageField.setImageResource(R.drawable.image_field_b);
+                holder.imageField.setImageResource(R.drawable.image_field_b);
                 break;
             case "c":
-                fieldHolder.imageField.setImageResource(R.drawable.image_field_c);
+                holder.imageField.setImageResource(R.drawable.image_field_c);
                 break;
             case "d":
-                fieldHolder.imageField.setImageResource(R.drawable.image_field_d);
+                holder.imageField.setImageResource(R.drawable.image_field_d);
                 break;
         }
 
-        fieldHolder.lblTitleFieldRow.setText(fieldHolder.field.getName().toUpperCase());
-        fieldHolder.lblAddressFieldRow.setText(fieldHolder.field.getAddress().toUpperCase());
-        fieldHolder.ratingBarField.setRating(fieldHolder.field.getRating());
+
+        holder.lblAddressFieldRow.setText(holder.field.getAddress());
+        df.setRoundingMode(RoundingMode.DOWN);
+        holder.lblRatingFieldRow.setText(df.format(holder.field.getRating()));
+        holder.lblTitleFieldRow.setText(holder.field.getName());
+        holder.ratingBarField.setRating(holder.field.getRating());
 
 
-        fieldHolder.btnLocate.setOnClickListener(new View.OnClickListener() {
+        holder.btnLocate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*Plato plato = plateList.get(plateHolder.getAdapterPosition());
@@ -114,12 +123,12 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             }
         });
 
-        fieldHolder.btnReserve.setOnClickListener(new View.OnClickListener() {
+        holder.btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {}
         });
 
-        fieldHolder.btnReviews.setOnClickListener(new View.OnClickListener() {
+        holder.btnReviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {}
         });
@@ -127,6 +136,6 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
     }
 
     public int getItemCount() {
-        return fieldList.size();
+        return list.size();
     }
 }

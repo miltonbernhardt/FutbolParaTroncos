@@ -43,7 +43,7 @@ public class AppRepository implements OnResultCallback {
 
     public static void close(){
         _INSTANCE = null;
-        db.close();
+        //db.close(); //ToDo AppRepository cambiar
     }
 
     @Override

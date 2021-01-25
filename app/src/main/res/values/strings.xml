@@ -3,8 +3,10 @@
     <string name="name_title">FÚTBOL PARA TRONCOS</string>
 
     <!-- activity_comments_recycler -->
+    <string name="btnMakeOpinion">OPINAR</string>
 
     <!-- activity_fields -->
+    <string name="lblOrder">Ordenar por:</string>
 
     <!-- activity_menu -->
 
@@ -23,10 +25,16 @@
     <string name="hintTextPass">Contraseña</string>
 
     <!-- row_comment -->
-    <string name="btnReserve">Reservar</string>
-    <string name="btnReviews">Reseñas</string>
-    <string name="lblTitleFieldRow">Los sin sangre</string>
+    <string name="textCommentRow">His method adds unneeded complexity to view hierarchy. You will need two additional views (A layout container and the border view) to use his method. Thus if you have many views you need to add border to, your view tree will grow unmanagable.</string>
+    <string name="lblTitleFieldRow">NOMBRE DE LA CANCHA</string>
+    <string name="lblRatingFieldRow">5.0</string>
+    <string name="lblDateCommentRow">27/12/2020</string>
+
+
 
     <!-- row_field -->
-
+    <string name="btnReserve">RESERVAR</string>
+    <string name="btnOpinions">OPINIONES</string>
+    <string name="lblUsernameCommentRow">PISCULICHI</string>
+    <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
 </resources>

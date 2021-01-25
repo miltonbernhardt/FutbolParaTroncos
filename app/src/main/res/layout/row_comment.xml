@@ -1,51 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardViewField"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardViewComment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/padding_container"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorPrimary"
+    app:cardBackgroundColor="@color/colorOnPrimary"
     app:cardCornerRadius="@dimen/corner_radius"
     app:cardElevation="@dimen/card_elevation"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:gravity="center|start"
         android:orientation="vertical"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:paddingHorizontal="@dimen/padding_container"
+        android:paddingVertical="@dimen/padding_container"
         android:showDividers="none">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center">
-
-            <ImageView
-                android:id="@+id/imageField"
-                android:layout_width="363dp"
-                android:layout_height="239dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="fitStart" />
-
-        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center|clip_vertical|start"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lblRatingFieldRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_container"
+                android:layout_weight="0"
+                android:background="@color/colorOnPrimaryVariant"
+                android:paddingHorizontal="@dimen/padding_container"
+                android:text="@string/lblRatingFieldRow"
+                android:textAllCaps="true" />
+
+            <RatingBar
+                android:id="@+id/ratingBarCommentRow"
+                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progressTint="@color/colorPrimaryVariant"
+                android:rating="3.5"
+                android:stepSize="0.5" />
 
             <Space
                 android:layout_width="wrap_content"
-                android:layout_height="23dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
+            <TextView
+                android:id="@+id/lblDateCommentRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/lblDateCommentRow"
+                android:textAllCaps="true"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="@dimen/size_sub_subtitle" />
+
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space" />
+
+        <TextView
+            android:id="@+id/textCommentRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:text="@string/textCommentRow"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textColor="@android:color/secondary_text_light" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space" />
+
+        <TextView
+            android:id="@+id/lblUsernameCommentRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:gravity="end"
+            android:text="@string/lblUsernameCommentRow"
+            android:textAllCaps="true"
+            android:textColor="@color/colorOnSecondary"
+            android:textSize="@dimen/size_sub_subtitle" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space" />
 
     </LinearLayout>
 

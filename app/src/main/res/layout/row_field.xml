@@ -42,26 +42,50 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lblTitleFieldRow"
+                    android:textAllCaps="true"
                     android:textColor="@android:color/secondary_text_light"
                     android:textSize="@dimen/size_subtitle" />
 
-                <TextView
-                    android:id="@+id/lblAddressFieldRow"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name_title"
-                    android:textSize="@dimen/size_sub_subtitle" />
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:gravity="center|clip_vertical|left"
+                    android:orientation="horizontal">
 
-            <RatingBar
-                android:id="@+id/ratingBarFieldRow"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:progressTint="@color/colorPrimaryVariant"
-                android:rating="3.5"
-                android:stepSize="0.5" />
+                    <TextView
+                        android:id="@+id/lblAddressFieldRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/name_title"
+                        android:textAllCaps="true"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/size_sub_subtitle" />
+
+                    <TextView
+                        android:id="@+id/lblRatingFieldRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/padding_container"
+                        android:layout_weight="0"
+                        android:background="@color/colorOnPrimaryVariant"
+                        android:paddingHorizontal="@dimen/padding_container"
+                        android:text="@string/lblRatingFieldRow"
+                        android:textAllCaps="true" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBarFieldRow"
+                        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:progressTint="@color/colorPrimaryVariant"
+                        android:rating="3.5"
+                        android:stepSize="0.5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <Space
                 android:layout_width="@dimen/space"
@@ -94,12 +118,12 @@
                 android:textSize="@dimen/size_text_button" />
 
             <Button
-                android:id="@+id/btnReviews"
+                android:id="@+id/btnOpinions"
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="@string/btnReviews"
+                android:text="@string/btnOpinions"
                 android:textColor="@color/colorPrimaryVariant"
                 android:textSize="@dimen/size_text_button" />
 

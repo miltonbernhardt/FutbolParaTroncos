@@ -1,7 +1,9 @@
 package dam.app.database;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import dam.app.model.Comment;
 import dam.app.model.Field;
 
 public  class VolatileData {
@@ -37,6 +39,41 @@ public  class VolatileData {
         a.add(f2);
         a.add(f3);
         a.add(f4);
+        return a;
+    }
+
+    public static ArrayList<Comment> getComments(){
+        ArrayList<Comment> a = new ArrayList<>();
+        Comment c1 = new Comment(), c2 = new Comment(), c3 = new Comment(), c4 = new Comment(), c5 = new Comment();
+        c1.setDateOfComment(LocalDate.now().minusDays(10));
+        c2.setDateOfComment(LocalDate.now().minusDays(8));
+        c3.setDateOfComment(LocalDate.now().minusDays(6));
+        c4.setDateOfComment(LocalDate.now().minusDays(17));
+        c5.setDateOfComment(LocalDate.now().minusDays(2));
+
+        c1.setScore(4);
+        c2.setScore(5);
+        c3.setScore(3);
+        c4.setScore(3);
+        c5.setScore(5);
+
+        c1.setUsername("Oriol Sales");
+        c2.setUsername("Javier Valdivia");
+        c3.setUsername("Moises Pallares");
+        c4.setUsername("Carlos Manuel Abril");
+        c5.setUsername("Jordi Valcarcel");
+
+        c1.setComment("bajo muchísimo la calidad de la pizza, antes traía mucho queso, salsa de buena calidad, la verdad que la que encargamos anoche no tenía condimentos, preferiría pagar más pero que sea como las de antes. gracias!.  bajo muchísimo la calidad de la pizza, antes traía mucho queso, salsa de buena calidad, la verdad que la que encargamos anoche no tenía condimentos, preferiría pagar más pero que sea como las de antes. gracias!");
+        c2.setComment("Muy buenas empanadas, abundantes no como los souveniles de otros lugares");
+        c3.setComment("las papas estaban como muy marrones daba la sensacion que el aceite que se utilizo era muy usado y los panes de la ensalada cesar no eran como los que consumi en el local, no estaban dorados,era solo pan cortado, el resto rico. las papas estaban como muy marrones daba la sensacion que el aceite que se utilizo era muy usado y los panes de la ensalada cesar no eran como los que consumi en el local, no estaban dorados,era solo pan cortado, el resto rico");
+        c4.setComment("excelente la boca. Ni hablar las empanadas de choclo.");
+        c5.setComment("encargue canelones de verdura y me llegaron sin salsa...tendrían que aclararlo en la selección del menú y brindar la opción se elegir la salsa para acompañar");
+
+        a.add(c1);
+        a.add(c2);
+        a.add(c3);
+        a.add(c4);
+        a.add(c5);
         return a;
     }
 }

@@ -4,14 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorOnPrimaryVariant"
     android:gravity="center"
     android:orientation="vertical">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerComments"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorOnPrimaryVariant" />
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/padding_container"
+        android:paddingVertical="@dimen/padding_container">
+
+        <TextView
+            android:id="@+id/lblOrderFields"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lblOrder"
+            android:textAllCaps="true"
+            android:textColor="@color/colorOnSecondary"
+            android:textSize="@dimen/size_sub_subtitle" />
+
+        <Spinner
+            android:id="@+id/spinnerOptionsFields"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFields"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

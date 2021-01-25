@@ -1,37 +1,58 @@
 package dam.app.recycler;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import dam.app.R;
 import dam.app.activity.ActivityComments;
+import dam.app.model.Comment;
 import dam.app.model.Field;
 
 public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHolderComment> {
 
-    private final ActivityComments activityComments;
-    private final List<Field> fieldList;
+    private final ActivityComments activity;
+    private final List<Comment> list;
+    private final DecimalFormat df = new DecimalFormat("##.#");
 
-    public CommentRecycler(ActivityComments activityComments, List<Field> plateListParameter){
-        this.activityComments = activityComments;
-        this.fieldList = plateListParameter;
+    public CommentRecycler(ActivityComments activity, List<Comment> list){
+        this.activity = activity;
+        this.list = list;
     }
 
     public static class ViewHolderComment extends RecyclerView.ViewHolder {
-        //ToDo setear bien los campos cuando se termine la vista row_field
-        /*ImageView plateImage;
-        CardView cardViewPlate;
-        TextView textTitle;
-        Button btnVer;*/
+        CardView cardViewComment;
+        TextView lblDateCommentRow;
+        TextView lblRatingFieldRow;
+        TextView lblUsernameCommentRow;
+        TextView textCommentRow;
+        RatingBar ratingBarCommentRow;
 
-        public ViewHolderComment(@NonNull View itemView) {
-            super(itemView);
+        Comment comment;
+
+        public ViewHolderComment(@NonNull View v) {
+            super(v);
+            cardViewComment = v.findViewById(R.id.cardViewComment);
+            lblDateCommentRow = v.findViewById(R.id.lblDateCommentRow);
+            lblRatingFieldRow = v.findViewById(R.id.lblRatingFieldRow);
+            lblUsernameCommentRow = v.findViewById(R.id.lblUsernameCommentRow);
+            textCommentRow = v.findViewById(R.id.textCommentRow);
+            ratingBarCommentRow = v.findViewById(R.id.ratingBarCommentRow);
+            LayerDrawable stars = (LayerDrawable) ratingBarCommentRow.getProgressDrawable();
+            stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
         }
     }
 
@@ -41,31 +62,24 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         return new CommentRecycler.ViewHolderComment(view);
     }
 
-    public void onBindViewHolder(@NonNull final CommentRecycler.ViewHolderComment commentHolder, int position) {
-        //ToDo setear bien los campos cuando se termine la vista row_field
-       /* plateHolder.plate = plateList.get(position);
-        plateHolder.cardViewPlate.setTag(position);
+    public void onBindViewHolder(@NonNull final ViewHolderComment holder, int position) {
+        holder.comment = list.get(position);
+        holder.lblDateCommentRow.setTag(position);
+        holder.cardViewComment.setTag(position);
+        holder.lblRatingFieldRow.setTag(position);
+        holder.lblUsernameCommentRow.setTag(position);
+        holder.textCommentRow.setTag(position);
+        holder.ratingBarCommentRow.setTag(position);
 
-        plateHolder.textTitle.setTag(position);
-        plateHolder.textTitle.setText(plateHolder.plate.getTitle());
-        plateHolder.textPrice.setTag(position);
-        plateHolder.textPrice.setText("Precio: "+plateHolder.plate.getPrice().toString()+"$");
-        plateHolder.btnVer.setTag(position);
-        plateHolder.btnPedirPlato.setTag(position);
-        plateHolder.btnPedirPlato.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Plato plato = plateList.get(plateHolder.getAdapterPosition());
-                Intent intent = new Intent(activityPlateRecycler, ActivityPedido.class);
-                intent.putExtra("plato", plato);
-                activityPlateRecycler.getIntent().getSerializableExtra("plato");
-                activityPlateRecycler.setResult(Activity.RESULT_OK, intent);
-                activityPlateRecycler.finish();
-            }
-        });*/
+        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().toString());//TODo ver formato fecha
+        df.setRoundingMode(RoundingMode.DOWN);
+        holder.lblRatingFieldRow.setText(df.format(holder.comment.getScore()));
+        holder.lblUsernameCommentRow.setText(holder.comment.getUsername());
+        holder.textCommentRow.setText(holder.comment.getComment());
+        holder.ratingBarCommentRow.setRating(holder.comment.getScore());
     }
 
     public int getItemCount() {
-        return fieldList.size();
+        return list.size();
     }
 }
