@@ -27,7 +27,6 @@ public class Reserve {
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name="id")
     private long id;
 

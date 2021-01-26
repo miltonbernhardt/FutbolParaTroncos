@@ -17,7 +17,6 @@ public class Schedule {
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name="id")
     private long id;
 

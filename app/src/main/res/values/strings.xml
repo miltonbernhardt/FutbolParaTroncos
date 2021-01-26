@@ -24,13 +24,16 @@
     <string name="hintNameUser">Ingrese nombre de usuario</string>
     <string name="hintTextPass">Contraseña</string>
 
+    <!-- AppRepository -->
+    <string name="failedOperation">Operación fallida!</string>
+    <string name="noCommentsInDB">No hay comentarios acerca de la cancha.</string>
+    <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
+
     <!-- row_comment -->
     <string name="textCommentRow">His method adds unneeded complexity to view hierarchy. You will need two additional views (A layout container and the border view) to use his method. Thus if you have many views you need to add border to, your view tree will grow unmanagable.</string>
     <string name="lblTitleFieldRow">NOMBRE DE LA CANCHA</string>
     <string name="lblRatingFieldRow">5.0</string>
     <string name="lblDateCommentRow">27/12/2020</string>
-
-
 
     <!-- row_field -->
     <string name="btnReserve">RESERVAR</string>

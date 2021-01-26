@@ -14,7 +14,6 @@ import dam.app.database.Converters;
 public class User {
     /* ---- ATTRIBUTES -----*/
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name="id")
     private long id;
 

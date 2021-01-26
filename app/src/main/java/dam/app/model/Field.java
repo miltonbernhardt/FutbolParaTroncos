@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey;
 public class Field {
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name="id")
     private long id;
 

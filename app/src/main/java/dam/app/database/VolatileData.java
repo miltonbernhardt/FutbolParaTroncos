@@ -69,6 +69,12 @@ public  class VolatileData {
         c4.setComment("excelente la boca. Ni hablar las empanadas de choclo.");
         c5.setComment("encargue canelones de verdura y me llegaron sin salsa...tendrían que aclararlo en la selección del menú y brindar la opción se elegir la salsa para acompañar");
 
+        c1.setIdField(1);
+        c2.setIdField(1);
+        c3.setIdField(2);
+        c4.setIdField(3);
+        c5.setIdField(4);
+
         a.add(c1);
         a.add(c2);
         a.add(c3);

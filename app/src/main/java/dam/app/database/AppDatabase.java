@@ -30,9 +30,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract DAOSchedule daoSchedule();
     public abstract DAOUser daoUser();
 
-    private static final int NUMBER_OF_THREADS = 1;
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
     public static AppDatabase getInstance(final Context context) {
         if (_INSTANCE == null) {
             synchronized (AppDatabase.class) {

@@ -14,12 +14,15 @@ import dam.app.database.Converters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
+@Entity(foreignKeys = {@ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
+        indices = {@Index(value = {"idField"})})
+        /* ToDo Comment arreglar cuando se implemente lo del user
+        (foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
         @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
-        indices = {@Index(value = {"idUser"}), @Index(value = {"idField"})})
+        indices = {@Index(value = {"idUser"}), @Index(value = {"idField"})})*/
 public class Comment {
     /* ---- RELATIONS ---- */
-    @ColumnInfo(name="idUser")
+    //@ColumnInfo(name="idUser")
     private long idUser;
 
     @ColumnInfo(name="idField")
@@ -27,7 +30,6 @@ public class Comment {
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     @ColumnInfo(name="id")
     private long id;
 
@@ -35,7 +37,6 @@ public class Comment {
     @ColumnInfo(name="dateOfComment")
     private LocalDate dateOfComment;
 
-    //Es repetir datos, pero es más esfuerzo si no se hace
     @ColumnInfo(name="username")
     private String username;
 

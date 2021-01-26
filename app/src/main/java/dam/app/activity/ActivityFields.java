@@ -1,68 +1,46 @@
 package dam.app.activity;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dam.app.R;
 import dam.app.database.AppRepository;
-import dam.app.database.OnResultCallback;
-import dam.app.database.VolatileData;
+import dam.app.model.Field;
 import dam.app.recycler.FieldRecycler;
+import rx.Subscriber;
 
-public class ActivityFields extends AppCompatActivity implements OnResultCallback {
+public class ActivityFields extends AppCompatActivity {
     RecyclerView recyclerView;
-    RecyclerView.Adapter adapter;
+    FieldRecycler adapter;
     RecyclerView.LayoutManager layoutManager;
     AppRepository repository = null;
+    Subscriber<List<Field>> subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fields_recycler);
 
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new FieldRecycler(this, new ArrayList<>());
         recyclerView = findViewById(R.id.recyclerFields);
         recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        //ToDo ActivityFields cambiar cuando se hayan almacenado las canchas en la bd
-        adapter = new FieldRecycler(this, VolatileData.getFields());
         recyclerView.setAdapter(adapter);
 
-        //repository = AppRepository.getInstance(this.getApplicationContext(),this);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_list_fields, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuListFields) {
-            //Intent registerScreen = new Intent(this, ActivityPedido.class);
-            //startActivity(registerScreen);
-            //Log.d("New", "ELIGIÓ NUEVO PEDIDO");
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onResult(List result) {
-        //ToDo ActivityFields cambiar cuando se hayan almacenado las canchas en la bd
+        repository = AppRepository.getInstance(this);
+        subscription = repository.getFieldsSubscriber(recyclerView);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        if(!subscription.isUnsubscribed()) subscription.unsubscribe();
         AppRepository.close();
     }
 }
