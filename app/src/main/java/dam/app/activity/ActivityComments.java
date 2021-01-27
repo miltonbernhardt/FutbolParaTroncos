@@ -1,6 +1,8 @@
 package dam.app.activity;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +26,8 @@ public class ActivityComments extends AppCompatActivity {
 
     Subscriber<List<Comment>> subscription;
 
+    Spinner spinnerCommentsOptions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,10 @@ public class ActivityComments extends AppCompatActivity {
 
         repository = AppRepository.getInstance(this);
         subscription = repository.getCommentsSubscriber(recyclerView);
+
+        spinnerCommentsOptions = findViewById(R.id.spinnerCommentsOptions);
+        spinnerCommentsOptions.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_layout, getResources().getStringArray(R.array.optionsComments)));
+
     }
 
     @Override

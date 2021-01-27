@@ -98,7 +98,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/image_no_image_available"
+            android:src="@mipmap/image_no_image_available"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
@@ -140,7 +140,7 @@
                 android:layout_weight="0"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icon_map_marker"
+                android:src="@mipmap/icon_map_marker"
                 android:tint="@color/colorPrimaryVariant"
                 tools:ignore="ContentDescription" />
 

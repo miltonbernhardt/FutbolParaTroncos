@@ -53,20 +53,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <!--<ImageButton
-                android:id="@+id/btnCamera"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="@drawable/camera"
-                android:text="Button" />-->
-
             <Button
                 android:id="@+id/btnCamera"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:background="@drawable/icon_camera" />
+                android:background="@mipmap/icon_camera" />
         </LinearLayout>
 
     </LinearLayout>

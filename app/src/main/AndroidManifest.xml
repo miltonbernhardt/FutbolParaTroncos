@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/icon_field_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FutbolParaTroncos"
+
         android:usesCleartextTraffic="true">
 
-        <activity android:name="dam.app.activity.ActivityComments">
+        <activity android:name="dam.app.activity.ActivityFields" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

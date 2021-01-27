@@ -1,6 +1,9 @@
 package dam.app.activity;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +24,9 @@ public class ActivityFields extends AppCompatActivity {
     AppRepository repository = null;
     Subscriber<List<Field>> subscription;
 
+    Spinner spinnerOptionsFields;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +41,9 @@ public class ActivityFields extends AppCompatActivity {
 
         repository = AppRepository.getInstance(this);
         subscription = repository.getFieldsSubscriber(recyclerView);
+
+        spinnerOptionsFields = findViewById(R.id.spinnerOptionsFields);
+        spinnerOptionsFields.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerOptionsFields)));
     }
 
     @Override
