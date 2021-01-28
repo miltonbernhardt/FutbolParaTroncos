@@ -6,12 +6,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import dam.app.database.Converters;
 
 @Entity
-public class User {
+public class User implements Serializable {
     /* ---- ATTRIBUTES -----*/
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")

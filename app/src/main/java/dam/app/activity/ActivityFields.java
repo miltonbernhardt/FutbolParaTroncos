@@ -18,29 +18,29 @@ import dam.app.recycler.FieldRecycler;
 import rx.Subscriber;
 
 public class ActivityFields extends AppCompatActivity {
-    RecyclerView recyclerView;
-    FieldRecycler adapter;
-    RecyclerView.LayoutManager layoutManager;
-    AppRepository repository = null;
-    Subscriber<List<Field>> subscription;
+    private RecyclerView recyclerView;
 
-    Spinner spinnerOptionsFields;
+    private ActivityFields _CONTEXT;
+    private AppRepository _REPOSITORY = null;
+    private Subscriber<List<Field>> _SUBSCRIPTION;
 
+    private Spinner spinnerOptionsFields;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fields_recycler);
 
-        layoutManager = new LinearLayoutManager(this);
-        adapter = new FieldRecycler(this, new ArrayList<>());
+
+        _CONTEXT = this;
+        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
+
         recyclerView = findViewById(R.id.recyclerFields);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new FieldRecycler(this, new ArrayList<>()));
 
-        repository = AppRepository.getInstance(this);
-        subscription = repository.getFieldsSubscriber(recyclerView);
+        _SUBSCRIPTION = _REPOSITORY.getFieldsSubscriber(recyclerView);
 
         spinnerOptionsFields = findViewById(R.id.spinnerOptionsFields);
         spinnerOptionsFields.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerOptionsFields)));
@@ -49,7 +49,7 @@ public class ActivityFields extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        if(!subscription.isUnsubscribed()) subscription.unsubscribe();
+        if(!_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
         AppRepository.close();
     }
 }

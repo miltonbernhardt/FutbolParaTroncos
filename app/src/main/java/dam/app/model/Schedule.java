@@ -7,10 +7,12 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
-public class Schedule {
+public class Schedule implements Serializable {
     /* ---- RELATIONS ---- */
     @ColumnInfo(name="idField")
     private long idField;

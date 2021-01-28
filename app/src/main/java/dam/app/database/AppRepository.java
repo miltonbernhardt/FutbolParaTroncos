@@ -54,9 +54,10 @@ public class AppRepository {
         return _INSTANCE;
     }
 
-    public Subscriber<List<Comment>> getCommentsSubscriber(RecyclerView recyclerView){
+    public Subscriber<List<Comment>> getCommentsSubscriber(RecyclerView recyclerView, long idField){
+
         Observable<List<Comment>> observer2 = Observable.create((Observable.OnSubscribe<List<Comment>>) observer -> {
-            observer.onNext(daoComment.findAll());
+            observer.onNext(daoComment.findAllByField(idField));
             observer.onCompleted();
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
 
@@ -86,7 +87,6 @@ public class AppRepository {
                     Snackbar.make(view, _CONTEXT.getResources().getString(R.string.noCommentsInDB), Snackbar.LENGTH_LONG).show();
                     value = daoComment.findAll();
                 }
-
                 CommentRecycler adapter = new CommentRecycler((ActivityComments)_CONTEXT, value);
                 recyclerView.setAdapter(adapter);
             }
@@ -123,7 +123,6 @@ public class AppRepository {
                     Snackbar.make(view, _CONTEXT.getResources().getString(R.string.noFieldsInDB), Snackbar.LENGTH_LONG).show();
                     value = daoField.findAll();
                 }
-
                 FieldRecycler adapter = new FieldRecycler((ActivityFields) _CONTEXT, value);
                 recyclerView.setAdapter(adapter);
             }

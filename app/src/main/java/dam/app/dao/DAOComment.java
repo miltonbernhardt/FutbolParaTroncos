@@ -27,4 +27,7 @@ public interface DAOComment {
 
     @Query("SELECT * FROM comment")
     List<Comment> findAll();
+
+    @Query("SELECT * FROM comment WHERE idField = :idField")
+    List<Comment> findAllByField(long idField);
 }

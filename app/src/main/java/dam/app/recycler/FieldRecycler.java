@@ -1,8 +1,11 @@
 package dam.app.recycler;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +24,9 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import dam.app.R;
+import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityFields;
+import dam.app.activity.ActivitySession;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -113,24 +118,29 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.btnLocate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                /*Plato plato = plateList.get(plateHolder.getAdapterPosition());
-                Intent intent = new Intent(activityPlateRecycler, ActivityPedido.class);
-                intent.putExtra("plato", plato);
-                activityPlateRecycler.getIntent().getSerializableExtra("plato");
-                activityPlateRecycler.setResult(Activity.RESULT_OK, intent);
-                activityPlateRecycler.finish();*/
+            public void onClick(View view) { //ToDo MAPS agregar función cuando se implemente lo del maps, o quitar este botón
             }
         });
 
         holder.btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {}
+            public void onClick(View view) {
+                Intent registerScreen = new Intent(activity, ActivitySession.class);
+                activity.startActivity(registerScreen);
+            }
         });
 
         holder.btnReviews.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {}
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, ActivityComments.class);
+                intent.putExtra("field", list.get(holder.getAdapterPosition()));
+                activity.setResult(Activity.RESULT_OK, intent);
+                activity.startActivity(intent);
+                activity.getIntent().getSerializableExtra("field");
+                Log.d("on ActivityFields", activity.getResources().getString(R.string.activity_comments));
+                //activity.finish();
+            }
         });
 
     }

@@ -5,8 +5,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 @Entity
-public class Field {
+public class Field implements Serializable {
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
@@ -90,5 +93,19 @@ public class Field {
 
     public void setImageUUID(String imageUUID) {
         this.imageUUID = imageUUID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Field field = (Field) o;
+        return id == field.id &&
+                Objects.equals(name, field.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 }

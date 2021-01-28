@@ -9,5 +9,4 @@
     android:textColor="@color/black"
     android:padding="@dimen/padding_container"
     android:layout_margin="@dimen/padding_container"
-    android:entries="@array/optionsComments"
-    />
+    android:entries="@array/optionsComments"/>

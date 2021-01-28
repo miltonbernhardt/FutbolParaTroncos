@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">FPTs</string>
     <string name="name_title">FÚTBOL PARA TRONCOS</string>
+    <string name="activity_comments">LEER COMENTARIOS </string>
+    <string name="activity_fields">VER CANCHAS</string>
+    <string name="activity_menu">MENÚ</string>
+    <string name="activity_new_comment">OPINAR SOBRE UNA CANCHA</string>
+    <string name="activity_new_reserves">HACER UNA NUEVA RESERVA</string>
+    <string name="activity_reserves">VER RESERVACIONES HECHAS</string>
+    <string name="activity_session">PANTALLA SESIÓN</string>
+
 
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
@@ -35,7 +43,7 @@
 
     <!-- AppRepository -->
     <string name="failedOperation">Operación fallida!</string>
-    <string name="noCommentsInDB">No hay comentarios acerca de la cancha.</string>
+    <string name="noCommentsInDB">No hay comentarios acerca de la cancha. Se mostraran todos.</string>
     <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
 
     <!-- row_comment -->

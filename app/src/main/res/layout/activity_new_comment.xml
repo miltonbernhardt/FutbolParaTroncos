@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -48,17 +48,12 @@
                 android:text="@string/btnAddComment"
                 android:textSize="@dimen/size_text_button" />
 
-            <Space
-                android:layout_width="@dimen/space"
+            <RatingBar
+                android:id="@+id/ratingBar2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/btnCamera"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:background="@mipmap/icon_camera" />
         </LinearLayout>
 
     </LinearLayout>
