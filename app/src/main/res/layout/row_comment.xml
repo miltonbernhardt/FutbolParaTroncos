@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/padding_container"
                 android:layout_weight="0"
-                android:background="@color/colorOnPrimaryVariant"
+                android:background="@drawable/rating_background"
                 android:paddingHorizontal="@dimen/padding_container"
                 android:text="@string/lblRatingFieldRow"
                 android:textAllCaps="true" />
@@ -59,7 +59,7 @@
                 android:layout_weight="0"
                 android:text="@string/lblDateCommentRow"
                 android:textAllCaps="true"
-                android:textColor="@android:color/secondary_text_light"
+                android:textColor="@android:color/black"
                 android:textSize="@dimen/size_sub_subtitle" />
 
         </LinearLayout>
@@ -75,8 +75,7 @@
             android:justificationMode="inter_word"
             android:text="@string/textCommentRow"
             android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:textColor="@android:color/secondary_text_light" />
+            android:textAllCaps="false" />
 
         <Space
             android:layout_width="match_parent"
@@ -84,13 +83,12 @@
 
         <TextView
             android:id="@+id/lblUsernameCommentRow"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:layout_gravity="end"
             android:gravity="end"
             android:text="@string/lblUsernameCommentRow"
             android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
             android:textSize="@dimen/size_sub_subtitle" />
 
         <Space

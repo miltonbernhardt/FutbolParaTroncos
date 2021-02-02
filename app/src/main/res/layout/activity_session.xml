@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorBackground"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/padding_container"
@@ -26,14 +26,14 @@
 
     <EditText
         android:id="@+id/textUsername"
+        style="@style/EditTextStyle"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/hintNameUser"
-        android:inputType="textPersonName"
-        android:textSize="@dimen/size_field_text" />
+        android:inputType="textPersonName" />
 
     <Space
         android:layout_width="match_parent"
@@ -41,14 +41,18 @@
 
     <EditText
         android:id="@+id/textPassword"
+        style="@style/EditTextStyle"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/hintTextPass"
-        android:inputType="textPassword"
-        android:textSize="@dimen/size_field_text" />
+        android:inputType="textPassword" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space" />
 
     <Space
         android:layout_width="match_parent"
@@ -56,8 +60,11 @@
 
     <Button
         android:id="@+id/btnLogin"
+        style="@style/ButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnLogin" />
-
+        android:backgroundTint="#367C37"
+        android:backgroundTintMode="src_over"
+        android:text="@string/btnLogin"
+        android:theme="@style/ButtonStyle" />
 </LinearLayout>

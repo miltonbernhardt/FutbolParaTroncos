@@ -38,7 +38,7 @@
     <!-- activity_session -->
 
     <string name="btnLogin">Iniciar sesión</string>
-    <string name="hintNameUser">Ingrese nombre de usuario</string>
+    <string name="hintNameUser">Nombre de usuario</string>
     <string name="hintTextPass">Contraseña</string>
 
     <!-- AppRepository -->

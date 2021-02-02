@@ -43,7 +43,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/lblTitleFieldRow"
                     android:textAllCaps="true"
-                    android:textColor="@android:color/secondary_text_light"
                     android:textSize="@dimen/size_subtitle" />
 
                 <LinearLayout
@@ -59,7 +58,6 @@
                         android:layout_weight="1"
                         android:text="@string/name_title"
                         android:textAllCaps="true"
-                        android:textColor="@android:color/darker_gray"
                         android:textSize="@dimen/size_sub_subtitle" />
 
                     <TextView
@@ -68,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/padding_container"
                         android:layout_weight="0"
-                        android:background="@color/colorOnPrimaryVariant"
+                        android:background="@drawable/rating_background"
                         android:paddingHorizontal="@dimen/padding_container"
                         android:text="@string/lblRatingFieldRow"
                         android:textAllCaps="true" />
@@ -79,8 +77,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:progressTint="@color/colorPrimaryVariant"
+                        android:progressTint="@color/colorSecondary"
+                        android:progressTintMode="src_in"
                         android:rating="3.5"
+                        android:secondaryProgressTint="@color/colorOnPrimary"
                         android:stepSize="0.5" />
 
                 </LinearLayout>
@@ -114,7 +114,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/btnReserve"
-                android:textColor="@color/colorPrimaryVariant"
                 android:textSize="@dimen/size_text_button" />
 
             <Button
@@ -124,7 +123,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/btnOpinions"
-                android:textColor="@color/colorPrimaryVariant"
                 android:textSize="@dimen/size_text_button" />
 
             <Space
@@ -141,7 +139,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@mipmap/icon_map_marker"
-                android:tint="@color/colorPrimaryVariant"
+                android:tint="@color/colorPrimary"
                 tools:ignore="ContentDescription" />
 
             <Space

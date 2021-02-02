@@ -1,26 +1,54 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.FutbolParaTroncos" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
-        <item name="colorSurface">?attr/colorPrimary</item>
-
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
-        <!-- Customize your theme here. -->
 
+        <item name="colorSurface">?attr/colorPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
+
+        <item name="android:textColor">@color/black</item>
         <item name="android:spinnerDropDownItemStyle">@style/AppSpinnerDropDownItem</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
     </style>
 
     <style name="AppSpinnerDropDownItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
     <!--ToDo Theme setear bien el tema de los spinner-->
+    </style>
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/size_sub_subtitle</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="EditTextStyle" parent="android:Widget.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">@dimen/padding_container</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textSize">@dimen/size_subtitle</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
+    </style>
+
+    <style name="ButtonStyle" parent="android:Widget.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">@dimen/padding_container</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textSize">@dimen/size_text_button</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 </resources>

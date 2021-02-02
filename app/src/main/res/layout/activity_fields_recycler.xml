@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorBackground"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -21,10 +21,7 @@
             android:id="@+id/lblOrderFields"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lblOrder"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/size_sub_subtitle" />
+            android:text="@string/lblOrder" />
 
         <Space
             android:layout_width="@dimen/space"

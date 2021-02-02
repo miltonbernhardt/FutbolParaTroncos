@@ -47,6 +47,9 @@ public class Comment implements Serializable {
     @ColumnInfo(name="score")
     private int score;
 
+    @ColumnInfo(name="imageUUID")
+    private String imageUUID;
+
     public Comment(){
         dateOfComment = LocalDate.now();
         comment = "";
@@ -107,5 +110,13 @@ public class Comment implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getImageUUID() {
+        return imageUUID;
+    }
+
+    public void setImageUUID(String imageUUID) {
+        this.imageUUID = imageUUID;
     }
 }
