@@ -26,7 +26,7 @@ import java.util.List;
 import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityFields;
-import dam.app.activity.ActivitySession;
+import dam.app.activity.ActivityNewReserve;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -125,7 +125,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerScreen = new Intent(activity, ActivitySession.class);
+                Intent registerScreen = new Intent(activity, ActivityNewReserve.class);
                 activity.startActivity(registerScreen);
             }
         });

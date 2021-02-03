@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-
 import dam.app.R;
-import dam.app.database.AppRepository;
 
 public class ActivitySession extends ActivityMain {
 

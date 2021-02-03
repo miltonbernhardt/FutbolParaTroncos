@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center|start"
                 android:orientation="horizontal"
-                android:paddingVertical="@dimen/padding_container">
+                android:padding="@dimen/padding_container">
 
                 <TextView
                     android:id="@+id/lblOrderFields"

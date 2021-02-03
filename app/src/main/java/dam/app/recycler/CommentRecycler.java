@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.model.Comment;
-import dam.app.model.Field;
 
 public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHolderComment> {
 
@@ -71,7 +71,7 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         holder.textCommentRow.setTag(position);
         holder.ratingBarCommentRow.setTag(position);
 
-        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().toString());//TODo ver formato fecha
+        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));//TODo ver formato fecha
         df.setRoundingMode(RoundingMode.DOWN);
         holder.lblRatingFieldRow.setText(df.format(holder.comment.getScore()));
         holder.lblUsernameCommentRow.setText(holder.comment.getUsername());
