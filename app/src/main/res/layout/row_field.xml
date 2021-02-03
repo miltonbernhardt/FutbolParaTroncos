@@ -15,6 +15,7 @@
         android:orientation="vertical"
         android:showDividers="none">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,7 +50,7 @@
 
                     <TextView
                         android:id="@+id/lblAddressFieldRow"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/name_title"
@@ -64,7 +65,8 @@
                         android:background="@drawable/rating_background"
                         android:paddingHorizontal="@dimen/bigger_padding_container"
                         android:text="@string/lblRatingFieldRow"
-                        android:textAllCaps="true" />
+                        android:textAllCaps="true"
+                        android:textColor="@color/fontColorLight" />
 
                     <RatingBar
                         android:id="@+id/ratingBarFieldRow"
@@ -103,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/btnReserve"
+                android:textColor="@color/fontColorDark"
                 android:textSize="@dimen/size_text_button" />
 
             <Button
@@ -112,6 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/btnOpinions"
+                android:textColor="@color/fontColorDark"
                 android:textSize="@dimen/size_text_button"
                 app:iconTintMode="src_atop" />
 
@@ -129,7 +133,7 @@
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:src="@mipmap/icon_map_marker"
-                android:tint="@color/colorPrimary"
+                android:tint="@color/fontColorDark"
                 tools:ignore="ContentDescription" />
 
             <Space

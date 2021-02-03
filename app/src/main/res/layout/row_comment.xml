@@ -35,7 +35,8 @@
                 android:background="@drawable/rating_background"
                 android:paddingHorizontal="@dimen/bigger_padding_container"
                 android:text="@string/lblRatingFieldRow"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                android:textColor="@color/fontColorLight" />
 
             <RatingBar
                 android:id="@+id/ratingBarCommentRow"

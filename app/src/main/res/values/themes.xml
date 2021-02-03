@@ -1,8 +1,7 @@
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Theme.FutbolParaTroncos.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -20,8 +19,7 @@
         <item name="colorSurface">?attr/colorPrimary</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
 
-        <item name="android:textColor">@color/black</item>
-        <item name="android:spinnerDropDownItemStyle">@style/AppSpinnerDropDownItem</item>
+        <item name="android:textColor">@color/fontColorDark</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:editTextStyle">@style/EditTextStyle</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
@@ -29,16 +27,11 @@
         <item name="cardViewStyle">@style/CardViewStyle</item>
     </style>
 
-    <style name="AppSpinnerDropDownItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
-        <item name="android:background">@drawable/spinner_background</item>
-    <!--ToDo Theme setear bien el tema de los spinner-->
-    </style>
-
     <style name="TextViewStyle" parent="android:Widget.TextView">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/size_sub_subtitle</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/fontColorDark</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
@@ -48,8 +41,8 @@
         <item name="android:padding">@dimen/bigger_padding_container</item>
         <item name="android:background">@drawable/edit_text_background</item>
         <item name="android:textSize">@dimen/size_subtitle</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/colorPrimaryVariant</item>
+        <item name="android:textColor">@color/fontColorDark</item>
+        <item name="android:textColorHint">@color/gray</item>
     </style>
 
     <style name="ButtonStyle" parent="android:Widget.Button">
@@ -60,6 +53,14 @@
         <item name="textAllCaps">true</item>
         <item name="android:background">@drawable/button_background</item>
         <item name="backgroundTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="ButtonStyleTransparent" parent="android:Widget.Button">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/size_text_button</item>
+        <item name="android:textColor">@color/fontColorDark</item>
+        <item name="textAllCaps">true</item>
     </style>
 
     <style name="CardViewStyle">
@@ -79,5 +80,12 @@
         <item name="android:secondaryProgressTint">@color/colorOnPrimary</item>
         <item name="android:stepSize">0.5</item>
         <item name="android:rating">3.5</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/fontColorLight</item>
+        <!--<item name="actionMenuTextColor">@android:color/white</item>
+        <item name="actionOverflowButtonStyle">@style/ActionButtonOverflowStyle</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->
     </style>
 </resources>

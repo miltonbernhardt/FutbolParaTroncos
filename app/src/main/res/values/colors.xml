@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    -->
-
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#858585</color>
+    <color name="dark_gray">#444444</color>
+    <color name="black">#FF000000</color>
 
+    <color name="colorAccent">#96f7d2</color>
+
+    <color name="colorPrimary">#2cb978</color>
+    <color name="colorPrimaryVariant">#6FD174</color>
+    <color name="colorOnPrimary">#83e85a</color>
+
+    <color name="colorSecondary">#4592af</color>
+    <color name="colorSecondaryVariant">#ac3f21</color>
+    <color name="colorOnSecondary">#f3cf7a</color>
+
+    <!--
+    <color name="colorAccent">#EA5A6F</color>
 
     <color name="colorPrimary">#cb3b3b</color>
     <color name="colorPrimaryVariant">#85203b</color>
@@ -18,24 +25,12 @@
     <color name="colorSecondary">#086972</color>
     <color name="colorSecondaryVariant">#a7ff83</color>
     <color name="colorOnSecondary">#17b978</color>
+    -->
+
+    <color name="fontColorLight">@color/white</color>
+    <color name="fontColorDark">@color/dark_gray</color>
 
     <color name="colorBackground">@color/colorAccent</color>
-
-    <color name="colorSurface">@color/colorPrimary</color>
-    <color name="colorAccent">#EA5A6F</color>
-
-    <!--<color name="colorPrimary">@color/purple_500</color>
-    <color name="colorPrimaryVariant">@color/purple_700</color>
-    <color name="colorOnPrimary">@color/white</color>
-    <color name="colorOnPrimaryVariant">@color/purple_200</color>
-
-    <color name="colorSurface">@color/colorPrimary</color>
-
-    <color name="colorSecondary">@color/teal_200</color>
-    <color name="colorSecondaryVariant">@color/teal_700</color>
-    <color name="colorOnSecondary">@color/black</color>
-
-    <color name="colorAccent">#3F51B5</color>-->
 
     <color name="editTextError">#ED3C4B</color>
     <color name="editTextEnabledValid">#787677</color>
