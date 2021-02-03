@@ -1,18 +1,15 @@
 package dam.app.activity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,39 +19,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.app.R;
-import dam.app.database.AppRepository;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 import dam.app.recycler.CommentRecycler;
 import rx.Subscriber;
 
-public class ActivityComments extends AppCompatActivity {
-    private RecyclerView recyclerView;
-
-    private AppRepository _REPOSITORY = null;
-    private ActivityComments _CONTEXT;
+public class ActivityComments extends ActivityMain {
+    protected RecyclerView recyclerView;
+    protected Button btnMakeOpinion;
+    protected Field field;
+    protected TextView lblNameField;
+    protected Spinner spinnerCommentsOptions;
 
     private Subscriber<List<Comment>> subscription;
 
-    private Button btnMakeOpinion;
-    private Field field;
-    private TextView lblNameField;
-    private Spinner spinnerCommentsOptions;
-
-    private static final int REQUEST_CODE = 222;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_recycler);
+        createDrawable();
         _CONTEXT = this;
-        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
 
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CommentRecycler(_CONTEXT, new ArrayList<>()));
+        recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, new ArrayList<>()));
 
         field = (Field) getIntent().getExtras().getSerializable("field");
 
@@ -67,22 +56,35 @@ public class ActivityComments extends AppCompatActivity {
         spinnerCommentsOptions.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_layout, getResources().getStringArray(R.array.optionsComments)));
 
         btnMakeOpinion = findViewById(R.id.btnMakeOpinion);
-        btnMakeOpinion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewComment.class);
-                makeReviewScreen.putExtra("addButtonAsk", true);
-                startActivity(makeReviewScreen);
-                Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
-            }
+        btnMakeOpinion.setOnClickListener(v -> {
+            Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewComment.class);
+            makeReviewScreen.putExtra("addButtonAsk", true);
+            startActivity(makeReviewScreen);
+            Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
         });
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_option_fields:
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame,new first()).commit();
+                break;
+            case R.id.menu_option_reserves:
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new second()).commit();
+                break;
+            case R.id.menu_option_close_session:
+                Snackbar.make(_CONTEXT.getWindow().getDecorView().getRootView(), _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_LONG).show();
+
+                break;
+        }
+        return true;
     }
 
     @Override
     public void onStop() {
         super.onStop();
         if(!subscription.isUnsubscribed()) subscription.unsubscribe();
-        AppRepository.close();
     }
 }
 

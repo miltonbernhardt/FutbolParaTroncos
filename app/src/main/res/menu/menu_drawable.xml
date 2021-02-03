@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showInd="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_option_fields"
+            android:icon="@mipmap/icon_field_2"
+            android:title="@string/menu_option_fields" />
+
+        <item
+            android:id="@+id/menu_option_reserves"
+            android:icon="@mipmap/icon_reserve"
+            android:iconTint="#32592F"
+            android:title="@string/menu_option_reserves" />
+
+        <item
+            android:id="@+id/menu_option_close_session"
+            android:icon="@android:drawable/ic_menu_close_clear_cancel"
+            android:title="@string/menu_option_close_session" />
+    </group>
+
+    <!--<item android:title="Communication">
+
+        <menu>
+            <item
+                android:id="@+id/contact"
+                android:icon="@android:drawable/sym_contact_card"
+                android:title="Contact" />
+            <item
+                android:id="@+id/menu_option_close_session"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="@string/menu_option_close_session" />
+
+        </menu>
+    </item>-->
+</menu>

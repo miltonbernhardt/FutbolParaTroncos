@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/padding_container"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorOnPrimary"
+    app:cardBackgroundColor="@color/colorPrimaryVariant"
     app:cardCornerRadius="@dimen/corner_radius"
     app:cardElevation="@dimen/card_elevation"
     app:cardUseCompatPadding="false">
@@ -43,7 +43,7 @@
                 style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:progressTint="@color/colorPrimaryVariant"
+                android:progressTint="@color/colorSecondary"
                 android:rating="3.5"
                 android:stepSize="0.5" />
 
@@ -59,7 +59,6 @@
                 android:layout_weight="0"
                 android:text="@string/lblDateCommentRow"
                 android:textAllCaps="true"
-                android:textColor="@android:color/black"
                 android:textSize="@dimen/size_sub_subtitle" />
 
         </LinearLayout>

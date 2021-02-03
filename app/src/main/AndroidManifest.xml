@@ -8,17 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon_field_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FutbolParaTroncos"
+        android:theme="@style/Theme.FutbolParaTroncos.NoActionBar"
 
         android:usesCleartextTraffic="true">
-
         <activity android:name="dam.app.activity.ActivityComments" android:screenOrientation="portrait" android:label="COMENTARIOS" />
         <activity android:name="dam.app.activity.ActivityFields" android:label="CANCHAS" />
-        <activity android:name="dam.app.activity.ActivityMenu" android:label="MENÚ" />
+        <activity android:name="dam.app.activity.ActivitySession" android:label="INICIAR SESIÓN" />
         <activity android:name="dam.app.activity.ActivityNewComment" android:label="RESEÑAR" />
         <activity android:name="dam.app.activity.ActivityNewReserves" android:label="RESERVAR" />
+        <activity android:name="dam.app.activity.ActivityRegisterUser" android:label="REGISTRARSE" />
         <activity android:name="dam.app.activity.ActivityReserves" android:label="RESERVAS" />
-        <activity android:name="dam.app.activity.ActivitySession" android:screenOrientation="portrait">
+        <activity android:name="dam.app.activity.ActivityMenu" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

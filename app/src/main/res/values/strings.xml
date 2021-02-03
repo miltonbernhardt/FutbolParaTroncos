@@ -6,8 +6,10 @@
     <string name="activity_menu">MENÚ</string>
     <string name="activity_new_comment">OPINAR SOBRE UNA CANCHA</string>
     <string name="activity_new_reserves">HACER UNA NUEVA RESERVA</string>
+    <string name="activity_register_user">REGISTRARSE</string>
     <string name="activity_reserves">VER RESERVACIONES HECHAS</string>
     <string name="activity_session">PANTALLA SESIÓN</string>
+
 
 
     <!-- activity_comments_recycler -->
@@ -27,7 +29,7 @@
 
     <!-- activity_menu -->
 
-    <string name="btnLogout">Cerrar sesión</string>
+    <string name="btnRegister">REGISTRARSE</string>
     <string name="lblWelcome">BIENVENIDOS!</string>
 
     <!-- activity_new_comment -->
@@ -45,6 +47,18 @@
     <string name="failedOperation">Operación fallida!</string>
     <string name="noCommentsInDB">No hay comentarios acerca de la cancha. Se mostraran todos.</string>
     <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
+
+    <!-- Drawable menu -->
+    <string name="header_reserves_user">RESERVAS PENDIENTES:</string>
+    <string name="header_total_reserves">4</string>
+    <string name="header_user_phone">TELÉFONO</string>
+    <string name="header_username">NOMBRE DE USUARIO</string>
+    <string name="menu_option_close_session">CERRAR SESIÓN</string>
+    <string name="menu_option_fields">CANCHAS</string>
+    <string name="menu_option_reserves">RESERVAS PROPIAS</string>
+    <string name="message_closing_session">CERRANDO SESIÓN</string>
+    <string name="nav_drawer_open">ABRIR DRAW</string>
+    <string name="nav_drawer_close">CERRAR DRAW</string>
 
     <!-- row_comment -->
     <string name="textCommentRow">His method adds unneeded complexity to view hierarchy. You will need two additional views (A layout container and the border view) to use his method. Thus if you have many views you need to add border to, your view tree will grow unmanagable.</string>

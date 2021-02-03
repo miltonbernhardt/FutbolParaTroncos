@@ -2,6 +2,7 @@
 <resources>
     <!--  MARGIN AND PADDING -->
     <dimen name="padding_container">5sp</dimen>
+    <dimen name="bigger_padding_container">10sp</dimen>
 
     <!-- FUENTES -->
     <dimen name="size_title">28sp</dimen>
