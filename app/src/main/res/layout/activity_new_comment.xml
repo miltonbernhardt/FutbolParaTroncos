@@ -24,47 +24,80 @@
             android:layout_height="match_parent"
             android:background="@color/colorBackground"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/padding_container">
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnAddComment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btnAddComment"
-                    android:textSize="@dimen/size_text_button" />
-
                 <RatingBar
                     android:id="@+id/ratingBar2"
+                    style="@style/Widget.AppCompat.RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
+                    android:rating="0" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/lblNewComment"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/lblNewComment"
-                android:textSize="@dimen/size_title" />
 
             <EditText
                 android:id="@+id/textComment"
+                style="@style/EditTextStyle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:autofillHints="ignore"
+                android:gravity="top|start"
+                android:hint="@string/hintComment"
+                android:inputType="text|textMultiLine"
+                android:padding="@dimen/padding_container" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="top"
-                android:inputType="text|textMultiLine" />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_container">
+
+                <ImageButton
+                    android:id="@+id/btnCamera"
+                    style="@style/ButtonStyle"
+                    android:layout_width="@dimen/size_image_button"
+                    android:layout_height="@dimen/size_image_button"
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
+
+                <Space
+                    android:layout_width="@dimen/space"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxUploadImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkBoxUploadImage" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/padding_container">
+
+                <Button
+                    android:id="@+id/btnAddComment"
+                    style="@style/ButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btnAddComment" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

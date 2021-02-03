@@ -18,14 +18,14 @@
                 <include layout="@layout/navigator_toolbar" />
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorBackground"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/padding_container"
-                        android:paddingVertical="@dimen/padding_container"
-                        tools:context=".activity.ActivitySession">
+                    android:id="@+id/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBackground"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_container"
+                    tools:context=".activity.ActivitySession">
 
                         <TextView
                             android:id="@+id/lblFTP"

@@ -35,6 +35,8 @@
     <!-- activity_new_comment -->
 
     <string name="btnAddComment">Añadir comentario</string>
+    <string name="hintComment">Comentario...</string>
+    <string name="checkBoxUploadImage">Imágen cargada</string>
     <string name="lblNewComment">NUEVO COMENTARIO</string>
 
     <!-- activity_session -->
@@ -49,7 +51,7 @@
     <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
 
     <!-- Drawable menu -->
-    <string name="header_reserves_user">RESERVAS PENDIENTES:</string>
+    <string name="header_reserves_user">RESERVAS ACTIVAS:</string>
     <string name="header_total_reserves">4</string>
     <string name="header_user_phone">TELÉFONO</string>
     <string name="header_username">NOMBRE DE USUARIO</string>

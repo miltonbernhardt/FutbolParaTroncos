@@ -15,7 +15,7 @@
     <dimen name="size_text_button">18sp</dimen>
     <dimen name="size_text_small_button">12sp</dimen>
 
-    <dimen name="size_image_button">26sp</dimen>
+    <dimen name="size_image_button">48sp</dimen>
 
     <dimen name="space">13sp</dimen>
 
