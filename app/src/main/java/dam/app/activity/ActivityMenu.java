@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import dam.app.R;
+import dam.app.database.AppRepository;
 
 public class ActivityMenu extends ActivityMain {
 
@@ -18,6 +19,7 @@ public class ActivityMenu extends ActivityMain {
         setContentView(R.layout.activity_menu);
         createDrawable();
         _CONTEXT = this;
+        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
         //ToDo ActivityMenu fijarse si está logueado, si es asi ocultar los botones
 
         btnLoginHome = findViewById(R.id.btnLoginHome);

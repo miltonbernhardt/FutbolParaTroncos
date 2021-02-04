@@ -3,13 +3,11 @@ package dam.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +20,10 @@ import dam.app.R;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 import dam.app.recycler.CommentRecycler;
-import rx.Subscriber;
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ActivityComments extends ActivityMain {
     protected RecyclerView recyclerView;
@@ -31,7 +32,7 @@ public class ActivityComments extends ActivityMain {
     protected TextView lblNameField;
     protected Spinner spinnerCommentsOptions;
 
-    private Subscriber<List<Comment>> subscription;
+    private Subscription _SUBSCRIPTION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +41,9 @@ public class ActivityComments extends ActivityMain {
         createDrawable();
         _CONTEXT = this;
 
-        recyclerView = findViewById(R.id.recyclerComments);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, new ArrayList<>()));
-
         field = (Field) getIntent().getExtras().getSerializable("field");
 
-        subscription = _REPOSITORY.getCommentsSubscriber(recyclerView, field.getId()); //ToDo ActivityComments ver por qué no carga la lista la primera que entras a la vista
+        setComments(field.getId());
 
         lblNameField = findViewById(R.id.lblNameField);
         lblNameField.setText(field.getName());
@@ -64,27 +60,26 @@ public class ActivityComments extends ActivityMain {
         });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.menu_option_fields:
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame,new first()).commit();
-                break;
-            case R.id.menu_option_reserves:
-                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_frame, new second()).commit();
-                break;
-            case R.id.menu_option_close_session:
-                Snackbar.make(_CONTEXT.getWindow().getDecorView().getRootView(), _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_LONG).show();
+    public void setComments(long id) {
+        recyclerView = findViewById(R.id.recyclerComments);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, new ArrayList<>()));
 
-                break;
-        }
-        return true;
+        Observable<List<Comment>> observer = Observable.create(subscriber -> {
+            subscriber.onNext(_REPOSITORY.getCommentsFromField(id));
+            subscriber.onCompleted();
+        });
+
+        _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                fields -> recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, fields)) ,
+                error -> Snackbar.make(recyclerView, _CONTEXT.getResources().getString(R.string.failedOperation), Snackbar.LENGTH_LONG).show());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if(!subscription.isUnsubscribed()) subscription.unsubscribe();
+        if(!_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }
 

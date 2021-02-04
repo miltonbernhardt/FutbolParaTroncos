@@ -76,7 +76,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             case R.id.menu_option_close_session:
                 //ToDo cerrar sessión
                 Snackbar.make(background, _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_LONG).show();
-                finish();
+                this.finishAffinity();
                 break;
         }
         return true;

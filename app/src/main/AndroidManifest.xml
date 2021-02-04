@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/icon_field_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FutbolParaTroncos.NoActionBar"
-        android:screenOrientation="portrait"
+
 
         android:usesCleartextTraffic="true">
         <activity android:name="dam.app.activity.ActivityComments" android:screenOrientation="portrait" android:label="@string/activity_comments_label" />
@@ -19,7 +19,7 @@
         <activity android:name="dam.app.activity.ActivityRegisterUser" android:label="@string/activity_register_user_label" />
         <activity android:name="dam.app.activity.ActivityReserves" android:label="@string/activity_reserves_label" />
         <activity android:name="dam.app.activity.ActivitySession" android:label="@string/activity_session_label" />
-        <activity android:name="dam.app.activity.ActivityMenu" android:label="@string/name_title">
+        <activity android:name="dam.app.activity.ActivityMenu" android:label="@string/name_title" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

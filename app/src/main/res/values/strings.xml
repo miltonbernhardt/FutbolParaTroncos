@@ -13,7 +13,7 @@
     <string name="activity_register_user">REGISTRARSE</string>
     <string name="activity_register_user_label">REGISTRARSE</string>
     <string name="activity_reserves">VER RESERVACIONES HECHAS</string>
-    <string name="activity_reserves_label">RESERAR</string>
+    <string name="activity_reserves_label">RESERVAR</string>
     <string name="activity_session">PANTALLA SESIÓN</string>
     <string name="activity_session_label">INICIAR SESIÓN</string>
 
