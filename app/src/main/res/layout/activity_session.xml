@@ -38,7 +38,8 @@
                             android:id="@+id/imageBall"
                             android:layout_width="217dp"
                             android:layout_height="339dp"
-                            android:src="@mipmap/icon_football_ball" />
+                            android:src="@mipmap/icon_football_ball"
+                            android:contentDescription="TODO" />
 
                         <EditText
                             android:id="@+id/textUsername"

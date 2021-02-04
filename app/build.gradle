@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -50,8 +51,11 @@ dependencies {
 
     //ROOM
     implementation "androidx.room:room-runtime:2.2.6"
+    implementation 'com.google.firebase:firebase-auth:20.0.2'
     annotationProcessor "androidx.room:room-compiler:2.2.6"
     androidTestImplementation "androidx.room:room-testing:2.2.6"
+
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
 
     //RxJava
     implementation 'io.reactivex:rxjava:1.0.14'
