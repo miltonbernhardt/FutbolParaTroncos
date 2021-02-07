@@ -13,12 +13,12 @@
         android:usesCleartextTraffic="true">
         <activity android:name="dam.app.activity.ActivityComments" android:screenOrientation="portrait" android:label="COMENTARIOS" />
         <activity android:name="dam.app.activity.ActivityFields" android:label="CANCHAS" />
-        <activity android:name="dam.app.activity.ActivityMenu" android:label="INICIAR SESIÓN" />
+        <activity android:name="dam.app.activity.ActivityLogin" android:label="INICIAR SESIÓN" />
         <activity android:name="dam.app.activity.ActivityNewComment" android:label="RESEÑAR" />
         <activity android:name="dam.app.activity.ActivityNewReserve" android:label="RESERVAR" />
-        <activity android:name="dam.app.activity.ActivityRegisterUser" android:label="REGISTRARSE" />
+        <activity android:name="dam.app.activity.ActivityMenu" android:label="REGISTRARSE" />
         <activity android:name="dam.app.activity.ActivityReserves" android:label="RESERVAS" />
-        <activity android:name="dam.app.activity.ActivityLogin" android:screenOrientation="portrait">
+        <activity android:name="dam.app.activity.ActivityRegisterUser" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,4 +30,5 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 </manifest>

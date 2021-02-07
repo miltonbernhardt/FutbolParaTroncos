@@ -42,7 +42,7 @@
                             android:contentDescription="TODO" />
 
                         <EditText
-                            android:id="@+id/textUsername"
+                            android:id="@+id/textUserName"
                             style="@style/EditTextStyle"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"
