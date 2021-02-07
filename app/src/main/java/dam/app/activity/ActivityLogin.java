@@ -7,22 +7,22 @@ import android.widget.Button;
 
 import dam.app.R;
 
-public class ActivitySession extends ActivityMain {
+public class ActivityLogin extends ActivityMain {
 
     protected Button bntLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_session);
+        setContentView(R.layout.activity_login);
         createDrawable();
         _CONTEXT = this;
 
-        bntLogin = findViewById(R.id.btnLogin);
+        bntLogin = findViewById(R.id.btnRegisterUser);
         bntLogin.setOnClickListener(v -> {
             Intent makeMenuScreen = new Intent(_CONTEXT, ActivityMenu.class);
             startActivity(makeMenuScreen);
-            Log.d("on ActivitySession", _CONTEXT.getResources().getString(R.string.activity_fields));
+            Log.d("on ActivityLogin", _CONTEXT.getResources().getString(R.string.activity_fields));
             finish();
         });
     }
@@ -32,7 +32,7 @@ public class ActivitySession extends ActivityMain {
         super.onBackPressed();
         Intent makeMenuScreen = new Intent(_CONTEXT, ActivityMenu.class);
         startActivity(makeMenuScreen);
-        Log.d("on ActivitySession", _CONTEXT.getResources().getString(R.string.activity_fields));
+        Log.d("on ActivityLogin", _CONTEXT.getResources().getString(R.string.activity_fields));
         finish();
     }
 }

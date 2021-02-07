@@ -64,7 +64,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             case R.id.menu_option_fields:
                 Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
                 startActivity(makeFieldsScreen);
-                Log.d("on ActivitySession", _CONTEXT.getResources().getString(R.string.activity_fields));
+                Log.d("on ActivityLogin", _CONTEXT.getResources().getString(R.string.activity_fields));
                 //finish();
                 break;
             case R.id.menu_option_reserves:

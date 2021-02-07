@@ -25,10 +25,10 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_container"
-                    tools:context=".activity.ActivitySession">
+                    tools:context=".activity.ActivityLogin">
 
                         <TextView
-                            android:id="@+id/lblFTP"
+                            android:id="@+id/lblRegisterUser"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/name_title"
@@ -76,7 +76,7 @@
                             android:layout_height="@dimen/space" />
 
                         <Button
-                            android:id="@+id/btnLogin"
+                            android:id="@+id/btnRegisterUser"
                             style="@style/ButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

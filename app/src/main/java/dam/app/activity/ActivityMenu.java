@@ -22,7 +22,7 @@ public class ActivityMenu extends ActivityMain {
 
         btnLoginHome = findViewById(R.id.btnLoginHome);
         btnLoginHome.setOnClickListener(v -> {
-            Intent makeMenuScreen = new Intent(_CONTEXT, ActivitySession.class);
+            Intent makeMenuScreen = new Intent(_CONTEXT, ActivityLogin.class);
             startActivity(makeMenuScreen);
             Log.d("on ActivityMenu", _CONTEXT.getResources().getString(R.string.activity_register_user));
             finish();//ToDo ActivityMenu no deberia ser finish, deberia esperar que el otro vuelva

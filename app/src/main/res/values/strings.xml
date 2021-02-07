@@ -43,7 +43,7 @@
 
     <string name="btnLogin">Iniciar sesión</string>
     <string name="hintNameUser">Nombre de usuario</string>
-    <string name="hintTextPass">Contraseña</string>
+    <string name="hintTextPass">Ingresar contraseña</string>
 
     <!-- AppRepository -->
     <string name="failedOperation">Operación fallida!</string>
@@ -73,4 +73,6 @@
     <string name="btnOpinions">OPINIONES</string>
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
+    <string name="confirmationPassHint">Confirmar contraseña</string>
+    <string name="tittleNewUser">Crear cuenta</string>
 </resources>
