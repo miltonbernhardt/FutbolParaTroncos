@@ -38,28 +38,77 @@ public class AppRepository {
         return _INSTANCE;
     }
 
-    public List<Comment> getCommentsFromField(long id) {
-        List<Comment> list = daoComment.findAllByField(id);
+    public List<Comment> getCommentsFromField(long id, String sortBy, boolean asc) {
+        List<Comment> list;
+
+        if(sortBy.equals("PUNTUACIÓN")){
+            if(asc) list = daoComment.findAllByScore(id);
+            else list = daoComment.findAllByScoreDesc(id);
+        }
+        else{
+            if(asc) list = daoComment.findAllByDate(id);
+            else list = daoComment.findAllByDateDesc(id);
+        }
+
         if(list.isEmpty()){
             //ToDo AL FINAL quitar esto
-            if(daoField.findAll().isEmpty()){
+            if(daoField.findAllByName().isEmpty()){
                 for (Field f : VolatileData.getFields()) daoField.insert(f);
             }
             for (Comment c : VolatileData.getComments()) daoComment.insert(c);
-            list = daoComment.findAllByField(id);
+
+            if(sortBy.equals("PUNTUACIÓN")){
+                if(asc) list = daoComment.findAllByScore(id);
+                else list = daoComment.findAllByScoreDesc(id);
+            }
+            else{
+                if(asc) list = daoComment.findAllByDate(id);
+                else list = daoComment.findAllByDateDesc(id);
+            }
         }
         return list;
     }
 
-    public List<Field> getAllFields() {
-        List<Field> list = daoField.findAll();
+    public List<Field> getAllFields(String sortBy, boolean asc) {
+        List<Field> list;
+
+        switch (sortBy){
+            case "CERCANÍA":
+                if(asc) list = daoField.findAllByProximity();
+                else list = daoField.findAllByProximityDesc();
+                break;
+            case "PUNTUACIÓN":
+                if(asc) list = daoField.findAllByScore();
+                else list = daoField.findAllByScoreDesc();
+                break;
+            default:
+                if(asc) list = daoField.findAllByName();
+                else list = daoField.findAllByNameDesc();
+                break;
+        }
+
+
         if(list.isEmpty()){
             //ToDo AL FINAL quitar esto
-            if(daoField.findAll().isEmpty()){
+            if(daoField.findAllByName().isEmpty()){
                 for (Field f : VolatileData.getFields()) daoField.insert(f);
             }
             for (Comment c : VolatileData.getComments()) daoComment.insert(c);
-            list = daoField.findAll();
+
+            switch (sortBy){
+                case "CERCANÍA":
+                    if(asc) list = daoField.findAllByProximity();
+                    else list = daoField.findAllByProximityDesc();
+                    break;
+                case "PUNTUACIÓN":
+                    if(asc) list = daoField.findAllByScore();
+                    else list = daoField.findAllByScoreDesc();
+                    break;
+                default:
+                    if(asc) list = daoField.findAllByName();
+                    else list = daoField.findAllByNameDesc();
+                    break;
+            }
         }
         return list;
     }

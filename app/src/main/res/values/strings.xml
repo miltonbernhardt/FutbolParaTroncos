@@ -19,17 +19,37 @@
 
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
-    <string-array name="optionsComments">
+    <string-array name="spinnerCommentsOptions">
         <item>FECHA</item>
         <item>PUNTUACIÓN</item>
     </string-array>
 
     <!-- activity_fields_recycler -->
     <string name="lblOrder">Ordenar por:</string>
-    <string-array name="spinnerOptionsFields">
+    <string-array name="spinnerFieldsOptions">
         <item>NOMBRE</item>
         <item>CERCANÍA</item>
         <item>PUNTUACIÓN</item>
+    </string-array>
+
+    <string-array name="spinnerSortOptionDate">
+        <item>Más nuevo primero</item>
+        <item>Más viejo primero</item>
+    </string-array>
+
+    <string-array name="spinnerSortOptionName">
+        <item>Alfabético</item>
+        <item>Alfabético invertido</item>
+    </string-array>
+
+    <string-array name="spinnerSortOptionProximity">
+        <item>Más cerca primero</item>
+        <item>Más lejos primero</item>
+    </string-array>
+
+    <string-array name="spinnerSortOptionScore">
+        <item>Más alto primero</item>
+        <item>Más bajo primero</item>
     </string-array>
 
     <!-- activity_menu -->

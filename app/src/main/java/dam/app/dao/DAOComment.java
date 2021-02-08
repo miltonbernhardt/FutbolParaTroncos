@@ -10,6 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import dam.app.model.Comment;
+import dam.app.model.Field;
 
 @Dao
 public interface DAOComment {
@@ -25,9 +26,17 @@ public interface DAOComment {
     @Query("SELECT * FROM comment WHERE id = :id LIMIT 1")
     Comment find(long id);
 
-    @Query("SELECT * FROM comment")
-    List<Comment> findAll();
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment")
+    List<Comment> findAllByDate(long idField);
 
-    @Query("SELECT * FROM comment WHERE idField = :idField")
-    List<Comment> findAllByField(long idField);
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment DESC")
+    List<Comment> findAllByDateDesc(long idField);
+
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score")
+    List<Comment> findAllByScore(long idField);
+
+
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score DESC")
+    List<Comment> findAllByScoreDesc(long idField);
+
 }

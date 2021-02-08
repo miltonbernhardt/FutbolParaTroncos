@@ -61,12 +61,24 @@
                     android:background="@drawable/spinner_background"
                     android:dropDownWidth="match_parent"
                     android:spinnerMode="dropdown" />
+
+                <Space
+                    android:layout_width="@dimen/space"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/spinnerCommentsSortOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_background"
+                    android:dropDownWidth="match_parent"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerComments"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1">
 
             </androidx.recyclerview.widget.RecyclerView>

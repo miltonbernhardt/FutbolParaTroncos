@@ -116,31 +116,22 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.ratingBarField.setRating(holder.field.getRating());
 
 
-        holder.btnLocate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { //ToDo MAPS agregar función cuando se implemente lo del maps, o quitar este botón
-            }
+        holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
         });
 
-        holder.btnReserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registerScreen = new Intent(activity, ActivityNewReserve.class);
-                activity.startActivity(registerScreen);
-            }
+        holder.btnReserve.setOnClickListener(view -> {
+            Intent registerScreen = new Intent(activity, ActivityNewReserve.class);
+            activity.startActivity(registerScreen);
         });
 
-        holder.btnReviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, ActivityComments.class);
-                intent.putExtra("field", list.get(holder.getAdapterPosition()));
-                activity.setResult(Activity.RESULT_OK, intent);
-                activity.startActivity(intent);
-                activity.getIntent().getSerializableExtra("field");
-                Log.d("on ActivityFields", activity.getResources().getString(R.string.activity_comments));
-                //activity.finish();
-            }
+        holder.btnReviews.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, ActivityComments.class);
+            intent.putExtra("field", list.get(holder.getAdapterPosition()));
+            activity.setResult(Activity.RESULT_OK, intent);
+            activity.startActivity(intent);
+            activity.getIntent().getSerializableExtra("field");
+            Log.d("on ActivityFields", activity.getResources().getString(R.string.activity_comments));
+            //activity.finish();
         });
 
     }

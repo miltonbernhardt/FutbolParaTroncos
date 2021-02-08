@@ -26,6 +26,22 @@ public interface DAOField {
     @Query("SELECT * FROM field WHERE id = :id LIMIT 1")
     Field find(long id);
 
-    @Query("SELECT * FROM field")
-    List<Field> findAll();
+    @Query("SELECT * FROM field ORDER BY name")
+    List<Field> findAllByName();
+
+    @Query("SELECT * FROM field ORDER BY name DESC")
+    List<Field> findAllByNameDesc();
+
+    @Query("SELECT * FROM field ORDER BY address") //ToDo DAO ordenar por promixidad, capaz hacerlo en el repository
+    List<Field> findAllByProximity();
+
+    @Query("SELECT * FROM field ORDER BY address DESC") //ToDo DAO ordenar por promixidad, capaz hacerlo en el repository
+    List<Field> findAllByProximityDesc();
+
+    @Query("SELECT * FROM field ORDER BY rating")
+    List<Field> findAllByScore();
+
+    @Query("SELECT * FROM field ORDER BY rating DESC")
+    List<Field> findAllByScoreDesc();
+
 }

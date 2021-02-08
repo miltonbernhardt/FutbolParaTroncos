@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +31,7 @@ import rx.schedulers.Schedulers;
 public class ActivityFields extends ActivityMain {
     protected RecyclerView recyclerView;
     protected Spinner spinnerOptionsFields;
+    protected Spinner spinnerSortOptionsFields;
 
     protected Subscription _SUBSCRIPTION;
 
@@ -37,20 +42,45 @@ public class ActivityFields extends ActivityMain {
         createDrawable();
         _CONTEXT = this;
 
-        setFields();
+        spinnerSortOptionsFields = findViewById(R.id.spinnerSortOptionsFields);
         spinnerOptionsFields = findViewById(R.id.spinnerOptionsFields);
-        spinnerOptionsFields.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerOptionsFields)));
+        spinnerOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerFieldsOptions)));
+
+        spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String order = ((TextView)selectedItemView).getText().toString();
+                if(order.equals("CERCANÍA"))spinnerSortOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortOptionProximity)));
+                else{
+                    if(order.equals("PUNTUACIÓN")) spinnerSortOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortOptionScore)));
+                    else spinnerSortOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortOptionName)));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) { }
+        });
+
+        spinnerSortOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                boolean asc = false;
+                if(position == 1) asc = true;
+                setFields(spinnerSortOptionsFields.getSelectedItem().toString(), asc);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) { }
+        });
     }
 
-    public void setFields() {
+    public void setFields(String sortBy, boolean asc) {
         recyclerView = findViewById(R.id.recyclerFields);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new FieldRecycler(this, new ArrayList<>()));
 
         Observable<List<Field>> observer = Observable.create(subscriber -> {
-            //SystemClock.sleep(2000);
-            subscriber.onNext(_REPOSITORY.getAllFields());
+            subscriber.onNext(_REPOSITORY.getAllFields(sortBy, asc));
             subscriber.onCompleted();
         });
 
@@ -63,10 +93,14 @@ public class ActivityFields extends ActivityMain {
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.menu_option_fields:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
             case R.id.menu_option_reserves:
                 Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
                 startActivity(makeReviewScreen);
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
+                break;
             case R.id.menu_option_close_session:
                 //ToDo cerrar sessión
                 Snackbar.make(recyclerView, _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_SHORT).show();
