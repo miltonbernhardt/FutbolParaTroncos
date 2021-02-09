@@ -27,6 +27,7 @@ import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityFields;
 import dam.app.activity.ActivityNewReserve;
+import dam.app.database.AppRepository;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -94,7 +95,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             case "":
                 holder.imageField.setImageResource(R.mipmap.image_no_image_available);
                 break;
-            case "a":
+            case "DebugExampleTwoFragment":
                 holder.imageField.setImageResource(R.mipmap.image_field_a);
                 break;
             case "b":
@@ -108,20 +109,23 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
                 break;
         }
 
-
         holder.lblAddressFieldRow.setText(holder.field.getAddress());
         df.setRoundingMode(RoundingMode.DOWN);
         holder.lblRatingFieldRow.setText(df.format(holder.field.getRating()));
         holder.lblTitleFieldRow.setText(holder.field.getName());
         holder.ratingBarField.setRating(holder.field.getRating());
 
-
         holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
         });
 
         holder.btnReserve.setOnClickListener(view -> {
-            Intent registerScreen = new Intent(activity, ActivityNewReserve.class);
-            activity.startActivity(registerScreen);
+            //ToDo SESSION cuando se implemente lo de session, solo permitir reservar DebugExampleTwoFragment alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
+            if(AppRepository.isLogged()){
+                activity.startActivity(new Intent(activity, ActivityNewReserve.class));
+            }
+            else{
+
+            }
         });
 
         holder.btnReviews.setOnClickListener(view -> {
@@ -131,7 +135,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             activity.startActivity(intent);
             activity.getIntent().getSerializableExtra("field");
             Log.d("on ActivityFields", activity.getResources().getString(R.string.activity_comments));
-            //activity.finish();
+            activity.finish();
         });
 
     }

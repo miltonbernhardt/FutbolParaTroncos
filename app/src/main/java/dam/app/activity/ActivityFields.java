@@ -45,8 +45,8 @@ public class ActivityFields extends ActivityMain {
         spinnerSortOptionsFields = findViewById(R.id.spinnerSortOptionsFields);
         spinnerOptionsFields = findViewById(R.id.spinnerOptionsFields);
         spinnerOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerFieldsOptions)));
-
-        spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        setFields("", false);
+        /*spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String order = ((TextView)selectedItemView).getText().toString();
@@ -70,7 +70,7 @@ public class ActivityFields extends ActivityMain {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) { }
-        });
+        });*/
     }
 
     public void setFields(String sortBy, boolean asc) {
@@ -100,6 +100,7 @@ public class ActivityFields extends ActivityMain {
                 Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
                 startActivity(makeReviewScreen);
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
+                finish();
                 break;
             case R.id.menu_option_close_session:
                 //ToDo cerrar sessión

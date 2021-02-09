@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -18,10 +19,11 @@ import com.google.android.material.snackbar.Snackbar;
 
 import dam.app.R;
 import dam.app.database.AppRepository;
+import dam.app.extras.Dialog;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected AppCompatActivity _CONTEXT;
+    protected ActivityMain _CONTEXT;
     protected AppRepository _REPOSITORY = null;
     protected static final int REQUEST_CODE = 222;
 
@@ -80,6 +82,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return true;
+    }
+
+    public void showDialog(String title, String message)
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        Dialog editNameDialog = new Dialog(title,  message, _CONTEXT);
+        editNameDialog.show(fm, "fragment_edit_name");
     }
 
     @Override

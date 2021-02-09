@@ -3,6 +3,7 @@ package dam.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -77,10 +80,16 @@ public class ActivityComments extends ActivityMain {
 
         btnMakeOpinion = findViewById(R.id.btnMakeOpinion);
         btnMakeOpinion.setOnClickListener(v -> {
-            Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewComment.class);
-            makeReviewScreen.putExtra("addButtonAsk", true);
-            startActivity(makeReviewScreen);
-            Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
+            if(_REPOSITORY.isLogged()){
+                //ToDo SESSION cuando se implemente lo de session, solo permitir comentar DebugExampleTwoFragment alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
+                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewComment.class);
+                startActivity(makeReviewScreen);
+                Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
+            }
+            else{
+                showDialog(getResources().getString(R.string.user_not_logged), getResources().getString(R.string.wish_to_log_for_comment));
+            }
+
         });
     }
 

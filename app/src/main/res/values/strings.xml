@@ -75,6 +75,15 @@
     <string name="noCommentsInDB">No hay comentarios acerca de la cancha. Se mostraran todos.</string>
     <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
 
+    <!-- DialogPane -->
+    <string name="log_to_comment">Debe loguearse para poder comentar acerca de la cancha</string>
+    <string name="log_to_reserve">Debe loguearse para poder hacer una reserva en la cancha</string>
+    <string name="wish_to_log_for_comment">¿Desea loguearse para poder reseñar acerca de la cancha?</string>
+    <string name="wish_to_log_for_reserve">¿Desea loguearse para poder reservar la cancha?</string>
+    <string name="user_not_logged">Usuario no logueado!</string>
+    <string name="no">NO</string>
+    <string name="yes">SI</string>
+
     <!-- Drawable menu -->
     <string name="header_reserves_user">RESERVAS ACTIVAS:</string>
     <string name="header_total_reserves">4</string>

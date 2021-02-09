@@ -14,7 +14,7 @@ public  class VolatileData {
         f1.setName("El fútbolito");
         f1.setAddress("Siempre Diva 500");
         f1.setPhoneOfContact("3459823462");
-        f1.setImageUUID("a");
+        f1.setImageUUID("DebugExampleTwoFragment");
         f1.setRating(3.8f);
 
         f2.setName("Los sin sangre");

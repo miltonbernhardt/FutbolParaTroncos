@@ -16,7 +16,8 @@ public class ActivityNewComment extends ActivityMain {
         setContentView(R.layout.activity_new_comment);
         createDrawable();
         _CONTEXT = this;
-
+//tecnicamente solo se podria comentar de reservas vencidas
+        //solo mostrar la posibildiad si ntiene una reserva vencida
         textComment = findViewById(R.id.textComment);
         btnAddComment = findViewById(R.id.btnAddComment);
     }

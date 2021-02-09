@@ -113,6 +113,11 @@ public class AppRepository {
         return list;
     }
 
+    public static boolean isLogged(){
+        //ToDo SESSION verificar si está logueado
+        return true;
+    }
+
     public static void close(){
         _INSTANCE = null;
         db.close();
