@@ -1,4 +1,8 @@
 <resources>
+    <!-- clave de mapa -->
+    <string name="google_maps_key">AIzaSyCuYHwH_F4qzlVLJYDJWIR5FZWS_eN5loA</string>
+
+
     <string name="app_name">FPTs</string>
     <string name="name_title">FÚTBOL PARA TRONCOS</string>
     <string name="activity_comments">LEER COMENTARIOS </string>
@@ -107,4 +111,5 @@
     <string name="btnOpinions">OPINIONES</string>
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
