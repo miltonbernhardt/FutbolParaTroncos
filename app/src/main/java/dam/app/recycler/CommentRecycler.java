@@ -20,16 +20,15 @@ import java.util.List;
 
 import dam.app.R;
 import dam.app.activity.ActivityComments;
+import dam.app.activity.ActivityMain;
 import dam.app.model.Comment;
 
 public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHolderComment> {
 
-    private final ActivityComments activity;
     private final List<Comment> list;
     private final DecimalFormat df = new DecimalFormat("##.#");
 
-    public CommentRecycler(ActivityComments activity, List<Comment> list){
-        this.activity = activity;
+    public CommentRecycler(List<Comment> list){
         this.list = list;
     }
 

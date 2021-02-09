@@ -91,6 +91,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         editNameDialog.show(fm, "fragment_edit_name");
     }
 
+    public void showDialog(int title, int message)
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        Dialog editNameDialog = new Dialog(getResources().getString(title),  getResources().getString(message), _CONTEXT);
+        editNameDialog.show(fm, "fragment_edit_name");
+    }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

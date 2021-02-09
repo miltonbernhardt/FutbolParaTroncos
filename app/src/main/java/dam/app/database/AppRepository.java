@@ -115,7 +115,7 @@ public class AppRepository {
 
     public static boolean isLogged(){
         //ToDo SESSION verificar si está logueado
-        return true;
+        return false;
     }
 
     public static void close(){

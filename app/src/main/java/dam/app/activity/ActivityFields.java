@@ -45,8 +45,8 @@ public class ActivityFields extends ActivityMain {
         spinnerSortOptionsFields = findViewById(R.id.spinnerSortOptionsFields);
         spinnerOptionsFields = findViewById(R.id.spinnerOptionsFields);
         spinnerOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerFieldsOptions)));
-        setFields("", false);
-        /*spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String order = ((TextView)selectedItemView).getText().toString();
@@ -70,14 +70,14 @@ public class ActivityFields extends ActivityMain {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) { }
-        });*/
+        });
     }
 
     public void setFields(String sortBy, boolean asc) {
         recyclerView = findViewById(R.id.recyclerFields);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new FieldRecycler(this, new ArrayList<>()));
+        recyclerView.setAdapter(new FieldRecycler(_CONTEXT, new ArrayList<>()));
 
         Observable<List<Field>> observer = Observable.create(subscriber -> {
             subscriber.onNext(_REPOSITORY.getAllFields(sortBy, asc));
@@ -85,7 +85,7 @@ public class ActivityFields extends ActivityMain {
         });
 
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                fields -> recyclerView.setAdapter(new FieldRecycler((ActivityFields) _CONTEXT, fields)),
+                fields -> recyclerView.setAdapter(new FieldRecycler(_CONTEXT, fields)),
                 error -> Snackbar.make(recyclerView, _CONTEXT.getResources().getString(R.string.failedOperation), Snackbar.LENGTH_LONG).show());
     }
 

@@ -25,20 +25,21 @@ import java.util.List;
 
 import dam.app.R;
 import dam.app.activity.ActivityComments;
-import dam.app.activity.ActivityFields;
+import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewReserve;
 import dam.app.database.AppRepository;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
 
-    private final ActivityFields activity;
+    private final ActivityMain _CONTEXT;
     private final List<Field> list;
     private final DecimalFormat df = new DecimalFormat("##.#");
 
-    public FieldRecycler(ActivityFields activity, List<Field> list){
-        this.activity = activity;
+
+    public FieldRecycler(ActivityMain _CONTEXT, List<Field> list){
         this.list = list;
+        this._CONTEXT = _CONTEXT;
     }
 
     public static class FieldHolder extends RecyclerView.ViewHolder {
@@ -121,21 +122,21 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.btnReserve.setOnClickListener(view -> {
             //ToDo SESSION cuando se implemente lo de session, solo permitir reservar DebugExampleTwoFragment alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
             if(AppRepository.isLogged()){
-                activity.startActivity(new Intent(activity, ActivityNewReserve.class));
+                _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
             }
             else{
-
+                _CONTEXT.showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
             }
         });
 
         holder.btnReviews.setOnClickListener(view -> {
-            Intent intent = new Intent(activity, ActivityComments.class);
+            Intent intent = new Intent(_CONTEXT, ActivityComments.class);
             intent.putExtra("field", list.get(holder.getAdapterPosition()));
-            activity.setResult(Activity.RESULT_OK, intent);
-            activity.startActivity(intent);
-            activity.getIntent().getSerializableExtra("field");
-            Log.d("on ActivityFields", activity.getResources().getString(R.string.activity_comments));
-            activity.finish();
+            _CONTEXT.setResult(Activity.RESULT_OK, intent);
+            _CONTEXT.startActivity(intent);
+            _CONTEXT.getIntent().getSerializableExtra("field");
+            Log.d("on ActivityFields", _CONTEXT.getResources().getString(R.string.activity_comments));
+            //_CONTEXT.finish();
         });
 
     }

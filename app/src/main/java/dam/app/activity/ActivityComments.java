@@ -3,7 +3,6 @@ package dam.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,8 +10,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,7 +84,7 @@ public class ActivityComments extends ActivityMain {
                 Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
             }
             else{
-                showDialog(getResources().getString(R.string.user_not_logged), getResources().getString(R.string.wish_to_log_for_comment));
+                showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
             }
 
         });
@@ -97,7 +94,7 @@ public class ActivityComments extends ActivityMain {
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, new ArrayList<>()));
+        recyclerView.setAdapter(new CommentRecycler(new ArrayList<>()));
 
         Observable<List<Comment>> observer = Observable.create(subscriber -> {
             subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy, asc));
@@ -105,7 +102,7 @@ public class ActivityComments extends ActivityMain {
         });
 
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                fields -> recyclerView.setAdapter(new CommentRecycler((ActivityComments) _CONTEXT, fields)) ,
+                fields -> recyclerView.setAdapter(new CommentRecycler(fields)) ,
                 error -> Snackbar.make(recyclerView, _CONTEXT.getResources().getString(R.string.failedOperation), Snackbar.LENGTH_LONG).show());
     }
 

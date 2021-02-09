@@ -80,7 +80,7 @@
     <string name="log_to_reserve">Debe loguearse para poder hacer una reserva en la cancha</string>
     <string name="wish_to_log_for_comment">¿Desea loguearse para poder reseñar acerca de la cancha?</string>
     <string name="wish_to_log_for_reserve">¿Desea loguearse para poder reservar la cancha?</string>
-    <string name="user_not_logged">Usuario no logueado!</string>
+    <string name="user_not_logged">Usuario no logueado</string>
     <string name="no">NO</string>
     <string name="yes">SI</string>
 

@@ -33,10 +33,11 @@ public class ActivityMenu extends ActivityMain {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(v -> {
-            Intent makeMenuScreen = new Intent(_CONTEXT, ActivityRegisterUser.class);
+            /*Intent makeMenuScreen = new Intent(_CONTEXT, ActivityRegisterUser.class);
             startActivity(makeMenuScreen);
             Log.d("on ActivityMenu", _CONTEXT.getResources().getString(R.string.activity_fields));
-            //finish();
+            //finish();*/
+            showDialog("PRUEBAS", "DESCOMENTAR EN ACTIVITY MENÚ");
         });
     }
 }
