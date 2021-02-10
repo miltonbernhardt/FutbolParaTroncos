@@ -129,7 +129,7 @@
             android:layout_marginHorizontal="@dimen/bigger_padding_container"
             app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintHorizontal_bias="0.72"
             app:layout_constraintStart_toStartOf="@id/guidelineVertical1"
             app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
             app:srcCompat="@mipmap/image_no_image_available" />

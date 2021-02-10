@@ -45,10 +45,10 @@
     <string name="btnAddComment">Añadir reseña</string>
     <string name="checkBoxUploadImage">Imágen cargada</string>
     <string name="hintComment">Comentario...</string>
-    <string name="lblCommentAsk">¿Tienes alguna opinión que quieras dar?</string>
+    <string name="lblCommentAsk">¿Tenés alguna opinión que quieras dar?</string>
     <string name="lblNewComment">DAR OPINIÓN</string>
-    <string name="lblUploadPhotoAsk">¿Desea subir una imágen de la cancha?</string>
-    <string name="lblRatingAsk">¿Comó es tu valoración de la cancha?</string>
+    <string name="lblUploadPhotoAsk">¿Deseas subir una imágen de la cancha?</string>
+    <string name="lblRatingAsk">¿Cómo es tu valoración de la cancha?</string>
 
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>

@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ import dam.app.extras.Dialog;
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ActivityMain _CONTEXT;
-    protected AppRepository _REPOSITORY = null;
+    public AppRepository _REPOSITORY = null;
     protected static final int REQUEST_CODE = 222;
 
     protected Toolbar toolbar;
@@ -33,24 +34,26 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     protected NavigationView navigationView;
 
     public void createDrawable(ActivityMain _CONTEXT){
-        //_BACKGROUND = findViewById(R.id.background);
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
-
         navigationView = findViewById(R.id.navigation_view);
 
         setSupportActionBar(toolbar);
+        navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
-
         drawerLayout.addDrawerListener(toggle);
-
         toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
 
         this._CONTEXT = _CONTEXT;
         _REPOSITORY = AppRepository.getInstance(_CONTEXT);
+
+        if(_REPOSITORY.isLogged()) setMenu(R.menu.menu_all_options);
+    }
+
+    protected void setMenu(int menu){
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(menu);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -60,7 +63,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             case R.id.menu_option_fields:
                 Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
                 startActivity(makeFieldsScreen);
-                Log.d("on ActivitySession", _CONTEXT.getResources().getString(R.string.activity_fields));
+                Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_fields));
                 finish();
                 break;
             case R.id.menu_option_reserves:

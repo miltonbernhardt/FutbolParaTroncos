@@ -44,18 +44,10 @@ public class AppRepository {
         List<Comment> list = new ArrayList<>();
 
         switch (sortBy){
-            case PUNTUACION_ALTA:
-                list = daoComment.findAllByScoreDesc(id);
-                break;
-            case PUNTUACION_BAJA:
-                list = daoComment.findAllByScore(id);
-                break;
-            case FECHA_CERCANA:
-                list = daoComment.findAllByDateDesc(id);
-                break;
-            case FECHA_LEJANA:
-                list = daoComment.findAllByDate(id);
-                break;
+            case PUNTUACION_ALTA: list = daoComment.findAllByScoreDesc(id); break;
+            case PUNTUACION_BAJA:  list = daoComment.findAllByScore(id); break;
+            case FECHA_CERCANA: list = daoComment.findAllByDateDesc(id); break;
+            case FECHA_LEJANA: list = daoComment.findAllByDate(id); break;
         }
 
         if(list.isEmpty()){
@@ -74,23 +66,12 @@ public class AppRepository {
         List<Field> list = new ArrayList<>();
 
         switch (sortBy){
-            case DIRECCION_CERCANA:
-                list = daoField.findAllByProximity();
-                break;
-            case DIRECCION_LEJANA:
-                list = daoField.findAllByProximityDesc();
-                break;
-            case PUNTUACION_ALTA:
-                list = daoField.findAllByScoreDesc();
-                break;
-            case PUNTUACION_BAJA:
-                list = daoField.findAllByScore();
-                break;
-            case NOMBRE_ALFABETICO:
-                list = daoField.findAllByName();
-                break;
+            case DIRECCION_CERCANA: list = daoField.findAllByProximity(); break;
+            case DIRECCION_LEJANA:  list = daoField.findAllByProximityDesc(); break;
+            case PUNTUACION_ALTA: list = daoField.findAllByScoreDesc(); break;
+            case PUNTUACION_BAJA: list = daoField.findAllByScore(); break;
+            case NOMBRE_ALFABETICO: list = daoField.findAllByName(); break;
         }
-
 
         if(list.isEmpty()){
             //ToDo AL FINAL quitar esto
@@ -109,7 +90,7 @@ public class AppRepository {
         return 0l;
     }
 
-    public static boolean isLogged(){
+    public boolean isLogged(){
         //ToDo SESSION verificar si está logueado
         return true;
     }

@@ -57,21 +57,12 @@ public class ActivityComments extends ActivityMain {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
-                    case 0:
-                        setComments(idField, EnumSortOption.FECHA_CERCANA);
-                        break;
-                    case 1:
-                        setComments(idField, EnumSortOption.FECHA_LEJANA);
-                        break;
-                    case 2:
-                        setComments(idField, EnumSortOption.PUNTUACION_ALTA);
-                        break;
-                    case 3:
-                        setComments(idField, EnumSortOption.PUNTUACION_BAJA);
-                        break;
+                    case 0: setComments(idField, EnumSortOption.FECHA_CERCANA); break;
+                    case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
+                    case 2: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
+                    case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) { }
         });

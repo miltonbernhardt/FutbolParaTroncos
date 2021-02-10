@@ -1,18 +1,12 @@
 package dam.app.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +33,9 @@ public class ActivityFields extends ActivityMain {
         setContentView(R.layout.activity_fields_recycler);
         createDrawable(this);
 
+        if(_REPOSITORY.isLogged()) setMenu(R.menu.menu_without_fields_with_session);
+        else setMenu(R.menu.menu_without_fields_and_session);
+
         spinnerOptionsFields = findViewById(R.id.spinnerSortFields);
         spinnerOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortFields)));
 
@@ -46,24 +43,13 @@ public class ActivityFields extends ActivityMain {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
-                    case 0:
-                        setFields(EnumSortOption.NOMBRE_ALFABETICO);
-                        break;
-                    case 1:
-                        setFields(EnumSortOption.DIRECCION_CERCANA);
-                        break;
-                    case 2:
-                        setFields(EnumSortOption.DIRECCION_LEJANA);
-                        break;
-                    case 3:
-                        setFields(EnumSortOption.PUNTUACION_ALTA);
-                        break;
-                    case 4:
-                        setFields(EnumSortOption.PUNTUACION_BAJA);
-                        break;
+                    case 0: setFields(EnumSortOption.NOMBRE_ALFABETICO);  break;
+                    case 1: setFields(EnumSortOption.DIRECCION_CERCANA); break;
+                    case 2: setFields(EnumSortOption.DIRECCION_LEJANA); break;
+                    case 3: setFields(EnumSortOption.PUNTUACION_ALTA); break;
+                    case 4: setFields(EnumSortOption.PUNTUACION_BAJA); break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) { }
         });
@@ -83,33 +69,6 @@ public class ActivityFields extends ActivityMain {
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 fields -> recyclerView.setAdapter(new FieldRecycler(_CONTEXT, fields)),
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.menu_option_fields:
-                drawerLayout.closeDrawer(GravityCompat.START);
-                break;
-            case R.id.menu_option_reserves:
-                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
-                startActivity(makeReviewScreen);
-                Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
-                finish();
-                break;
-            case R.id.menu_option_close_session:
-                //ToDo cerrar sessión
-                Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                this.finishAffinity();
-                break;
-        }
-        return true;
     }
 
     @Override
