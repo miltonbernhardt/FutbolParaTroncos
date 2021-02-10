@@ -2,6 +2,7 @@ package dam.app.database;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dam.app.dao.DAOComment;
@@ -9,6 +10,7 @@ import dam.app.dao.DAOField;
 import dam.app.dao.DAOReserve;
 import dam.app.dao.DAOSchedule;
 import dam.app.dao.DAOUser;
+import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 
@@ -38,16 +40,22 @@ public class AppRepository {
         return _INSTANCE;
     }
 
-    public List<Comment> getCommentsFromField(long id, String sortBy, boolean asc) {
-        List<Comment> list;
+    public List<Comment> getCommentsFromField(long id, EnumSortOption sortBy) {
+        List<Comment> list = new ArrayList<>();
 
-        if(sortBy.equals("PUNTUACIÓN")){
-            if(asc) list = daoComment.findAllByScore(id);
-            else list = daoComment.findAllByScoreDesc(id);
-        }
-        else{
-            if(asc) list = daoComment.findAllByDate(id);
-            else list = daoComment.findAllByDateDesc(id);
+        switch (sortBy){
+            case PUNTUACION_ALTA:
+                list = daoComment.findAllByScoreDesc(id);
+                break;
+            case PUNTUACION_BAJA:
+                list = daoComment.findAllByScore(id);
+                break;
+            case FECHA_CERCANA:
+                list = daoComment.findAllByDateDesc(id);
+                break;
+            case FECHA_LEJANA:
+                list = daoComment.findAllByDate(id);
+                break;
         }
 
         if(list.isEmpty()){
@@ -57,33 +65,29 @@ public class AppRepository {
             }
             for (Comment c : VolatileData.getComments()) daoComment.insert(c);
 
-            if(sortBy.equals("PUNTUACIÓN")){
-                if(asc) list = daoComment.findAllByScore(id);
-                else list = daoComment.findAllByScoreDesc(id);
-            }
-            else{
-                if(asc) list = daoComment.findAllByDate(id);
-                else list = daoComment.findAllByDateDesc(id);
-            }
+            list = daoComment.findAllByDate(id);
         }
         return list;
     }
 
-    public List<Field> getAllFields(String sortBy, boolean asc) {
-        List<Field> list;
+    public List<Field> getAllFields(EnumSortOption sortBy) {
+        List<Field> list = new ArrayList<>();
 
         switch (sortBy){
-            case "CERCANÍA":
-                if(asc) list = daoField.findAllByProximity();
-                else list = daoField.findAllByProximityDesc();
+            case DIRECCION_CERCANA:
+                list = daoField.findAllByProximity();
                 break;
-            case "PUNTUACIÓN":
-                if(asc) list = daoField.findAllByScore();
-                else list = daoField.findAllByScoreDesc();
+            case DIRECCION_LEJANA:
+                list = daoField.findAllByProximityDesc();
                 break;
-            default:
-                if(asc) list = daoField.findAllByName();
-                else list = daoField.findAllByNameDesc();
+            case PUNTUACION_ALTA:
+                list = daoField.findAllByScoreDesc();
+                break;
+            case PUNTUACION_BAJA:
+                list = daoField.findAllByScore();
+                break;
+            case NOMBRE_ALFABETICO:
+                list = daoField.findAllByName();
                 break;
         }
 
@@ -95,27 +99,19 @@ public class AppRepository {
             }
             for (Comment c : VolatileData.getComments()) daoComment.insert(c);
 
-            switch (sortBy){
-                case "CERCANÍA":
-                    if(asc) list = daoField.findAllByProximity();
-                    else list = daoField.findAllByProximityDesc();
-                    break;
-                case "PUNTUACIÓN":
-                    if(asc) list = daoField.findAllByScore();
-                    else list = daoField.findAllByScoreDesc();
-                    break;
-                default:
-                    if(asc) list = daoField.findAllByName();
-                    else list = daoField.findAllByNameDesc();
-                    break;
-            }
+            list = daoField.findAllByName();
         }
         return list;
+    }
+
+    public long saveComment(Comment comment){
+
+        return 0l;
     }
 
     public static boolean isLogged(){
         //ToDo SESSION verificar si está logueado
-        return false;
+        return true;
     }
 
     public static void close(){

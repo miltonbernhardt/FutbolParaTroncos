@@ -15,8 +15,7 @@ public class ActivitySession extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session);
-        createDrawable();
-        _CONTEXT = this;
+        createDrawable(this);
 
         bntLogin = findViewById(R.id.btnLogin);
         bntLogin.setOnClickListener(v -> {

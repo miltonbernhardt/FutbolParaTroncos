@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorSecondary"
-    android:entries="@array/spinnerCommentsOptions"
+    android:entries="@array/spinnerSortComments"
     android:gravity="start"
     android:padding="@dimen/padding_container"
     android:textColor="@color/fontColorLight"

@@ -26,17 +26,17 @@ public interface DAOComment {
     @Query("SELECT * FROM comment WHERE id = :id LIMIT 1")
     Comment find(long id);
 
-    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment")
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment")//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
     List<Comment> findAllByDate(long idField);
 
-    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment DESC")
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY dateOfComment DESC")//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
     List<Comment> findAllByDateDesc(long idField);
 
-    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score")
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score")//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
     List<Comment> findAllByScore(long idField);
 
 
-    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score DESC")
+    @Query("SELECT * FROM comment WHERE idField = :idField ORDER BY score DESC")//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
     List<Comment> findAllByScoreDesc(long idField);
 
 }

@@ -19,37 +19,21 @@
 
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
-    <string-array name="spinnerCommentsOptions">
-        <item>FECHA</item>
-        <item>PUNTUACIÓN</item>
+    <string-array name="spinnerSortComments">
+        <item>MÁS RECIENTE PRIMERO</item>
+        <item>MAS VIEJO PRIMERO</item>
+        <item>CON PUNTAJES MÁS ALTOS</item>
+        <item>CON PUNTAJES MÁS BAJOS</item>
     </string-array>
 
     <!-- activity_fields_recycler -->
     <string name="lblOrder">Ordenar por:</string>
-    <string-array name="spinnerFieldsOptions">
-        <item>NOMBRE</item>
-        <item>CERCANÍA</item>
-        <item>PUNTUACIÓN</item>
-    </string-array>
-
-    <string-array name="spinnerSortOptionDate">
-        <item>Más nuevo primero</item>
-        <item>Más viejo primero</item>
-    </string-array>
-
-    <string-array name="spinnerSortOptionName">
-        <item>Alfabético</item>
-        <item>Alfabético invertido</item>
-    </string-array>
-
-    <string-array name="spinnerSortOptionProximity">
-        <item>Más cerca primero</item>
-        <item>Más lejos primero</item>
-    </string-array>
-
-    <string-array name="spinnerSortOptionScore">
-        <item>Más alto primero</item>
-        <item>Más bajo primero</item>
+    <string-array name="spinnerSortFields">
+        <item>SEGÚN EL NOMBRE DE LA CANCHA</item>
+        <item>MÁS CERCANO</item>
+        <item>MÁS LEJANO</item>
+        <item>CON PUNTAJE PROMEDIO MÁS ALTO</item>
+        <item>CON PUNTAJE PROMEDIO MÁS BAJO</item>
     </string-array>
 
     <!-- activity_menu -->
@@ -58,11 +42,16 @@
     <string name="lblWelcome">BIENVENIDOS!</string>
 
     <!-- activity_new_comment -->
-
-    <string name="btnAddComment">Añadir comentario</string>
-    <string name="hintComment">Comentario...</string>
+    <string name="btnAddComment">Añadir reseña</string>
     <string name="checkBoxUploadImage">Imágen cargada</string>
-    <string name="lblNewComment">NUEVO COMENTARIO</string>
+    <string name="hintComment">Comentario...</string>
+    <string name="lblCommentAsk">¿Tienes alguna opinión que quieras dar?</string>
+    <string name="lblNewComment">DAR OPINIÓN</string>
+    <string name="lblUploadPhotoAsk">¿Desea subir una imágen de la cancha?</string>
+    <string name="lblRatingAsk">¿Comó es tu valoración de la cancha?</string>
+
+    <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
+    <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
 
     <!-- activity_session -->
 
@@ -76,13 +65,14 @@
     <string name="noFieldsInDB">No se encontraron canchas disponibles.</string>
 
     <!-- DialogPane -->
+    <string name="should_rate">Debe puntuar la cancha</string>
     <string name="log_to_comment">Debe loguearse para poder comentar acerca de la cancha</string>
     <string name="log_to_reserve">Debe loguearse para poder hacer una reserva en la cancha</string>
     <string name="wish_to_log_for_comment">¿Desea loguearse para poder reseñar acerca de la cancha?</string>
     <string name="wish_to_log_for_reserve">¿Desea loguearse para poder reservar la cancha?</string>
     <string name="user_not_logged">Usuario no logueado</string>
-    <string name="no">NO</string>
-    <string name="yes">SI</string>
+    <string name="no">CANCELAR</string>
+    <string name="yes">OK</string>
 
     <!-- Drawable menu -->
     <string name="header_reserves_user">RESERVAS ACTIVAS:</string>

@@ -18,7 +18,6 @@ import dam.app.activity.ActivitySession;
 public class Dialog extends DialogFragment {
 
     private final ActivityMain _CONTEXT;
-
     private final String title;
     private final String message;
 

@@ -29,9 +29,6 @@ public interface DAOField {
     @Query("SELECT * FROM field ORDER BY name")
     List<Field> findAllByName();
 
-    @Query("SELECT * FROM field ORDER BY name DESC")
-    List<Field> findAllByNameDesc();
-
     @Query("SELECT * FROM field ORDER BY address") //ToDo DAO ordenar por promixidad, capaz hacerlo en el repository
     List<Field> findAllByProximity();
 

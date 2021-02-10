@@ -1,6 +1,5 @@
 package dam.app.model;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -17,17 +16,11 @@ import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
         indices = {@Index(value = {"idField"})})
-        /* ToDo Comment arreglar cuando se implemente lo del user
-        (foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
-        @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
-        indices = {@Index(value = {"idUser"}), @Index(value = {"idField"})})*/
 public class Comment implements Serializable {
     /* ---- RELATIONS ---- */
-    //@ColumnInfo(name="idUser")
-    private long idUser;
 
     @ColumnInfo(name="idField")
-    private long idField;
+    private long idField;//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
@@ -54,14 +47,6 @@ public class Comment implements Serializable {
         dateOfComment = LocalDate.now();
         comment = "";
         score = 5;
-    }
-
-    public long getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(long idUser) {
-        this.idUser = idUser;
     }
 
     public long getIdField() {

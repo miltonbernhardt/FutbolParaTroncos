@@ -17,8 +17,7 @@ public class ActivityMenu extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        createDrawable();
-        _CONTEXT = this;
+        createDrawable(this);
         _REPOSITORY = AppRepository.getInstance(_CONTEXT);
         //ToDo ActivityMenu fijarse si está logueado, si es asi ocultar los botones
 

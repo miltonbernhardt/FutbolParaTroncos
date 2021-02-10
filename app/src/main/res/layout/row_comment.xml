@@ -5,7 +5,7 @@
     android:id="@+id/cardViewComment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/padding_container"
+    android:layout_marginVertical="@dimen/bigger_padding_container"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/colorPrimaryVariant"
     app:cardCornerRadius="@dimen/corner_radius"

@@ -11,98 +11,193 @@
     tools:openDrawer="end">
     <!--tools:openDrawer="start"-->
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/colorBackground">
 
-        <include layout="@layout/navigator_toolbar" />
+        <include
+            layout="@layout/navigator_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_goneMarginTop="0dp" />
 
-        <LinearLayout
-            android:id="@+id/background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:gravity="center"
+        <TextView
+            android:id="@+id/lblNameField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/name_title"
+            android:textSize="@dimen/size_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.91" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <TextView
+            android:id="@+id/lblRatingAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/lblRatingAsk"
+            app:layout_constraintBottom_toTopOf="@id/ratingBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal1" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:isIndicator="false"
+            android:rating="0.0"
+            android:stepSize="1"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblRatingAsk" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.24" />
+
+        <TextView
+            android:id="@+id/lblUploadPhotoAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/lblUploadPhotoAsk"
+            app:layout_constraintBottom_toTopOf="@id/btnCamera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2" />
+
+        <ImageButton
+            android:id="@+id/btnCamera"
+            style="@style/ButtonStyle"
+            android:layout_width="@dimen/size_image_button"
+            android:layout_height="@dimen/size_image_button"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:contentDescription="@android:string/VideoView_error_title"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <CheckBox
+            android:id="@+id/checkBoxUploadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:enabled="false"
+            android:text="@string/checkBoxUploadImage"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk" />
+
+        <ImageView
+            android:id="@+id/imageUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.52"
+            app:layout_constraintStart_toStartOf="@id/guidelineVertical1"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
+            app:srcCompat="@mipmap/image_no_image_available" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <TextView
+            android:id="@+id/lblCommentAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:layout_marginBottom="@dimen/padding_container"
+            android:text="@string/lblCommentAsk"
+            app:layout_constraintBottom_toTopOf="@id/textComment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal3" />
+
+        <EditText
+            android:id="@+id/textComment"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:autofillHints="ignore"
+            android:gravity="top|start"
+            android:hint="@string/hintComment"
+            android:inputType="text|textMultiLine"
+            android:padding="@dimen/bigger_padding_container"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblCommentAsk" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.87" />
+
+        <Button
+            android:id="@+id/btnAddComment"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/btnAddComment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineVertical1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_container">
+            app:layout_constraintGuide_percent="0.15" />
 
-
-            <LinearLayout
-                android:id="@+id/punt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <RatingBar
-                    android:id="@+id/ratingBar2"
-                    style="@style/Widget.AppCompat.RatingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:rating="0" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/textComment"
-                style="@style/EditTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="12"
-                android:autofillHints="ignore"
-                android:gravity="top|start"
-                android:hint="@string/hintComment"
-                android:inputType="text|textMultiLine"
-                android:padding="@dimen/padding_container" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_container">
-
-                <ImageButton
-                    android:id="@+id/btnCamera"
-                    style="@style/ButtonStyle"
-                    android:layout_width="@dimen/size_image_button"
-                    android:layout_height="@dimen/size_image_button"
-                    app:srcCompat="@android:drawable/ic_menu_camera" />
-
-                <Space
-                    android:layout_width="@dimen/space"
-                    android:layout_height="wrap_content" />
-
-                <CheckBox
-                    android:id="@+id/checkBoxUploadImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/checkBoxUploadImage" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingVertical="@dimen/padding_container">
-
-                <Button
-                    android:id="@+id/btnAddComment"
-                    style="@style/ButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btnAddComment" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/navigation_view" />
 

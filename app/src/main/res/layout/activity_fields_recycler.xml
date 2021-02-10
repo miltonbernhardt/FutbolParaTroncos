@@ -10,66 +10,65 @@
     tools:context=".activity.ActivityFields"
     tools:openDrawer="end">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/colorBackground">
 
-        <include layout="@layout/navigator_toolbar" />
+        <include
+            layout="@layout/navigator_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <LinearLayout
-            android:id="@+id/background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/padding_container">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.91">
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/lblOrderFields"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center|start"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_container">
+                android:layout_marginHorizontal="@dimen/bigger_padding_container"
+                android:text="@string/lblOrder" />
 
-                <TextView
-                    android:id="@+id/lblOrderFields"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/lblOrder" />
-
-                <Space
-                    android:layout_width="@dimen/space"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/spinnerOptionsFields"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/spinner_background"
-                    android:spinnerMode="dropdown" />
-
-                <Space
-                    android:layout_width="@dimen/space"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/spinnerSortOptionsFields"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/spinner_background"
-                    android:spinnerMode="dropdown" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerFields"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <Spinner
+                android:id="@+id/spinnerSortFields"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_background"
+                android:spinnerMode="dropdown" />
 
         </LinearLayout>
-    </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerFields"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/navigation_view" />
 

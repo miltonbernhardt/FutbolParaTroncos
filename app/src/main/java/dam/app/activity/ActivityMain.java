@@ -12,10 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import dam.app.R;
 import dam.app.database.AppRepository;
@@ -32,17 +32,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     protected ActionBarDrawerToggle toggle;
     protected NavigationView navigationView;
 
-    protected LinearLayout background;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        _CONTEXT = this;
-        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
-    }
-
-    public void createDrawable(){
-        background = findViewById(R.id.background);
+    public void createDrawable(ActivityMain _CONTEXT){
+        //_BACKGROUND = findViewById(R.id.background);
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
 
@@ -57,6 +48,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        this._CONTEXT = _CONTEXT;
+        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -67,17 +61,17 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
                 startActivity(makeFieldsScreen);
                 Log.d("on ActivitySession", _CONTEXT.getResources().getString(R.string.activity_fields));
-                //finish();
+                finish();
                 break;
             case R.id.menu_option_reserves:
                 Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
                 startActivity(makeReviewScreen);
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
-                //finish();
+                finish();
                 break;
             case R.id.menu_option_close_session:
                 //ToDo cerrar sessión
-                Snackbar.make(background, _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_LONG).show();
+                Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
                 this.finishAffinity();
                 break;
         }

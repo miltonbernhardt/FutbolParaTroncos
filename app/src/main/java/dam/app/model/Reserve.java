@@ -1,6 +1,5 @@
 package dam.app.model;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -25,6 +24,9 @@ public class Reserve implements Serializable {
 
     @ColumnInfo(name="idField")
     private long idField;
+
+    //@ColumnInfo(name="idComment") ToDo RESERVE agregar cuando se haga lo de reserva
+    //private long idComment;
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)

@@ -10,8 +10,7 @@ public class ActivityNewReserve extends ActivityMain  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_reserve);
-        createDrawable();
-        _CONTEXT = this;
+        createDrawable(this);
     }
 
 }

@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import dam.app.R;
-import dam.app.activity.ActivityComments;
-import dam.app.activity.ActivityMain;
 import dam.app.model.Comment;
 
 public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHolderComment> {
@@ -33,7 +31,7 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
     }
 
     public static class ViewHolderComment extends RecyclerView.ViewHolder {
-        CardView cardViewComment;
+        CardView cardViewComment;//TODO ActivityNewComment agregar imagen
         TextView lblDateCommentRow;
         TextView lblRatingFieldRow;
         TextView lblUsernameCommentRow;

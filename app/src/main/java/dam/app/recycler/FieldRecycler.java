@@ -131,10 +131,10 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.btnReviews.setOnClickListener(view -> {
             Intent intent = new Intent(_CONTEXT, ActivityComments.class);
-            intent.putExtra("field", list.get(holder.getAdapterPosition()));
+            intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
+            intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());
             _CONTEXT.setResult(Activity.RESULT_OK, intent);
             _CONTEXT.startActivity(intent);
-            _CONTEXT.getIntent().getSerializableExtra("field");
             Log.d("on ActivityFields", _CONTEXT.getResources().getString(R.string.activity_comments));
             //_CONTEXT.finish();
         });
