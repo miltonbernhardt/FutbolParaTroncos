@@ -43,7 +43,7 @@ public class ActivityRegisterUser extends ActivityMain  {
         mLoadingBar = findViewById(R.id.progressBarRegister);
 
         //if the user is login, so we redirect to the main menu
-        //if(mAuth.getCurrentUser() != null) startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
+        if(mAuth.getCurrentUser() != null) startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
         //Regular Expression for Standard Email adress
         String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern emailPattern = Pattern.compile(emailRegex);
@@ -57,6 +57,8 @@ public class ActivityRegisterUser extends ActivityMain  {
                 String userName = mUserName.getText().toString();
                 String password1 = mPassword.getText().toString().trim();
                 String password2 = mPasswordConfirmation.getText().toString().trim();
+                Log.d("pass",password1);
+
                 Matcher matcher = emailPattern.matcher(email);
                 Boolean wrongField = false;
 
@@ -86,20 +88,18 @@ public class ActivityRegisterUser extends ActivityMain  {
                 //if all field are right, so go on
                 if(!wrongField) {
                     mAuth.createUserWithEmailAndPassword(email, password1)
-                            .addOnCompleteListener(ActivityRegisterUser.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success
-                                        Toast.makeText(ActivityRegisterUser.this, "Registración exitosa.",
-                                                Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
-                                    } else {
-                                        // If sign in fails, display a message to the user.
-                                        Log.w("FAIL", "createUserWithEmail:failure", task.getException());
-                                        Toast.makeText(ActivityRegisterUser.this, "Error en la registración.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
+                            .addOnCompleteListener(ActivityRegisterUser.this, task -> {
+                                if (task.isSuccessful()) {
+                                    // Sign in success
+                                    Toast.makeText(ActivityRegisterUser.this, "Registración exitosa.",
+                                            Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
+                                    finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w("FAIL", "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(ActivityRegisterUser.this, "Error en la registración.",
+                                            Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }

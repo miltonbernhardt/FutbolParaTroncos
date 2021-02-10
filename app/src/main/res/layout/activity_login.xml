@@ -42,7 +42,7 @@
                             android:contentDescription="TODO" />
 
                         <EditText
-                            android:id="@+id/textUserName"
+                            android:id="@+id/textUserNameLogin"
                             style="@style/EditTextStyle"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                             android:layout_height="@dimen/space" />
 
                         <EditText
-                            android:id="@+id/textPassword"
+                            android:id="@+id/textPasswordLogin"
                             style="@style/EditTextStyle"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"

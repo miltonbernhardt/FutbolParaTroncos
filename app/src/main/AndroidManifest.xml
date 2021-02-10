@@ -16,9 +16,9 @@
         <activity android:name="dam.app.activity.ActivityLogin" android:label="INICIAR SESIÓN" />
         <activity android:name="dam.app.activity.ActivityNewComment" android:label="RESEÑAR" />
         <activity android:name="dam.app.activity.ActivityNewReserve" android:label="RESERVAR" />
-        <activity android:name="dam.app.activity.ActivityMenu" android:label="REGISTRARSE" />
+        <activity android:name="dam.app.activity.ActivityRegisterUser" android:label="REGISTRARSE" />
         <activity android:name="dam.app.activity.ActivityReserves" android:label="RESERVAS" />
-        <activity android:name="dam.app.activity.ActivityRegisterUser" android:screenOrientation="portrait">
+        <activity android:name="dam.app.activity.ActivityMenu" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,10 +11,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 
 import dam.app.R;
 import dam.app.database.AppRepository;
@@ -74,13 +76,16 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 //finish();
                 break;
             case R.id.menu_option_close_session:
-                //ToDo cerrar sessión
                 Snackbar.make(background, _CONTEXT.getResources().getString(R.string.message_closing_session), Snackbar.LENGTH_LONG).show();
+
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
                 finish();
                 break;
         }
         return true;
     }
+
 
     @Override
     public void onBackPressed() {
