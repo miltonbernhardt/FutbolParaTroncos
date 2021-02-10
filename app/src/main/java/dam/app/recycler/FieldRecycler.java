@@ -27,7 +27,6 @@ import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewReserve;
-import dam.app.database.AppRepository;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -90,24 +89,14 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         //ToDo FieldRecycler cambiar esto cuando se haya guardado bien las imágenes
         holder.field = list.get(position);
-        //Si está o no en la bd
+
         switch (holder.field.getImageUUID()){
             default:
-            case "":
-                holder.imageField.setImageResource(R.mipmap.image_no_image_available);
-                break;
-            case "DebugExampleTwoFragment":
-                holder.imageField.setImageResource(R.mipmap.image_field_a);
-                break;
-            case "b":
-                holder.imageField.setImageResource(R.mipmap.image_field_b);
-                break;
-            case "c":
-                holder.imageField.setImageResource(R.mipmap.image_field_c);
-                break;
-            case "d":
-                holder.imageField.setImageResource(R.mipmap.image_field_d);
-                break;
+            case "": holder.imageField.setImageResource(R.mipmap.image_no_image_available); break;
+            case "DebugExampleTwoFragment": holder.imageField.setImageResource(R.mipmap.image_field_a); break;
+            case "b": holder.imageField.setImageResource(R.mipmap.image_field_b);  break;
+            case "c": holder.imageField.setImageResource(R.mipmap.image_field_c); break;
+            case "d": holder.imageField.setImageResource(R.mipmap.image_field_d); break;
         }
 
         holder.lblAddressFieldRow.setText(holder.field.getAddress());

@@ -21,11 +21,14 @@ import com.google.android.material.navigation.NavigationView;
 import dam.app.R;
 import dam.app.database.AppRepository;
 import dam.app.extras.Dialog;
+import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ActivityMain _CONTEXT;
     public AppRepository _REPOSITORY = null;
+    protected Subscription _SUBSCRIPTION;
+
     protected static final int REQUEST_CODE = 222;
 
     protected Toolbar toolbar;
@@ -108,5 +111,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     public void onStop() {
         super.onStop();
         AppRepository.close();
+        if(_SUBSCRIPTION != null && !_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }

@@ -84,6 +84,7 @@
 
     <style name="ToolBarStyle" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/fontColorLight</item>
+        <item name="android:textAllCaps">true</item>
         <!--<item name="actionMenuTextColor">@android:color/white</item>
         <item name="actionOverflowButtonStyle">@style/ActionButtonOverflowStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->

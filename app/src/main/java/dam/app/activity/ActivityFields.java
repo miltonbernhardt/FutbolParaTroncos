@@ -17,15 +17,12 @@ import dam.app.extras.EnumSortOption;
 import dam.app.model.Field;
 import dam.app.recycler.FieldRecycler;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class ActivityFields extends ActivityMain {
     protected RecyclerView recyclerView;
     protected Spinner spinnerOptionsFields;
-
-    protected Subscription _SUBSCRIPTION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +66,6 @@ public class ActivityFields extends ActivityMain {
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 fields -> recyclerView.setAdapter(new FieldRecycler(_CONTEXT, fields)),
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(!_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }
 

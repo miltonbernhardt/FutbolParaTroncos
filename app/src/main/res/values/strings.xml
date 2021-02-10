@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FPTs</string>
-    <string name="name_title">FÚTBOL PARA TRONCOS</string>
+    <string name="name_title">Fútbol Para Troncos</string>
     <string name="activity_comments">LEER COMENTARIOS </string>
     <string name="activity_comments_label">COMENTARIOS</string>
     <string name="activity_fields">VER CANCHAS</string>

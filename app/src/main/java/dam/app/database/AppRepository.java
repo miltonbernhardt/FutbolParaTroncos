@@ -1,10 +1,14 @@
 package dam.app.database;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dam.app.R;
 import dam.app.dao.DAOComment;
 import dam.app.dao.DAOField;
 import dam.app.dao.DAOReserve;
@@ -13,6 +17,8 @@ import dam.app.dao.DAOUser;
 import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.model.Field;
+import dam.app.model.Reserve;
+import dam.app.model.User;
 
 public class AppRepository {
     private static AppCompatActivity _CONTEXT;
@@ -86,8 +92,35 @@ public class AppRepository {
     }
 
     public long saveComment(Comment comment){
+        long idField = comment.getIdReserve();
+        comment.setUsername("Setear el username");
 
-        return 0l;
+        /*Reserve reserve = daoReserve.find(comment.getIdReserve());
+        long idField = reserve.getIdField();
+        User user = daoUser.find(reserve.getIdUser());
+        comment.setUsername(user.getUserName());
+        ToDo USER descomentar al hacer bien lo del user
+        */
+
+        long id = daoComment.insert(comment);
+        if(id >= 0) updateRating(idField);
+        return id;
+    }
+
+    public void updateRating(long idField){
+        List<Comment> comments = daoComment.findAllByScore(idField);
+
+        float totalScore = 0f;
+        int totalComments = 0;
+
+        for (Comment c:comments) {
+            totalComments++;
+            totalScore += c.getScore();
+        }
+
+        Field field = daoField.find(idField);
+        field.setRating(totalScore/totalComments);
+        daoField.update(field);
     }
 
     public boolean isLogged(){

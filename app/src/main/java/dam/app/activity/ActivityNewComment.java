@@ -15,6 +15,9 @@ import java.time.LocalDate;
 
 import dam.app.R;
 import dam.app.model.Comment;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ActivityNewComment extends ActivityMain {
     protected Button btnAddComment;
@@ -62,23 +65,35 @@ public class ActivityNewComment extends ActivityMain {
                 comment.setScore((int)score);
                 comment.setImageUUID("");
                 comment.setDateOfComment(LocalDate.now());
-                comment.setId(idReserve);
+                comment.setIdReserve(idReserve);
                 if(isUpload){
                     //ToDo ActivityNewComment subir imágen
                     comment.setImageUUID("b");
                 }
-                long id = _REPOSITORY.saveComment(comment);
 
-                if(id < 0){
-                    Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.errorSaveComment));
-                    Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Log.d("on ActivityMenu", _CONTEXT.getResources().getString(R.string.successfulSaveComment));
-                    Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
-                    finish();
-                }
+                addComment(comment);
             }
         });
+    }
+
+    public void addComment(Comment comment) {
+        Observable<Long> observer = Observable.create(subscriber -> {
+            subscriber.onNext(_REPOSITORY.saveComment(comment));
+            subscriber.onCompleted();
+        });
+
+        _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                id -> {
+                    if(id < 0){
+                        Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.errorSaveComment));
+                        Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.successfulSaveComment));
+                        Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                } ,
+                error -> Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show());
     }
 }

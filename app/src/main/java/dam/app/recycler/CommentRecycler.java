@@ -68,7 +68,7 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         holder.textCommentRow.setTag(position);
         holder.ratingBarCommentRow.setTag(position);
 
-        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));//TODo ver formato fecha
+        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         df.setRoundingMode(RoundingMode.DOWN);
         holder.lblRatingFieldRow.setText(df.format(holder.comment.getScore()));
         holder.lblUsernameCommentRow.setText(holder.comment.getUsername());

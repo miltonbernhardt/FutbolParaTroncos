@@ -23,7 +23,6 @@ import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.recycler.CommentRecycler;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -32,8 +31,6 @@ public class ActivityComments extends ActivityMain {
     protected Button btnMakeOpinion;
     protected TextView lblNameField;
     protected Spinner spinnerSortComments;
-
-    private Subscription _SUBSCRIPTION;
 
     private long idField;
     private String fieldName;
@@ -96,12 +93,6 @@ public class ActivityComments extends ActivityMain {
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 fields -> recyclerView.setAdapter(new CommentRecycler(fields)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(!_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }
 
