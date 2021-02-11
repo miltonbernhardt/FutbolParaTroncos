@@ -5,6 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -34,10 +36,24 @@ public class Field implements Serializable {
     @ColumnInfo(name="imageUUID")
     private String imageUUID;
 
+    @ColumnInfo(name="positionX")
+    String positionX;
+
+    @ColumnInfo(name="positionY")
+    String positionY;
+
     public Field() {
         name = address = phoneOfContact = imageUUID = "";
         rating = 0f;
     }
+
+   public String getPositionX(){return positionX;};
+
+    public void setPositionX(String positionX){this.positionX=positionX;}
+
+    public String getPositionY(){return positionY;};
+
+    public void setPositionY(String positionY){this.positionY=positionY;}
 
     public long getId() {
         return id;

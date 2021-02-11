@@ -1,5 +1,7 @@
 package dam.app.database;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,27 +14,35 @@ public  class VolatileData {
         ArrayList<Field> a = new ArrayList<>();
         Field f1 = new Field(), f2 = new Field(), f3 = new Field(), f4 = new Field();
         f1.setName("El fútbolito");
-        f1.setAddress("Siempre Diva 500");
+        f1.setAddress("Lavaisse 610");
         f1.setPhoneOfContact("3459823462");
         f1.setImageUUID("DebugExampleTwoFragment");
+        f1.setPositionX("-31.617074");
+        f1.setPositionY("-60.675567");
         f1.setRating(3.8f);
 
         f2.setName("Los sin sangre");
         f2.setAddress("Laprida 8990");
         f2.setPhoneOfContact("3426637869");
         f2.setImageUUID("b");
+        f2.setPositionX("-31.613421");
+        f2.setPositionY("-60.683842");
         f2.setRating(4.5f);
 
         f3.setName("La boca");
-        f3.setAddress("Bv. Martínez 982");
+        f3.setAddress("4 de Enero 3751");
         f3.setPhoneOfContact("3459829222");
         f3.setImageUUID("c");
+        f3.setPositionX("-31.631391");
+        f3.setPositionY("-60.707875");
         f3.setRating(4.2f);
 
         f4.setName("El salado");
-        f4.setAddress("Velez 4571");
+        f4.setAddress("Gdor. Candioti 1700");
         f4.setPhoneOfContact("3432123469");
         f4.setImageUUID("d");
+        f4.setPositionX("-31.640270");
+        f4.setPositionY("-60.694922");
         f4.setRating(4.65f);
 
         a.add(f1);

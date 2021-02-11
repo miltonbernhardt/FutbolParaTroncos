@@ -117,8 +117,12 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.ratingBarField.setRating(holder.field.getRating());
 
         holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
-            activity.startActivity(new Intent(activity, MapsActivity.class));
-
+           // activity.startActivity(new Intent(activity, MapsActivity.class));
+            Intent i= new Intent(activity,MapsActivity.class);
+            i.putExtra("positionX",list.get(holder.getAdapterPosition()).getPositionX());
+            i.putExtra("positionY",list.get(holder.getAdapterPosition()).getPositionY());
+            i.putExtra("fieldName",list.get(holder.getAdapterPosition()).getName());
+            activity.startActivity(i);
         });
 
         holder.btnReserve.setOnClickListener(view -> {
