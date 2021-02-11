@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FPTs</string>
     <string name="name_title">Fútbol Para Troncos</string>
+
     <string name="activity_comments">LEER COMENTARIOS </string>
     <string name="activity_comments_label">COMENTARIOS</string>
     <string name="activity_fields">VER CANCHAS</string>
@@ -47,9 +48,12 @@
     <string name="hintComment">Comentario...</string>
     <string name="lblCommentAsk">¿Tenés alguna opinión que quieras dar?</string>
     <string name="lblNewComment">DAR OPINIÓN</string>
+
     <string name="lblUploadPhotoAsk">¿Deseas subir una imágen de la cancha?</string>
     <string name="lblRatingAsk">¿Cómo es tu valoración de la cancha?</string>
 
+    <string name="errorCamera">Permiso de usar la cámara denegado</string>
+    <string name="errorGallery">Permiso de usar la galería denegado</string>
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
 

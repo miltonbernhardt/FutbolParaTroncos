@@ -52,7 +52,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="textAllCaps">true</item>
         <item name="android:background">@drawable/button_background</item>
+        <item name="android:scaleType">fitCenter</item>
         <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="tint">@color/white</item>
     </style>
 
     <style name="ButtonStyleTransparent" parent="android:Widget.Button">
