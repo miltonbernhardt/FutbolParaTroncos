@@ -16,7 +16,7 @@ public  class VolatileData {
         f1.setName("El fútbolito");
         f1.setAddress("Lavaisse 610");
         f1.setPhoneOfContact("3459823462");
-        f1.setImageUUID("DebugExampleTwoFragment");
+        f1.setImageUUID("a");
         f1.setPositionX("-31.617074");
         f1.setPositionY("-60.675567");
         f1.setRating(3.8f);

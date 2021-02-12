@@ -27,8 +27,7 @@ import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewReserve;
-import dam.app.activity.MapsActivity;
-import dam.app.database.AppRepository;
+import dam.app.activity.ActivityMaps;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -97,7 +96,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             case "":
                 holder.imageField.setImageResource(R.mipmap.image_no_image_available);
                 break;
-            case "DebugExampleTwoFragment":
+            case "a":
                 holder.imageField.setImageResource(R.mipmap.image_field_a);
                 break;
             case "b":
@@ -119,11 +118,11 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
            // activity.startActivity(new Intent(activity, MapsActivity.class));
-            Intent i= new Intent(activity,MapsActivity.class);
+            Intent i= new Intent(_CONTEXT, ActivityMaps.class);
             i.putExtra("positionX",list.get(holder.getAdapterPosition()).getPositionX());
             i.putExtra("positionY",list.get(holder.getAdapterPosition()).getPositionY());
             i.putExtra("fieldName",list.get(holder.getAdapterPosition()).getName());
-            activity.startActivity(i);
+            _CONTEXT.startActivity(i);
         });
 
         holder.btnReserve.setOnClickListener(view -> {
