@@ -1,9 +1,13 @@
 package dam.app.database;
 
-import android.util.Log;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +21,6 @@ import dam.app.dao.DAOUser;
 import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.model.Field;
-import dam.app.model.Reserve;
-import dam.app.model.User;
 
 public class AppRepository {
     private static AppCompatActivity _CONTEXT;
@@ -91,20 +93,43 @@ public class AppRepository {
         return list;
     }
 
-    public long saveComment(Comment comment){
+    public long saveComment(Comment comment, byte[] dataImage){
         long idField = comment.getIdReserve();
         comment.setUsername("Setear el username");
-
         /*Reserve reserve = daoReserve.find(comment.getIdReserve());
         long idField = reserve.getIdField();
         User user = daoUser.find(reserve.getIdUser());
         comment.setUsername(user.getUserName());
         ToDo USER descomentar al hacer bien lo del user
         */
+        if(dataImage != null) {
+            putBytes(dataImage, "field_"+idField+"_"+System.currentTimeMillis());
+            if(downloadUri != null) comment.setImageURI(downloadUri.toString());
+        }
 
         long id = daoComment.insert(comment);
         if(id >= 0) updateRating(idField);
         return id;
+    }
+
+
+    private Uri downloadUri;
+
+    private void putBytes(byte[] dataImage, String name) {
+        StorageReference platosImagesRef = FirebaseStorage.getInstance().getReference().child("images/"+name+".jpg");
+
+        UploadTask uploadTask = platosImagesRef.putBytes(dataImage);
+
+        uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) throw task.getException();
+            return platosImagesRef.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                downloadUri = task.getResult();
+            } else {
+                Toast.makeText(_CONTEXT, R.string.errorUploading, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void updateRating(long idField){

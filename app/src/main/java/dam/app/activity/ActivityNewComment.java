@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,14 +20,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDate;
 
 import dam.app.R;
-import dam.app.extras.ImageHelper;
 import dam.app.model.Comment;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -53,32 +50,7 @@ public class ActivityNewComment extends ActivityMain {
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private static final int PICK_FROM_GALLERY_PERMISSION_CODE = 101;
 
-    FirebaseStorage storage;
-    StorageReference storageRef;
-    StorageReference platosImagesRef;
-    byte[] dataImage;
-    Uri downloadUri;
-
-    /*private void getStorageReference() {
-        StorageReference storageRef = storage.getReference();
-        StorageReference platosImagesRef = storageRef.child("images/field.jpg");
-    }
-
-    private void someFunction() {
-        UploadTask uploadTask = platosImagesRef.putBytes(dataImage);
-        // UploadTask uploadTask = platosImagesRef.putFile(file);
-        // UploadTask uploadTask = platosImagesRef.putStream(stream);
-
-        Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
-            if (!task.isSuccessful()) throw task.getException();
-            return platosImagesRef.getDownloadUrl();
-        }).addOnCompleteListener(task -> {
-            if (task.isSuccessful())  { downloadUri = task.getResult(); }
-            else {
-                // Fallo
-            }
-        });
-    }*/
+    private byte[] dataImage = null;
 
     private void launchCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -109,8 +81,8 @@ public class ActivityNewComment extends ActivityMain {
         setContentView(R.layout.activity_new_comment);
         createDrawable(this);
 
-//        mAuth = FirebaseAuth.getInstance();
-  //      signInAnonymously();
+        mAuth = FirebaseAuth.getInstance();
+        signInAnonymously();
         //storage = FirebaseStorage.getInstance();
 
         idReserve = getIntent().getLongExtra("idReserve", -1);
@@ -139,62 +111,53 @@ public class ActivityNewComment extends ActivityMain {
             else  openGallery();
         });
 
-        btnAddComment.setOnClickListener(v -> {
-            float score = ratingBar.getRating();
-            String txtComment = textComment.getText().toString();
-
-            if(score == 0.0) Toast.makeText(_CONTEXT, R.string.should_rate, Toast.LENGTH_LONG).show();
-            else{
-                Comment comment = new Comment();
-                comment.setComment(txtComment);
-                comment.setScore((int)score);
-                comment.setImageUUID("");
-                comment.setDateOfComment(LocalDate.now());
-                comment.setIdReserve(idReserve);
-                if(imageUpload.getDrawable() != null){
-                    //ToDo IMAGE save image
-                    comment.setImageUUID("b");
-                }
-                addComment(comment);
-            }
-        });
+        btnAddComment.setOnClickListener(v -> { addComment(); });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         if (requestCode == MY_CAMERA_PERMISSION_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                launchCamera();
-            }
-            else Toast.makeText(this, R.string.errorCamera, Toast.LENGTH_LONG).show();
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) launchCamera();
+            else Toast.makeText(_CONTEXT, R.string.errorCamera, Toast.LENGTH_SHORT).show();
         } else if  (requestCode == PICK_FROM_GALLERY_PERMISSION_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                openGallery();
-            }
-            else Toast.makeText(this, R.string.errorGallery, Toast.LENGTH_LONG).show();
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) openGallery();
+            else Toast.makeText(_CONTEXT, R.string.errorGallery, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void addComment(Comment comment) {
-        Observable<Long> observer = Observable.create(subscriber -> {
-            subscriber.onNext(_REPOSITORY.saveComment(comment));
-            subscriber.onCompleted();
-        });
+    public void addComment() {
 
-        _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                id -> {
-                    if(id < 0){
-                        Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.errorSaveComment));
-                        Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.successfulSaveComment));
-                        Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
-                        finish();
-                    }
-                } ,
-                error -> Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show());
+        float score = ratingBar.getRating();
+        String txtComment = textComment.getText().toString();
+
+        if(score == 0.0) Toast.makeText(_CONTEXT, R.string.should_rate, Toast.LENGTH_LONG).show();
+        else{
+            Comment comment = new Comment();
+            comment.setComment(txtComment);
+            comment.setScore((int)score);
+            comment.setImageURI("");
+            comment.setDateOfComment(LocalDate.now());
+            comment.setIdReserve(idReserve);
+
+            Observable<Long> observer = Observable.create(subscriber -> {
+                subscriber.onNext(_REPOSITORY.saveComment(comment, dataImage));
+                subscriber.onCompleted();
+            });
+
+            _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+                    id -> {
+                        if(id < 0){
+                            Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.errorSaveComment));
+                            Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.successfulSaveComment));
+                            Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    } ,
+                    error -> Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show());
+        }
     }
 }

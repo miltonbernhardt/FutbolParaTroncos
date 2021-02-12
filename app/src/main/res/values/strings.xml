@@ -54,6 +54,7 @@
 
     <string name="errorCamera">Permiso de usar la cámara denegado</string>
     <string name="errorGallery">Permiso de usar la galería denegado</string>
+    <string name="errorUploading">Hubo un error al subir la imágen de la cancha</string>
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
 
