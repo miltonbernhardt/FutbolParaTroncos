@@ -27,6 +27,7 @@ import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewReserve;
+import dam.app.activity.MapsActivity;
 import dam.app.database.AppRepository;
 import dam.app.model.Field;
 
@@ -117,6 +118,12 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.ratingBarField.setRating(holder.field.getRating());
 
         holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
+           // activity.startActivity(new Intent(activity, MapsActivity.class));
+            Intent i= new Intent(activity,MapsActivity.class);
+            i.putExtra("positionX",list.get(holder.getAdapterPosition()).getPositionX());
+            i.putExtra("positionY",list.get(holder.getAdapterPosition()).getPositionY());
+            i.putExtra("fieldName",list.get(holder.getAdapterPosition()).getName());
+            activity.startActivity(i);
         });
 
         holder.btnReserve.setOnClickListener(view -> {
