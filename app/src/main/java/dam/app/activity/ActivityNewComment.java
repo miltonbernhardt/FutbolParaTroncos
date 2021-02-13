@@ -105,7 +105,18 @@ public class ActivityNewComment extends ActivityMain {
         ID_PICTURE = "field_"+s.replace(" ", "_")+"_"+System.currentTimeMillis();
     }
 
-    private void saveImageFinal(){
+    private void setImageFinal(Bitmap bitmapImage){
+
+        int nh = (int) ( bitmapImage.getHeight() * (512.0 / bitmapImage.getWidth()) );
+        Bitmap scaled = Bitmap.createScaledBitmap(bitmapImage, 512, nh, true);
+
+        imageUpload.setImageBitmap(scaled);
+
+        deleteCache();
+        IMAGE_PATH_FINAL = ImageHelper.persistImage(scaled, ID_PICTURE, _CONTEXT, ".jpg");
+    }
+
+    private void setImageFinalFromGallery(){
         Bitmap bitmapImage = BitmapFactory.decodeFile(IMAGE_PATH_CACHE);
         int nh = (int) ( bitmapImage.getHeight() * (512.0 / bitmapImage.getWidth()) );
         Bitmap scaled = Bitmap.createScaledBitmap(bitmapImage, 512, nh, true);
@@ -156,8 +167,17 @@ public class ActivityNewComment extends ActivityMain {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode){
-                case GALLERY_REQUEST: break;
-                case CAMERA_REQUEST:saveImageFinal();break;
+                case GALLERY_REQUEST:
+                    Uri imageUri = data.getData();
+                    try {
+                        Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                        setImageFinal(bitmapImage);
+                    } catch (IOException ignored) { }
+                    break;
+                case CAMERA_REQUEST:
+                    Bitmap bitmapImage = BitmapFactory.decodeFile(IMAGE_PATH_CACHE);
+                    setImageFinal(bitmapImage);
+                    break;
             }
         }
     }
