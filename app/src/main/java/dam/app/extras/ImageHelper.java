@@ -8,8 +8,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 public class ImageHelper {
-    public static String persistImage(Bitmap bitmap, String name, Context _CONTEXT, String suffix) {
-        File imageFile = new File(_CONTEXT.getExternalFilesDir("fields-reviews"), name + suffix);
+    public static String persistImage(Bitmap bitmap, String name, Context _CONTEXT, String suffix, String dir) {
+        File imageFile = new File(_CONTEXT.getExternalFilesDir(dir), name + suffix);
 
         OutputStream os;
         try {

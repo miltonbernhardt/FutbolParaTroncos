@@ -25,10 +25,8 @@
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
     <string-array name="spinnerSortComments">
-        <item>MÁS RECIENTE PRIMERO</item>
-        <item>MAS VIEJO PRIMERO</item>
-        <item>CON PUNTAJES MÁS ALTOS</item>
-        <item>CON PUNTAJES MÁS BAJOS</item>
+        <item>POR FECHA</item>
+        <item>POR PUNTAJE</item>
     </string-array>
 
     <!-- activity_fields_recycler -->
@@ -37,8 +35,7 @@
         <item>SEGÚN EL NOMBRE DE LA CANCHA</item>
         <item>MÁS CERCANO</item>
         <item>MÁS LEJANO</item>
-        <item>CON PUNTAJE PROMEDIO MÁS ALTO</item>
-        <item>CON PUNTAJE PROMEDIO MÁS BAJO</item>
+        <item>SEGÚN EL PUNTAJE</item>
     </string-array>
 
     <!-- activity_menu -->

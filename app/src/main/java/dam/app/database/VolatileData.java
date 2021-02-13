@@ -1,6 +1,4 @@
-package dam.app.extras;
-
-import com.google.android.gms.maps.model.LatLng;
+package dam.app.database;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,38 +7,56 @@ import dam.app.model.Comment;
 import dam.app.model.Field;
 
 public  class VolatileData {
+
+    public static void persist(AppFirebase _REPOSITORY){
+        for (Field f : VolatileData.getFields()) {
+            //long id = _REPOSITORY.daoField.insert(f);
+            //f.setId(id);
+            _REPOSITORY.writeNewObject(f);
+        }
+
+        for (Comment c : VolatileData.getComments()) {
+            //long id = _REPOSITORY.daoComment.insert(c);
+            //c.setId(id);
+            _REPOSITORY.writeNewObject(c);
+        }
+    }
     
     public static ArrayList<Field> getFields(){
         ArrayList<Field> a = new ArrayList<>();
         Field f1 = new Field(), f2 = new Field(), f3 = new Field(), f4 = new Field();
-        f1.setName("El fútbolito");
+        f1.setId(110);
+        f1.setName("El Fúlbito");
         f1.setAddress("Lavaisse 610");
         f1.setPhoneOfContact("3459823462");
-        f1.setImageUUID("a");
+        f1.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_fulbito.jpg");
         f1.setPositionX("-31.617074");
         f1.setPositionY("-60.675567");
         f1.setRating(3.8f);
 
-        f2.setName("Los sin sangre");
+        f2.setId(111);
+        f2.setName("Los Sin Sangre");
         f2.setAddress("Laprida 8990");
         f2.setPhoneOfContact("3426637869");
-        f2.setImageUUID("b");
+        f2.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_los_sin_sangre.jpg");
         f2.setPositionX("-31.613421");
         f2.setPositionY("-60.683842");
         f2.setRating(4.5f);
 
-        f3.setName("La boca");
+        f3.setId(112);
+        f3.setName("El Nido de Perros");
         f3.setAddress("4 de Enero 3751");
         f3.setPhoneOfContact("3459829222");
-        f3.setImageUUID("c");
+        f3.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_nido_de_perros.jpg");
         f3.setPositionX("-31.631391");
         f3.setPositionY("-60.707875");
         f3.setRating(4.2f);
 
-        f4.setName("El salado");
+        f4.setId(113);
+        f4.setName("El Salado");
         f4.setAddress("Gdor. Candioti 1700");
         f4.setPhoneOfContact("3432123469");
-        f4.setImageUUID("d");
+        f4.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_salado.jpg");
         f4.setPositionX("-31.640270");
         f4.setPositionY("-60.694922");
         f4.setRating(4.65f);
@@ -55,11 +71,17 @@ public  class VolatileData {
     public static ArrayList<Comment> getComments(){
         ArrayList<Comment> a = new ArrayList<>();
         Comment c1 = new Comment(), c2 = new Comment(), c3 = new Comment(), c4 = new Comment(), c5 = new Comment();
-        c1.setDateOfComment(LocalDate.now().minusDays(10));
-        c2.setDateOfComment(LocalDate.now().minusDays(8));
-        c3.setDateOfComment(LocalDate.now().minusDays(6));
-        c4.setDateOfComment(LocalDate.now().minusDays(17));
-        c5.setDateOfComment(LocalDate.now().minusDays(2));
+        c1.setDateOfCommentFromDate(LocalDate.now().minusDays(10));
+        c2.setDateOfCommentFromDate(LocalDate.now().minusDays(8));
+        c3.setDateOfCommentFromDate(LocalDate.now().minusDays(6));
+        c4.setDateOfCommentFromDate(LocalDate.now().minusDays(17));
+        c5.setDateOfCommentFromDate(LocalDate.now().minusDays(2));
+
+        c1.setId(110);
+        c2.setId(111);
+        c3.setId(112);
+        c4.setId(113);
+        c5.setId(114);
 
         c1.setScore(4);
         c2.setScore(5);
@@ -79,11 +101,11 @@ public  class VolatileData {
         c4.setComment("excelente la boca. Ni hablar las empanadas de choclo.");
         c5.setComment("encargue canelones de verdura y me llegaron sin salsa...tendrían que aclararlo en la selección del menú y brindar la opción se elegir la salsa para acompañar");
 
-        c1.setIdReserve(1);
-        c2.setIdReserve(1);
-        c3.setIdReserve(2);
-        c4.setIdReserve(3);
-        c5.setIdReserve(4);
+        c1.setIdReserve(110);
+        c2.setIdReserve(110);
+        c3.setIdReserve(111);
+        c4.setIdReserve(112);
+        c5.setIdReserve(113);
 
         a.add(c1);
         a.add(c2);

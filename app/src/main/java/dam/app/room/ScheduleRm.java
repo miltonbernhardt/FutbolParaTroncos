@@ -1,22 +1,49 @@
-package dam.app.model;
+package dam.app.room;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-public class Schedule implements Serializable {
+import dam.app.model.Field;
+
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
+public class ScheduleRm implements Serializable {
+    /* ---- RELATIONS ---- */
+    @ColumnInfo(name="idField")
     private long idField;
 
+    /* ---- ATTRIBUTES ---- */
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="id")
     private long id;
+
+    @ColumnInfo(name="monday")
     private boolean MONDAY = false;
+    @ColumnInfo(name="tuesday")
     private boolean TUESDAY = false;
+    @ColumnInfo(name="wednesday")
     private boolean WEDNESDAY = false;
+    @ColumnInfo(name="thursday")
     private boolean THURSDAY = false;
+    @ColumnInfo(name="friday")
     private boolean FRIDAY = false;
+    @ColumnInfo(name="saturday")
     private boolean SATURDAY = false;
+    @ColumnInfo(name="sunday")
     private boolean SUNDAY = false;
+
+    @ColumnInfo(name="openingTime")
     private int openingTime;
+    @ColumnInfo(name="closingTime")
     private int closingTime;
 
-    public Schedule (){}
+    public ScheduleRm (){}
 
     public long getIdField() {
         return idField;

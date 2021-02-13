@@ -31,6 +31,7 @@ import java.text.Normalizer;
 import java.time.LocalDate;
 
 import dam.app.R;
+import dam.app.extras.EnumPaths;
 import dam.app.extras.ImageHelper;
 import dam.app.model.Comment;
 import rx.Observable;
@@ -67,7 +68,7 @@ public class ActivityNewComment extends ActivityMain {
 
             try {
                 deleteCache();
-                photoFile = File.createTempFile(ID_PICTURE,".tmp", _CONTEXT.getApplicationContext().getExternalFilesDir("fields-reviews"));
+                photoFile = File.createTempFile(ID_PICTURE,".tmp", _CONTEXT.getApplicationContext().getExternalFilesDir(EnumPaths.PATH_IMAGES_REVIEW.toString()));
                 IMAGE_PATH_CACHE = photoFile.getAbsolutePath();
             } catch (IOException ex) { Toast.makeText(_CONTEXT, R.string.errorUploading, Toast.LENGTH_LONG).show(); }
 
@@ -104,7 +105,7 @@ public class ActivityNewComment extends ActivityMain {
     private void setIdPicture(){
         String s = Normalizer.normalize(fieldName, Normalizer.Form.NFD);
         s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-        ID_PICTURE = "field_"+s.replace(" ", "_")+"_"+System.currentTimeMillis();
+        ID_PICTURE = "field-"+s.replace(" ", "-")+"-"+System.currentTimeMillis();
     }
 
     private void setImageFinal(Bitmap bitmapImage){
@@ -115,7 +116,7 @@ public class ActivityNewComment extends ActivityMain {
         imageUpload.setImageBitmap(scaled);
 
         deleteCache();
-        IMAGE_PATH_FINAL = ImageHelper.persistImage(scaled, ID_PICTURE, _CONTEXT, ".jpg");
+        IMAGE_PATH_FINAL = ImageHelper.persistImage(scaled, ID_PICTURE, _CONTEXT, ".jpg", EnumPaths.PATH_IMAGES_REVIEW.toString());
         btnDeleteImage.setVisibility(View.VISIBLE);
     }
 
@@ -129,10 +130,9 @@ public class ActivityNewComment extends ActivityMain {
             Comment comment = new Comment();
             comment.setComment(txtComment);
             comment.setScore((int)score);
-            comment.setImageURI(IMAGE_PATH_FINAL);
-            comment.setDateOfComment(LocalDate.now());
+            comment.setImagePath(IMAGE_PATH_FINAL);
             comment.setIdReserve(idReserve);
-
+            comment.setDateOfCommentFromDate(LocalDate.now());
             Observable<Long> observer = Observable.create(subscriber -> {
                 subscriber.onNext(_REPOSITORY.saveComment(comment));
                 subscriber.onCompleted();
@@ -150,7 +150,7 @@ public class ActivityNewComment extends ActivityMain {
                             finish();
                         }
                     } ,
-                    error -> Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show());
+                    error -> { error.printStackTrace(); Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();});
         }
     }
 

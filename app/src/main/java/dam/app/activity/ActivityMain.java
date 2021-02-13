@@ -23,14 +23,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import dam.app.R;
-import dam.app.database.AppRepository;
+import dam.app.database.AppFirebase;
 import dam.app.extras.Dialog;
 import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    public AppFirebase _REPOSITORY = null;
     protected ActivityMain _CONTEXT;
-    public AppRepository _REPOSITORY = null;
+
     protected Subscription _SUBSCRIPTION;
 
     protected static final int REQUEST_CODE = 222;
@@ -42,7 +43,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     protected FirebaseAuth mAuth;
 
-    public void createDrawable(ActivityMain _CONTEXT){
+    public void createDrawable(ActivityMain context){
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigation_view);
@@ -54,8 +55,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        this._CONTEXT = _CONTEXT;
-        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
+        _CONTEXT = context;
+        _REPOSITORY = AppFirebase.getInstance(_CONTEXT);
 
         if(_REPOSITORY.isLogged()) setMenu(R.menu.menu_all_options);
     }
@@ -140,7 +141,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     public void onStop() {
         super.onStop();
-        AppRepository.close();
+        AppFirebase.close();
         if(_SUBSCRIPTION != null && !_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }

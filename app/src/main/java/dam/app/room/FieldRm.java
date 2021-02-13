@@ -1,20 +1,44 @@
-package dam.app.model;
+package dam.app.room;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Field implements Serializable {
+@Entity
+public class FieldRm implements Serializable {
+    /* ---- ATTRIBUTES ---- */
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="id")
     private long id;
+
+    @ColumnInfo(name="name")
     private String name;
+
+    @ColumnInfo(name="price")
     private float price;
+
+    @ColumnInfo(name="address")
     private String address;
+
+    @ColumnInfo(name="phoneOfContact")
     private String phoneOfContact;
+
+    @ColumnInfo(name="rating")
     private float rating;
+
+    @ColumnInfo(name="imagePath")
     private String imagePath;
+
+    @ColumnInfo(name="positionX")
     private String positionX;
+
+    @ColumnInfo(name="positionY")
     private String positionY;
 
-    public Field() { }
+    public FieldRm() { }
 
     public long getId() {
         return id;
@@ -84,7 +108,7 @@ public class Field implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Field field = (Field) o;
+        FieldRm field = (FieldRm) o;
         return id == field.id &&
                 Objects.equals(name, field.name);
     }

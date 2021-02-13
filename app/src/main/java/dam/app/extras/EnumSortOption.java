@@ -1,7 +1,24 @@
 package dam.app.extras;
 
 public enum EnumSortOption {
-    NOMBRE_ALFABETICO, PUNTUACION_ALTA, PUNTUACION_BAJA, DIRECCION_CERCANA, DIRECCION_LEJANA, FECHA_CERCANA, FECHA_LEJANA;
+    NOMBRE_ALFABETICO("name"),
+    PUNTUACION_ALTA("rating"),PUNTUACION_BAJA("rating"),
+    DIRECCION_CERCANA("address"), DIRECCION_LEJANA("address"),//ToDo ver de quitar
+    FECHA_CERCANA("dateOfComment"), FECHA_LEJANA("dateOfComment");
+
+    private final String value;
+    EnumSortOption(String value){
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }
 
 

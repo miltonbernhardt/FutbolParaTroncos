@@ -1,52 +1,20 @@
 package dam.app.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
+import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import dam.app.database.Converters;
-
-import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
-        @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
-        indices = {@Index(value = {"idUser"}), @Index(value = {"idField"})})
 public class Reserve implements Serializable {
-    /* ---- RELATIONS ---- */
-    @ColumnInfo(name="idUser")
     private long idUser;
-
-    @ColumnInfo(name="idField")
     private long idField;
 
-    //@ColumnInfo(name="idComment") ToDo RESERVE agregar cuando se haga lo de reserva
-    //private long idComment;
-
-    /* ---- ATTRIBUTES ---- */
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
     private long id;
-
-    @TypeConverters(Converters.class)
-    @ColumnInfo(name="dateOfReserve")
-    private LocalDate dateOfReserve;
-
-    @ColumnInfo(name="startTime")
+    private String dateOfReserve;
     private int startTime;
-    @ColumnInfo(name="finishTime")
     private int finishTime;
 
-    public Reserve(){
-        dateOfReserve = LocalDate.now();
-        startTime = 0;
-        finishTime = 0;
-    }
+    public Reserve(){ }
 
     public long getIdUser() {
         return idUser;
@@ -72,11 +40,11 @@ public class Reserve implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDateOfReserve() {
+    public String getDateOfReserve() {
         return dateOfReserve;
     }
 
-    public void setDateOfReserve(LocalDate dateOfReserve) {
+    public void setDateOfReserve(String dateOfReserve) {
         this.dateOfReserve = dateOfReserve;
     }
 
@@ -94,5 +62,24 @@ public class Reserve implements Serializable {
 
     public void setFinishTime(int finishTime) {
         this.finishTime = finishTime;
+    }
+
+
+    @Exclude
+    public LocalDate getDateOfReserveAsDate() {
+        if (dateOfReserve == null) {
+            return null;
+        } else {
+            return LocalDate.parse(this.dateOfReserve);
+        }
+    }
+
+    @Exclude
+    public void setDateOfReserveFromDate(LocalDate dateOfReserve) {
+        if (dateOfReserve == null) {
+            this.dateOfReserve = "";
+        } else {
+            this.dateOfReserve = dateOfReserve.toString();
+        }
     }
 }

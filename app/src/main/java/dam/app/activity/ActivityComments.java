@@ -60,9 +60,9 @@ public class ActivityComments extends ActivityMain {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
                     case 0: setComments(idField, EnumSortOption.FECHA_CERCANA); break;
-                    case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
-                    case 2: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
-                    case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
+                    //case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
+                    case 1: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
+                    //case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
                 }
             }
             @Override
@@ -90,14 +90,19 @@ public class ActivityComments extends ActivityMain {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CommentRecycler(new ArrayList<>(), _CONTEXT));
 
+        /*  - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
+            - Esto quedo de haber implementado en un principio ROOM
+
         Observable<List<Comment>> observer = Observable.create(subscriber -> {
-            subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy));
+            subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy, recyclerView));
             subscriber.onCompleted();
         });
 
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 fields -> recyclerView.setAdapter(new CommentRecycler(fields, _CONTEXT)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
+        */
+        _REPOSITORY.getCommentsFromField(idField, sortBy, recyclerView);
     }
 }
 

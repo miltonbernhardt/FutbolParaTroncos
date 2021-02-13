@@ -6,7 +6,8 @@ import android.util.Log;
 import android.widget.Button;
 
 import dam.app.R;
-import dam.app.database.AppRepository;
+import dam.app.database.AppFirebase;
+import dam.app.database.VolatileData;
 
 public class ActivityMenu extends ActivityMain {
 
@@ -18,7 +19,7 @@ public class ActivityMenu extends ActivityMain {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         createDrawable(this);
-        _REPOSITORY = AppRepository.getInstance(_CONTEXT);
+        _REPOSITORY = AppFirebase.getInstance(_CONTEXT);
         //ToDo ActivityMenu fijarse si está logueado, si es asi ocultar los botones
 
         btnLoginHome = findViewById(R.id.btnLoginHome);
@@ -32,6 +33,7 @@ public class ActivityMenu extends ActivityMain {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(v -> {
+            VolatileData.persist(_REPOSITORY);//Todo quitar
             /*Intent makeMenuScreen = new Intent(_CONTEXT, ActivityRegisterUser.class);
             startActivity(makeMenuScreen);
             Log.d("on ActivityMenu", _CONTEXT.getResources().getString(R.string.activity_fields));

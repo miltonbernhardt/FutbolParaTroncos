@@ -1,23 +1,45 @@
-package dam.app.model;
+package dam.app.room;
 
-import com.google.firebase.database.Exclude;
-import com.google.firebase.database.IgnoreExtraProperties;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@IgnoreExtraProperties
-public class Comment implements Serializable {
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys = {@ForeignKey(entity = ReserveRm.class, parentColumns = "id", childColumns = "idReserve", onDelete = CASCADE)},
+        indices = {@Index(value = {"idReserve"})})
+public class CommentRm implements Serializable {
+    /* ---- RELATIONS ---- */
+
+    @ColumnInfo(name="idReserve")
     private long idReserve;
 
+    /* ---- ATTRIBUTES ---- */
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="id")
     private long id;
-    private String dateOfComment;
+
+    @ColumnInfo(name="dateOfComment")
+    private LocalDate dateOfComment;
+
+    @ColumnInfo(name="username")
     private String username;
+
+    @ColumnInfo(name="comment")
     private String comment;
+
+    @ColumnInfo(name="score")
     private int score;
+
+    @ColumnInfo(name="imageURI")
     private String imagePath;
 
-    public Comment(){ }
+    public CommentRm(){ }
 
     public long getIdReserve() {
         return idReserve;
@@ -35,11 +57,11 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public String getDateOfComment() {
-       return this.dateOfComment;
+    public LocalDate getDateOfComment() {
+        return this.dateOfComment;
     }
 
-    public void setDateOfComment(String dateOfComment) {
+    public void setDateOfComment(LocalDate dateOfComment) {
         this.dateOfComment = dateOfComment;
     }
 
@@ -73,23 +95,5 @@ public class Comment implements Serializable {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
-    }
-
-    @Exclude
-    public LocalDate getDateOfCommentAsDate() {
-        if (dateOfComment == null) {
-            return null;
-        } else {
-            return LocalDate.parse(this.dateOfComment);
-        }
-    }
-
-    @Exclude
-    public void setDateOfCommentFromDate(LocalDate dateOfComment) {
-        if (dateOfComment == null) {
-            this.dateOfComment = "";
-        } else {
-            this.dateOfComment = dateOfComment.toString();
-        }
     }
 }
