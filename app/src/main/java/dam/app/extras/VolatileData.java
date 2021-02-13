@@ -1,4 +1,4 @@
-package dam.app.database;
+package dam.app.extras;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -82,4 +82,6 @@ public  class VolatileData {
         a.add(c5);
         return a;
     }
+
+    //ToDo hacer uno de reservas, que venzan al segundo de instalar y asi
 }

@@ -41,7 +41,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="dam.app"
+            android:authorities="dam.app.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

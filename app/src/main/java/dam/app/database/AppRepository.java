@@ -9,6 +9,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import dam.app.dao.DAOReserve;
 import dam.app.dao.DAOSchedule;
 import dam.app.dao.DAOUser;
 import dam.app.extras.EnumSortOption;
+import dam.app.extras.VolatileData;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 
@@ -93,7 +95,7 @@ public class AppRepository {
         return list;
     }
 
-    public long saveComment(Comment comment, byte[] dataImage){
+    public long saveComment(Comment comment){
         long idField = comment.getIdReserve();
         comment.setUsername("Setear el username");
         /*Reserve reserve = daoReserve.find(comment.getIdReserve());
@@ -102,8 +104,9 @@ public class AppRepository {
         comment.setUsername(user.getUserName());
         ToDo USER descomentar al hacer bien lo del user
         */
-        if(dataImage != null) {
-            putBytes(dataImage, "field_"+idField+"_"+System.currentTimeMillis());
+
+        if(comment.getImageURI() != null && !comment.getImageURI().equals("")) {
+            putFile(comment.getImageURI());
             if(downloadUri != null) comment.setImageURI(downloadUri.toString());
         }
 
@@ -115,14 +118,16 @@ public class AppRepository {
 
     private Uri downloadUri;
 
-    private void putBytes(byte[] dataImage, String name) {
-        StorageReference platosImagesRef = FirebaseStorage.getInstance().getReference().child("images/"+name+".jpg");
+    private void putFile(String pathImage) {
+        Uri file = Uri.fromFile(new File(pathImage));
 
-        UploadTask uploadTask = platosImagesRef.putBytes(dataImage);
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child("reviewImages/"+file.getLastPathSegment());
+        UploadTask uploadTask = ref.putFile(file);
+
 
         uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) throw task.getException();
-            return platosImagesRef.getDownloadUrl();
+            return ref.getDownloadUrl();
         }).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 downloadUri = task.getResult();
