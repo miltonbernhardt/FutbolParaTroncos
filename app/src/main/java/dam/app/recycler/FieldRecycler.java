@@ -93,21 +93,11 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         switch (holder.field.getImageUUID()){
             default:
-            case "":
-                holder.imageField.setImageResource(R.mipmap.image_no_image_available);
-                break;
-            case "a":
-                holder.imageField.setImageResource(R.mipmap.image_field_a);
-                break;
-            case "b":
-                holder.imageField.setImageResource(R.mipmap.image_field_b);
-                break;
-            case "c":
-                holder.imageField.setImageResource(R.mipmap.image_field_c);
-                break;
-            case "d":
-                holder.imageField.setImageResource(R.mipmap.image_field_d);
-                break;
+            case "": holder.imageField.setImageResource(R.mipmap.image_no_image_available); break;
+            case "a": holder.imageField.setImageResource(R.mipmap.image_field_a); break;
+            case "b": holder.imageField.setImageResource(R.mipmap.image_field_b); break;
+            case "c": holder.imageField.setImageResource(R.mipmap.image_field_c); break;
+            case "d": holder.imageField.setImageResource(R.mipmap.image_field_d); break;
         }
 
         holder.lblAddressFieldRow.setText(holder.field.getAddress());

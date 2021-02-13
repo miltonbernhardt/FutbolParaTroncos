@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -85,6 +86,7 @@ public class ActivityNewComment extends ActivityMain {
 
     private void deleteImage(){
         imageUpload.setImageDrawable(null);
+        btnDeleteImage.setVisibility(View.INVISIBLE);
         if(IMAGE_PATH_FINAL != null && IMAGE_PATH_FINAL != ""){
             File originalFile = new File(IMAGE_PATH_FINAL);
             originalFile.delete();
@@ -114,17 +116,7 @@ public class ActivityNewComment extends ActivityMain {
 
         deleteCache();
         IMAGE_PATH_FINAL = ImageHelper.persistImage(scaled, ID_PICTURE, _CONTEXT, ".jpg");
-    }
-
-    private void setImageFinalFromGallery(){
-        Bitmap bitmapImage = BitmapFactory.decodeFile(IMAGE_PATH_CACHE);
-        int nh = (int) ( bitmapImage.getHeight() * (512.0 / bitmapImage.getWidth()) );
-        Bitmap scaled = Bitmap.createScaledBitmap(bitmapImage, 512, nh, true);
-
-        imageUpload.setImageBitmap(scaled);
-
-        deleteCache();
-        IMAGE_PATH_FINAL = ImageHelper.persistImage(scaled, ID_PICTURE, _CONTEXT, ".jpg");
+        btnDeleteImage.setVisibility(View.VISIBLE);
     }
 
     private void saveComment() {
@@ -215,6 +207,7 @@ public class ActivityNewComment extends ActivityMain {
             else openCamera();
         });
 
+        btnDeleteImage.setVisibility(View.INVISIBLE);
         btnDeleteImage.setOnClickListener(v -> { deleteImage(); });
 
         btnGallery.setOnClickListener(v -> {
