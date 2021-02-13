@@ -107,4 +107,10 @@
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
     <string name="title_activity_maps">Map</string>
+    <string name="lblFieldTittle">TituloField</string>
+    <string name="lblLocation">Ubicación</string>
+    <string name="lblCostTittle">titulo costo</string>
+    <string name="lblCostValue">costo valor</string>
+    <string name="lblOpeningTime">Hora apertura</string>
+    <string name="lblFinishTime">Hora de finalización</string>
 </resources>

@@ -44,7 +44,7 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
     }
 
     public static class ViewHolderComment extends RecyclerView.ViewHolder {
-        CardView cardViewComment;//TODO ActivityNewComment agregar imagen
+        CardView cardViewComment;
         ImageView imageViewNewComment;
         TextView lblDateCommentRow;
         TextView lblRatingFieldRow;

@@ -88,7 +88,6 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.lblTitleFieldRow.setTag(position);
         holder.ratingBarField.setTag(position);
 
-        //ToDo FieldRecycler cambiar esto cuando se haya guardado bien las imágenes
         holder.field = list.get(position);
 
         switch (holder.field.getImageUUID()){
