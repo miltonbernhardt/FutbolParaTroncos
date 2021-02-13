@@ -62,4 +62,7 @@ dependencies {
     //RxJava
     implementation 'io.reactivex:rxjava:1.0.14'
     implementation 'io.reactivex:rxandroid:1.0.1'
+
+    //MAPS
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

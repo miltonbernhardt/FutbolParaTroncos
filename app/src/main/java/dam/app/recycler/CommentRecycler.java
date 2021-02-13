@@ -36,8 +36,7 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
 
     private final List<Comment> list;
     private final DecimalFormat df = new DecimalFormat("##.#");
-    private ViewGroup parent;
-    private ActivityMain _CONTEXT;
+    private final ActivityMain _CONTEXT;
 
     public CommentRecycler(List<Comment> list, ActivityMain _CONTEXT){
         this.list = list;
@@ -71,7 +70,6 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
 
     @NonNull
     public ViewHolderComment onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        this.parent = parent;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_comment, parent, false);
         return new CommentRecycler.ViewHolderComment(view);
     }
@@ -96,8 +94,8 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
             else{
                 Uri file = Uri.fromFile(new File(holder.comment.getImageURI()));
                 StorageReference islandRef = FirebaseStorage.getInstance().getReference().child("reviewImages/"+file.getLastPathSegment());
-                File localFile = null;
 
+                File localFile = null;
                 try {
                     localFile = File.createTempFile("images", "tmp");
                 } catch (IOException ignore) { }

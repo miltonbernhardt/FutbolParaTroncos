@@ -43,6 +43,8 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
     }
 
     public static class FieldHolder extends RecyclerView.ViewHolder {
+        Field field;
+
         ImageButton btnLocate;
         Button btnReserve;
         Button btnReviews;
@@ -53,8 +55,6 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         TextView lblRatingFieldRow;
         TextView lblTitleFieldRow;
 
-        Field field;
-
         public FieldHolder(@NonNull View v) {
             super(v);
             btnLocate = v.findViewById(R.id.btnLocate);
@@ -64,7 +64,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             imageField = v.findViewById(R.id.imageField);
             ratingBarField = v.findViewById(R.id.ratingBarFieldRow);
             LayerDrawable stars = (LayerDrawable) ratingBarField.getProgressDrawable();
-            stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);//las estrellas vacias
+            stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
             lblAddressFieldRow = v.findViewById(R.id.lblAddressFieldRow);
             lblRatingFieldRow = v.findViewById(R.id.lblRatingFieldRow);
             lblTitleFieldRow = v.findViewById(R.id.lblTitleFieldRow);
@@ -90,7 +90,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         //ToDo FieldRecycler cambiar esto cuando se haya guardado bien las imágenes
         holder.field = list.get(position);
-        //Si está o no en la bd
+
         switch (holder.field.getImageUUID()){
             default:
             case "":
@@ -116,8 +116,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.lblTitleFieldRow.setText(holder.field.getName());
         holder.ratingBarField.setRating(holder.field.getRating());
 
-        holder.btnLocate.setOnClickListener(view -> { //ToDo JUANI - MAPS agregar función cuando se implemente lo del maps
-           // activity.startActivity(new Intent(activity, MapsActivity.class));
+        holder.btnLocate.setOnClickListener(view -> {
             Intent i= new Intent(_CONTEXT, ActivityMaps.class);
             i.putExtra("positionX",list.get(holder.getAdapterPosition()).getPositionX());
             i.putExtra("positionY",list.get(holder.getAdapterPosition()).getPositionY());
@@ -126,7 +125,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         });
 
         holder.btnReserve.setOnClickListener(view -> {
-            //ToDo SESSION cuando se implemente lo de session, solo permitir reservar DebugExampleTwoFragment alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
+            //ToDo SESSION cuando se implemente lo de session, solo permitir reservar a alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
             if(_CONTEXT._REPOSITORY.isLogged()){
                 _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
             }
@@ -142,7 +141,6 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             _CONTEXT.setResult(Activity.RESULT_OK, intent);
             _CONTEXT.startActivity(intent);
             Log.d("on ActivityFields", _CONTEXT.getResources().getString(R.string.activity_comments));
-            //_CONTEXT.finish();
         });
 
     }

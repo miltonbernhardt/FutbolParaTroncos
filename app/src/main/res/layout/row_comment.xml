@@ -74,7 +74,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|top">
+                android:layout_gravity="start|top"
+                android:layout_marginTop="@dimen/padding_container">
 
                 <ImageView
                     android:id="@+id/imageViewNewComment"

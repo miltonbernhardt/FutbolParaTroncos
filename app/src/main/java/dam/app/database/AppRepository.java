@@ -35,6 +35,8 @@ public class AppRepository {
     private final DAOSchedule daoSchedule;
     private final DAOUser daoUser;
 
+    private Uri downloadUri;
+
     private AppRepository(final AppCompatActivity context){
         _CONTEXT = context;
         db = AppDatabase.getInstance(context);
@@ -114,9 +116,6 @@ public class AppRepository {
         if(id >= 0) updateRating(idField);
         return id;
     }
-
-
-    private Uri downloadUri;
 
     private void putFile(String pathImage) {
         Uri file = Uri.fromFile(new File(pathImage));
