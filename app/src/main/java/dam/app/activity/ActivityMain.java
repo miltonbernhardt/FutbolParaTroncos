@@ -1,4 +1,5 @@
 package dam.app.activity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,27 +12,35 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import dam.app.R;
 import dam.app.database.AppRepository;
 import dam.app.extras.Dialog;
+import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ActivityMain _CONTEXT;
     public AppRepository _REPOSITORY = null;
+    protected Subscription _SUBSCRIPTION;
+
     protected static final int REQUEST_CODE = 222;
 
     protected Toolbar toolbar;
     protected DrawerLayout drawerLayout;
     protected ActionBarDrawerToggle toggle;
     protected NavigationView navigationView;
+
+    protected FirebaseAuth mAuth;
 
     public void createDrawable(ActivityMain _CONTEXT){
         toolbar = findViewById(R.id.toolbar);
@@ -55,6 +64,19 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().clear();
         navigationView.inflateMenu(menu);
     }
+
+    public void showDialog(String title, String message) {
+        FragmentManager fm = getSupportFragmentManager();
+        Dialog editNameDialog = new Dialog(title,  message, _CONTEXT);
+        editNameDialog.show(fm, "dialog_log");
+    }
+
+    public void showDialog(int title, int message) {
+        FragmentManager fm = getSupportFragmentManager();
+        Dialog editNameDialog = new Dialog(getResources().getString(title),  getResources().getString(message), _CONTEXT);
+        editNameDialog.show(fm, "dialog_log");
+    }
+
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -81,32 +103,44 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    public void showDialog(String title, String message)
-    {
-        FragmentManager fm = getSupportFragmentManager();
-        Dialog editNameDialog = new Dialog(title,  message, _CONTEXT);
-        editNameDialog.show(fm, "fragment_edit_name");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
-    public void showDialog(int title, int message)
-    {
-        FragmentManager fm = getSupportFragmentManager();
-        Dialog editNameDialog = new Dialog(getResources().getString(title),  getResources().getString(message), _CONTEXT);
-        editNameDialog.show(fm, "fragment_edit_name");
+    protected void signInAnonymously() {
+        //TODO se quita con lo de session de coli
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("in ActivityMain", "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        }
+                        else {
+                            Log.w("in ActivityMain", "signInAnonymously:failure", task.getException());
+                            Toast.makeText(_CONTEXT, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
+
 
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        else super.onBackPressed();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         AppRepository.close();
+        if(_SUBSCRIPTION != null && !_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }

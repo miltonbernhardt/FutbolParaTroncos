@@ -8,6 +8,7 @@
     <dimen name="size_title">28sp</dimen>
     <dimen name="size_subtitle">23sp</dimen>
     <dimen name="size_sub_subtitle">14sp</dimen>
+    <dimen name="size_minus_sub_subtitle">10sp</dimen>
     <style name="size_title_toolbar" parent="@style/Base.TextAppearance.AppCompat.Title">
         <item name="android:textSize">25sp</item>
     </style>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1079770270950",
+    "project_id": "futbolparatroncos-9a6fd",
+    "storage_bucket": "futbolparatroncos-9a6fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079770270950:android:5249b48384072c79b0ff27",
+        "android_client_info": {
+          "package_name": "dam.futbolparatroncos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079770270950-nldf5c1aie3utmc9a7jkp2bdfhqa8205.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHl-an_G0ml-DO088ZJxRY79YEBo5qmDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079770270950-nldf5c1aie3utmc9a7jkp2bdfhqa8205.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

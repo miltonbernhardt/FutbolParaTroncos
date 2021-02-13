@@ -52,7 +52,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="textAllCaps">true</item>
         <item name="android:background">@drawable/button_background</item>
+        <item name="android:scaleType">fitCenter</item>
         <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="tint">@color/white</item>
     </style>
 
     <style name="ButtonStyleTransparent" parent="android:Widget.Button">
@@ -84,6 +86,7 @@
 
     <style name="ToolBarStyle" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/fontColorLight</item>
+        <item name="android:textAllCaps">true</item>
         <!--<item name="actionMenuTextColor">@android:color/white</item>
         <item name="actionOverflowButtonStyle">@style/ActionButtonOverflowStyle</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>-->

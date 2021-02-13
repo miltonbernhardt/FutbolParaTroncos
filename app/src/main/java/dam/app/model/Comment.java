@@ -14,13 +14,13 @@ import dam.app.database.Converters;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = {@ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
-        indices = {@Index(value = {"idField"})})
+@Entity(foreignKeys = {@ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idReserve", onDelete = CASCADE)},
+        indices = {@Index(value = {"idReserve"})})
 public class Comment implements Serializable {
     /* ---- RELATIONS ---- */
 
-    @ColumnInfo(name="idField")
-    private long idField;//ToDo RESERVE cambiar por idReserve cuando se haga lo de reserva
+    @ColumnInfo(name="idReserve")
+    private long idReserve;
 
     /* ---- ATTRIBUTES ---- */
     @PrimaryKey(autoGenerate = true)
@@ -40,8 +40,8 @@ public class Comment implements Serializable {
     @ColumnInfo(name="score")
     private int score;
 
-    @ColumnInfo(name="imageUUID")
-    private String imageUUID;
+    @ColumnInfo(name="imageURI")
+    private String imageURI;
 
     public Comment(){
         dateOfComment = LocalDate.now();
@@ -49,12 +49,12 @@ public class Comment implements Serializable {
         score = 5;
     }
 
-    public long getIdField() {
-        return idField;
+    public long getIdReserve() {
+        return idReserve;
     }
 
-    public void setIdField(long idField) {
-        this.idField = idField;
+    public void setIdReserve(long idReserve) {
+        this.idReserve = idReserve;
     }
 
     public long getId() {
@@ -97,11 +97,11 @@ public class Comment implements Serializable {
         this.username = username;
     }
 
-    public String getImageUUID() {
-        return imageUUID;
+    public String getImageURI() {
+        return imageURI;
     }
 
-    public void setImageUUID(String imageUUID) {
-        this.imageUUID = imageUUID;
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
     }
 }

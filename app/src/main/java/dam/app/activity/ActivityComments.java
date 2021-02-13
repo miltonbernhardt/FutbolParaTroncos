@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,6 @@ import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.recycler.CommentRecycler;
 import rx.Observable;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -33,8 +34,6 @@ public class ActivityComments extends ActivityMain {
     protected TextView lblNameField;
     protected Spinner spinnerSortComments;
 
-    private Subscription _SUBSCRIPTION;
-
     private long idField;
     private String fieldName;
 
@@ -43,6 +42,9 @@ public class ActivityComments extends ActivityMain {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_recycler);
         createDrawable(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        signInAnonymously();//ToDo cambiar con el session
 
         idField = getIntent().getLongExtra("idField", -1);
         fieldName = getIntent().getStringExtra("nameField");
@@ -86,7 +88,7 @@ public class ActivityComments extends ActivityMain {
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CommentRecycler(new ArrayList<>()));
+        recyclerView.setAdapter(new CommentRecycler(new ArrayList<>(), _CONTEXT));
 
         Observable<List<Comment>> observer = Observable.create(subscriber -> {
             subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy));
@@ -94,14 +96,8 @@ public class ActivityComments extends ActivityMain {
         });
 
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                fields -> recyclerView.setAdapter(new CommentRecycler(fields)) ,
+                fields -> recyclerView.setAdapter(new CommentRecycler(fields, _CONTEXT)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if(!_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }
 

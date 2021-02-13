@@ -104,35 +104,58 @@
             android:layout_height="@dimen/size_image_button"
             android:layout_marginHorizontal="@dimen/bigger_padding_container"
             android:contentDescription="@android:string/VideoView_error_title"
+            android:padding="@dimen/padding_container"
             app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal3"
+            app:layout_constraintEnd_toStartOf="@id/btnGallery"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@mipmap/icon_camera" />
 
-        <CheckBox
-            android:id="@+id/checkBoxUploadImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <ImageButton
+            android:id="@+id/btnGallery"
+            style="@style/ButtonStyle"
+            android:layout_width="@dimen/size_image_button"
+            android:layout_height="@dimen/size_image_button"
             android:layout_marginHorizontal="@dimen/bigger_padding_container"
-            android:enabled="false"
-            android:text="@string/checkBoxUploadImage"
+            android:contentDescription="@android:string/VideoView_error_title"
+            android:padding="@dimen/padding_container"
             app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/guidelineVertical1"
-            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk" />
+            app:layout_constraintEnd_toStartOf="@id/btnDeleteImage"
+            app:layout_constraintStart_toEndOf="@id/btnCamera"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <ImageButton
+            android:id="@+id/btnDeleteImage"
+            style="@style/ButtonStyle"
+            android:layout_width="@dimen/size_image_button"
+            android:layout_height="@dimen/size_image_button"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:contentDescription="@android:string/VideoView_error_title"
+            android:padding="@dimen/padding_container"
+            android:tint="#954848"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal3"
+            app:layout_constraintStart_toEndOf="@id/btnGallery"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
+            app:srcCompat="@mipmap/icon_trash" />
 
         <ImageView
             android:id="@+id/imageUpload"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/bigger_padding_container"
+            android:adjustViewBounds="true"
+            android:background="@drawable/edit_text_background"
+            android:cropToPadding="true"
+            android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="@id/guidelineHorizontal3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.72"
-            app:layout_constraintStart_toStartOf="@id/guidelineVertical1"
-            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk"
-            app:srcCompat="@mipmap/image_no_image_available" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/btnDeleteImage"
+            app:layout_constraintTop_toBottomOf="@id/lblUploadPhotoAsk" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineHorizontal3"
@@ -189,13 +212,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal4" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineVertical1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
