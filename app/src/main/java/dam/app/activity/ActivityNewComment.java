@@ -182,10 +182,7 @@ public class ActivityNewComment extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_comment);
-        createDrawable(this);
-
-        mAuth = FirebaseAuth.getInstance();
-        signInAnonymously();//ToDo cambiar con el session
+        createDrawable(this, false);
 
         idField = getIntent().getStringExtra("idField");
         idReserve = getIntent().getStringExtra("idReserve");

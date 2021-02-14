@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import dam.app.R;
-import dam.app.AppFirebase;
 
 import static android.view.View.GONE;
 
@@ -22,21 +18,20 @@ public class ActivityMenu extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        createDrawable(this);
-        _FIREBASE = AppFirebase.getInstance(_CONTEXT);
+        createDrawable(this, false);
 
         btnLoginHome = findViewById(R.id.btnLoginHome);
         btnRegister = findViewById(R.id.btnRegister);
+
         //VolatileData.persist(_FIREBASE);//Todo quitar o ver donde poner
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
+        if(_FIREBASE.isLogged()){
+            setMenu(R.menu.menu_all_options);
             btnLoginHome.setVisibility(GONE);
             btnRegister.setVisibility(GONE);
-            Log.d("user", ""+user.getDisplayName());
-            Log.d("pass", ""+user.getEmail());
         }
         else {
+            setMenu(R.menu.menu_all_options_without_session);
             btnLoginHome.setOnClickListener(v -> {
                 Intent makeMenuScreen = new Intent(_CONTEXT, ActivityLogin.class);
                 startActivity(makeMenuScreen);

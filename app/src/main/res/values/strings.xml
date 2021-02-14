@@ -42,7 +42,6 @@
     </string-array>
 
     <!-- activity_menu -->
-
     <string name="btnRegister">REGISTRARSE</string>
     <string name="lblWelcome">BIENVENIDOS!</string>
 
@@ -62,11 +61,26 @@
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
 
-    <!-- activity_session -->
 
+    <!-- activity_new_reserve -->
+    <string name="lblFieldTittle">TituloField</string>
+    <string name="lblLocation">Ubicación</string>
+    <string name="lblCostTittle">titulo costo</string>
+    <string name="lblCostValue">costo valor</string>
+    <string name="lblOpeningTime">Hora apertura</string>
+    <string name="lblFinishTime">Hora de finalización</string>
+
+
+    <!-- activity_new_user -->
+    <string name="tittleNewUser">Crear Cuenta</string>
+    <string name="confirmationPassHint">Confirmar contraseña</string>
+
+    <!-- activity_session -->
     <string name="btnLogin">Iniciar sesión</string>
-    <string name="hintNameUser">Nombre de usuario</string>
+    <string name="hintTextEmail">Email</string>
     <string name="hintTextPass">Contraseña</string>
+    <string name="errorLogin">Revise el email o la contraseña</string>
+    <string name="successfulLogin">Inicio de sesión exitoso</string>
 
     <!-- AppRepository -->
     <string name="failedOperation">Operación fallida!</string>
@@ -107,12 +121,4 @@
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
     <string name="title_activity_maps">Map</string>
-
-    <!-- activity_new_reserve -->
-    <string name="lblFieldTittle">TituloField</string>
-    <string name="lblLocation">Ubicación</string>
-    <string name="lblCostTittle">titulo costo</string>
-    <string name="lblCostValue">costo valor</string>
-    <string name="lblOpeningTime">Hora apertura</string>
-    <string name="lblFinishTime">Hora de finalización</string>
 </resources>

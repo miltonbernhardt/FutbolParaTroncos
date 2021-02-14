@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class ActivityComments extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_recycler);
-        createDrawable(this);
+        createDrawable(this, false);
 
         idField = getIntent().getStringExtra("idField");
         fieldName = getIntent().getStringExtra("nameField");
@@ -70,7 +71,7 @@ public class ActivityComments extends ActivityMain {
                 startActivity(intent);
                 Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
             }
-            else showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
+            else Toast.makeText(_CONTEXT, R.string.user_not_logged, Toast.LENGTH_LONG).show();
         });
     }
 

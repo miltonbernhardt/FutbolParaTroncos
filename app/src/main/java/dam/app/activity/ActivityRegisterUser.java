@@ -27,7 +27,7 @@ public class ActivityRegisterUser extends ActivityMain  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-        createDrawable(this);
+        createDrawable(this, true);
         _CONTEXT = this;
         mAuth = FirebaseAuth.getInstance();
         mRegisterBtn = findViewById(R.id.btnRegisterUser);
@@ -99,7 +99,10 @@ public class ActivityRegisterUser extends ActivityMain  {
                             });
                 }
                 mLoadingBar.setVisibility(View.INVISIBLE);
+                //ToDo save user on firebase
 
+
+                //ToDo end all validations
             }
         });
 

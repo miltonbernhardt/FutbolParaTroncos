@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -145,7 +146,8 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
                 _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
             }
             else{
-                _CONTEXT.showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
+                //_CONTEXT.showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
+                Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
             }
         });
 

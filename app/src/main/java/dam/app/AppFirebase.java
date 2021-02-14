@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -185,7 +187,6 @@ public class AppFirebase {
         u.setId(key);
         ref.setValue(u);
         return key;
-
     }
 
     public String writeNewObject(Reserve r) {
@@ -255,8 +256,13 @@ public class AppFirebase {
     }
 
     public boolean isLogged(){
-        //ToDo SESSION verificar si está logueado
-        return true;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null) {
+            Log.d("user", " - " + user.getDisplayName());
+            Log.d("pass", " - " + user.getEmail());
+            return true;
+        }
+        return false;
     }
 
     public static void close(){
