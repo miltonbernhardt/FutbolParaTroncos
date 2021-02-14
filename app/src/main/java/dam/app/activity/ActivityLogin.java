@@ -19,8 +19,7 @@ public class ActivityLogin extends ActivityMain {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        createDrawable();
-        _CONTEXT = this;
+        createDrawable(this);
 
         bntLogin = findViewById(R.id.btnRegisterUser);
         mEmail = findViewById(R.id.textUserNameLogin);
@@ -48,21 +47,18 @@ public class ActivityLogin extends ActivityMain {
     }
 
     private void signIn(String email, String password){
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(ActivityLogin.this, task -> {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(ActivityLogin.this,
+                task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success
-                        Toast.makeText(ActivityLogin.this, "Registración exitosa.",
-                                Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
-                        finish();
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("ActivityLogin", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(ActivityLogin.this, "Error en trar iniciar sesión.",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                            Toast.makeText(ActivityLogin.this, "Registración exitosa.",
+                                    Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(_CONTEXT, ActivityMenu.class));
+                            finish();
+                        } else {
+                            Log.w("ActivityLogin", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(_CONTEXT, "Error en trar iniciar sesión.", Toast.LENGTH_SHORT).show();
+                        }
+
                 });
     }
 }

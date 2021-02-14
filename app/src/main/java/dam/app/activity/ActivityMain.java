@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,9 +97,10 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 finish();
                 break;
             case R.id.menu_option_close_session:
-                //ToDo cerrar sessión
                 Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
-                this.finishAffinity();
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
+                finish();
                 break;
         }
         return true;

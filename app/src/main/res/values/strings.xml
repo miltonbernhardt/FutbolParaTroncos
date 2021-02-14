@@ -10,6 +10,9 @@
     <string name="activity_comments_label">COMENTARIOS</string>
     <string name="activity_fields">VER CANCHAS</string>
     <string name="activity_fields_label">CANCHAS</string>
+    <string name="activity_login">PANTALLA SESIÓN</string>
+    <string name="activity_login_label">INICIAR SESIÓN</string>
+    <string name="activity_maps_label">Map</string>
     <string name="activity_menu">MENÚ</string>
     <string name="activity_new_comment">OPINAR SOBRE UNA CANCHA</string>
     <string name="activity_new_comment_label">RESEÑAR</string>
@@ -19,8 +22,6 @@
     <string name="activity_register_user_label">REGISTRARSE</string>
     <string name="activity_reserves">VER RESERVACIONES HECHAS</string>
     <string name="activity_reserves_label">RESERVAR</string>
-    <string name="activity_session">PANTALLA SESIÓN</string>
-    <string name="activity_session_label">INICIAR SESIÓN</string>
 
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
@@ -103,5 +104,6 @@
     <string name="btnOpinions">OPINIONES</string>
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="confirmationPassHint">Confirmar contraseña</string>
+    <string name="tittleNewUser">Crear cuenta</string>
 </resources>

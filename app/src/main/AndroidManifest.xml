@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.IMAGE_CAPTURE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -26,14 +27,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".activity.ActivityMaps" android:label="@string/title_activity_maps" />
+        <activity android:name=".activity.ActivityMaps" android:label="@string/activity_maps_label" />
         <activity android:name="dam.app.activity.ActivityComments" android:screenOrientation="portrait" android:label="@string/activity_comments_label" />
         <activity android:name="dam.app.activity.ActivityFields" android:label="@string/activity_fields_label"  />
         <activity android:name="dam.app.activity.ActivityNewComment" android:label="@string/activity_new_comment_label" />
         <activity android:name="dam.app.activity.ActivityNewReserve" android:label="@string/activity_new_reserves_label" />
         <activity android:name="dam.app.activity.ActivityRegisterUser" android:label="@string/activity_register_user_label" />
         <activity android:name="dam.app.activity.ActivityReserves" android:label="@string/activity_reserves_label" />
-        <activity android:name="dam.app.activity.ActivitySession" android:label="@string/activity_session_label" />
+        <activity android:name="dam.app.activity.ActivityLogin" android:label="@string/activity_login_label" />
         <activity android:name="dam.app.activity.ActivityMenu" android:label="@string/name_title" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,6 +42,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
