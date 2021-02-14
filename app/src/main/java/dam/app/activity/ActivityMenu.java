@@ -8,8 +8,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 import dam.app.R;
-import dam.app.database.AppFirebase;
-import dam.app.database.VolatileData;
+import dam.app.AppFirebase;
 
 public class ActivityMenu extends ActivityMain {
 
@@ -37,7 +36,7 @@ public class ActivityMenu extends ActivityMain {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(v -> {
-            VolatileData.persist(_FIREBASE);//Todo quitar
+            //VolatileData.persist(_FIREBASE);//Todo quitar o ver donde poner
             /*Intent makeMenuScreen = new Intent(_CONTEXT, ActivityRegisterUser.class);
             startActivity(makeMenuScreen);
             Log.d("on ActivityMenu", _CONTEXT.getResources().getString(R.string.activity_fields));

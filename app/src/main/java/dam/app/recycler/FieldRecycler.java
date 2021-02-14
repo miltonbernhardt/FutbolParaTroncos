@@ -110,7 +110,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
                 holder.imageField.setImageBitmap(bitmapImage);
             else{
                 Uri file = Uri.fromFile(new File(path));
-                StorageReference islandRef = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_FIELDS+"/"+file.getLastPathSegment());
+                StorageReference islandRef = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_FIELDS+file.getLastPathSegment());
                 File localFile = null;
                 try {
                     localFile = File.createTempFile("images", "tmp");

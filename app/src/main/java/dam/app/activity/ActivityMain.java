@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import dam.app.R;
-import dam.app.database.AppFirebase;
+import dam.app.AppFirebase;
 import dam.app.extras.Dialog;
 import rx.Subscription;
 

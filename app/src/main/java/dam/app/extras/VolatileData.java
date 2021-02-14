@@ -1,9 +1,10 @@
-package dam.app.database;
+package dam.app.extras;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import dam.app.AppFirebase;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 
@@ -81,13 +82,6 @@ public  class VolatileData {
         c3.setDateOfCommentFromDate(LocalDate.now().minusDays(6));
         c4.setDateOfCommentFromDate(LocalDate.now().minusDays(17));
         c5.setDateOfCommentFromDate(LocalDate.now().minusDays(2));
-
-        /*
-        c1.setId(110);
-        c2.setId(111);
-        c3.setId(112);
-        c4.setId(113);
-        c5.setId(114);*/
 
         c1.setScore(4);
         c2.setScore(5);

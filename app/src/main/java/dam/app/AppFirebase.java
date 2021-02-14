@@ -1,4 +1,4 @@
-package dam.app.database;
+package dam.app;
 
 import android.net.Uri;
 import android.util.Log;
@@ -22,7 +22,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import dam.app.R;
 import dam.app.activity.ActivityMain;
 import dam.app.extras.EnumPaths;
 import dam.app.extras.EnumSortOption;
@@ -155,7 +154,7 @@ public class AppFirebase {
     public void uploadImage(String pathImage) {
         Uri file = Uri.fromFile(new File(pathImage));
 
-        StorageReference ref = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_IMAGES_REVIEW +file.getLastPathSegment());
+        StorageReference ref = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_IMAGES_REVIEW+"/"+file.getLastPathSegment());
         UploadTask uploadTask = ref.putFile(file);
 
         uploadTask.continueWithTask(task -> {
