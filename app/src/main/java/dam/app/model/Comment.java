@@ -8,30 +8,39 @@ import java.time.LocalDate;
 
 @IgnoreExtraProperties
 public class Comment implements Serializable {
-    private long idReserve;
+    private String idReserve = "";
+    private String idField = "";
 
-    private long id;
-    private String dateOfComment;
-    private String username;
-    private String comment;
-    private int score;
-    private String imagePath;
+    private String id = "";
+    private String dateOfComment = "";
+    private String username = "";
+    private String comment = "";
+    private int score = 5;
+    private String imagePath = "";
 
     public Comment(){ }
 
-    public long getIdReserve() {
+    public String getIdReserve() {
         return idReserve;
     }
 
-    public void setIdReserve(long idReserve) {
+    public void setIdReserve(String idReserve) {
         this.idReserve = idReserve;
     }
 
-    public long getId() {
+    public String getIdField() {
+        return idField;
+    }
+
+    public void setIdField(String idField) {
+        this.idField = idField;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

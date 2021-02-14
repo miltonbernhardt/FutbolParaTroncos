@@ -29,7 +29,7 @@ import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public AppFirebase _REPOSITORY = null;
+    public AppFirebase _FIREBASE = null;
     protected ActivityMain _CONTEXT;
 
     protected Subscription _SUBSCRIPTION;
@@ -56,9 +56,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         _CONTEXT = context;
-        _REPOSITORY = AppFirebase.getInstance(_CONTEXT);
+        _FIREBASE = AppFirebase.getInstance(_CONTEXT);
 
-        if(_REPOSITORY.isLogged()) setMenu(R.menu.menu_all_options);
+        if(_FIREBASE.isLogged()) setMenu(R.menu.menu_all_options);
     }
 
     protected void setMenu(int menu){

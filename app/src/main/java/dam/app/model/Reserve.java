@@ -6,37 +6,38 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Reserve implements Serializable {
-    private long idUser;
-    private long idField;
+    private String idUser;
+    private String idField;
 
-    private long id;
+    private String id;
     private String dateOfReserve;
     private int startTime;
     private int finishTime;
+    private boolean hasCommented = false;
 
     public Reserve(){ }
 
-    public long getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(long idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
-    public long getIdField() {
+    public String getIdField() {
         return idField;
     }
 
-    public void setIdField(long idField) {
+    public void setIdField(String idField) {
         this.idField = idField;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -64,6 +65,13 @@ public class Reserve implements Serializable {
         this.finishTime = finishTime;
     }
 
+    public boolean isHasCommented() {
+        return hasCommented;
+    }
+
+    public void setHasCommented(boolean hasCommented) {
+        this.hasCommented = hasCommented;
+    }
 
     @Exclude
     public LocalDate getDateOfReserveAsDate() {

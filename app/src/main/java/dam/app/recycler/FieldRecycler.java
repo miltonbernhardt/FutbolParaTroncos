@@ -142,7 +142,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.btnReserve.setOnClickListener(view -> {
             //ToDo SESSION cuando se implemente lo de session, solo permitir reservar a alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
-            if(_CONTEXT._REPOSITORY.isLogged()){
+            if(_CONTEXT._FIREBASE.isLogged()){
                 _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
             }
             else{

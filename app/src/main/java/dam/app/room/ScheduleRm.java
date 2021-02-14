@@ -12,7 +12,7 @@ import dam.app.model.Field;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
+@Entity(foreignKeys = @ForeignKey(entity = FieldRm.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
 public class ScheduleRm implements Serializable {
     /* ---- RELATIONS ---- */
     @ColumnInfo(name="idField")

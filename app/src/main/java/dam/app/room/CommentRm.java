@@ -5,12 +5,14 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 import static androidx.room.ForeignKey.CASCADE;
 
+@Deprecated
 @Entity(foreignKeys = {@ForeignKey(entity = ReserveRm.class, parentColumns = "id", childColumns = "idReserve", onDelete = CASCADE)},
         indices = {@Index(value = {"idReserve"})})
 public class CommentRm implements Serializable {
@@ -24,6 +26,7 @@ public class CommentRm implements Serializable {
     @ColumnInfo(name="id")
     private long id;
 
+    @TypeConverters(Converters.class)
     @ColumnInfo(name="dateOfComment")
     private LocalDate dateOfComment;
 

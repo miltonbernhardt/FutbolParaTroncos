@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +33,6 @@ import dam.app.R;
 import dam.app.extras.EnumPaths;
 import dam.app.extras.ImageHelper;
 import dam.app.model.Comment;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class ActivityNewComment extends ActivityMain {
     protected Button btnAddComment;
@@ -48,7 +44,8 @@ public class ActivityNewComment extends ActivityMain {
     protected RatingBar ratingBar;
     protected TextView lblNameField;
 
-    protected long idReserve;
+    protected String idField;
+    protected String idReserve;
     protected String fieldName;
 
     private static final int CAMERA_REQUEST = 1;
@@ -131,16 +128,23 @@ public class ActivityNewComment extends ActivityMain {
             comment.setComment(txtComment);
             comment.setScore((int)score);
             comment.setImagePath(IMAGE_PATH_FINAL);
+            comment.setIdField(idField);
             comment.setIdReserve(idReserve);
             comment.setDateOfCommentFromDate(LocalDate.now());
-            Observable<Long> observer = Observable.create(subscriber -> {
-                subscriber.onNext(_REPOSITORY.saveComment(comment));
+
+            _FIREBASE.saveComment(comment);
+
+            Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
+            finish();
+
+            /*Observable<String> observer = Observable.create(subscriber -> {
+                subscriber.onNext(_FIREBASE.saveComment(comment));
                 subscriber.onCompleted();
             });
 
             _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                     id -> {
-                        if(id < 0){
+                        if(id != null && !id.equals("")){
                             Log.d("on ActivityNewComment", _CONTEXT.getResources().getString(R.string.errorSaveComment));
                             Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();
                         }
@@ -150,7 +154,7 @@ public class ActivityNewComment extends ActivityMain {
                             finish();
                         }
                     } ,
-                    error -> { error.printStackTrace(); Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();});
+                    error -> { error.printStackTrace(); Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();});*/
         }
     }
 
@@ -183,7 +187,8 @@ public class ActivityNewComment extends ActivityMain {
         mAuth = FirebaseAuth.getInstance();
         signInAnonymously();//ToDo cambiar con el session
 
-        idReserve = getIntent().getLongExtra("idReserve", -1);
+        idField = getIntent().getStringExtra("idField");
+        idReserve = getIntent().getStringExtra("idReserve");
         fieldName = getIntent().getStringExtra("fieldTitle");
         
         setIdPicture();

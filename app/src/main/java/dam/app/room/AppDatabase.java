@@ -9,11 +9,10 @@ import androidx.room.RoomDatabase;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 import dam.app.model.Reserve;
-import dam.app.model.Schedule;
 import dam.app.model.User;
 
 @Deprecated
-@Database(entities = {Comment.class, Field.class, Reserve.class, Schedule.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {CommentRm.class, FieldRm.class, ReserveRm.class, ScheduleRm.class, UserRm.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase _INSTANCE;
 

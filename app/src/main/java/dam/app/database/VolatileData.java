@@ -2,6 +2,7 @@ package dam.app.database;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import dam.app.model.Comment;
 import dam.app.model.Field;
@@ -9,23 +10,30 @@ import dam.app.model.Field;
 public  class VolatileData {
 
     public static void persist(AppFirebase _REPOSITORY){
-        for (Field f : VolatileData.getFields()) {
-            //long id = _REPOSITORY.daoField.insert(f);
-            //f.setId(id);
-            _REPOSITORY.writeNewObject(f);
-        }
+        List<Field> fields = VolatileData.getFields();
+        List<Comment> comments = VolatileData.getComments();
 
-        for (Comment c : VolatileData.getComments()) {
-            //long id = _REPOSITORY.daoComment.insert(c);
-            //c.setId(id);
-            _REPOSITORY.writeNewObject(c);
-        }
+        String key = _REPOSITORY.writeNewObject(fields.get(0));
+        comments.get(0).setIdField(key);
+        comments.get(1).setIdField(key);
+
+        key = _REPOSITORY.writeNewObject(fields.get(1));
+        comments.get(2).setIdField(key);
+
+        key = _REPOSITORY.writeNewObject(fields.get(2));
+        comments.get(3).setIdField(key);
+
+        key = _REPOSITORY.writeNewObject(fields.get(3));
+        comments.get(4).setIdField(key);
+
+        for (Comment c : comments) _REPOSITORY.writeNewObject(c);
     }
     
     public static ArrayList<Field> getFields(){
         ArrayList<Field> a = new ArrayList<>();
+
         Field f1 = new Field(), f2 = new Field(), f3 = new Field(), f4 = new Field();
-        f1.setId(110);
+
         f1.setName("El Fúlbito");
         f1.setAddress("Lavaisse 610");
         f1.setPhoneOfContact("3459823462");
@@ -34,7 +42,6 @@ public  class VolatileData {
         f1.setPositionY("-60.675567");
         f1.setRating(3.8f);
 
-        f2.setId(111);
         f2.setName("Los Sin Sangre");
         f2.setAddress("Laprida 8990");
         f2.setPhoneOfContact("3426637869");
@@ -43,7 +50,6 @@ public  class VolatileData {
         f2.setPositionY("-60.683842");
         f2.setRating(4.5f);
 
-        f3.setId(112);
         f3.setName("El Nido de Perros");
         f3.setAddress("4 de Enero 3751");
         f3.setPhoneOfContact("3459829222");
@@ -52,7 +58,6 @@ public  class VolatileData {
         f3.setPositionY("-60.707875");
         f3.setRating(4.2f);
 
-        f4.setId(113);
         f4.setName("El Salado");
         f4.setAddress("Gdor. Candioti 1700");
         f4.setPhoneOfContact("3432123469");
@@ -77,11 +82,12 @@ public  class VolatileData {
         c4.setDateOfCommentFromDate(LocalDate.now().minusDays(17));
         c5.setDateOfCommentFromDate(LocalDate.now().minusDays(2));
 
+        /*
         c1.setId(110);
         c2.setId(111);
         c3.setId(112);
         c4.setId(113);
-        c5.setId(114);
+        c5.setId(114);*/
 
         c1.setScore(4);
         c2.setScore(5);
@@ -101,17 +107,13 @@ public  class VolatileData {
         c4.setComment("excelente la boca. Ni hablar las empanadas de choclo.");
         c5.setComment("encargue canelones de verdura y me llegaron sin salsa...tendrían que aclararlo en la selección del menú y brindar la opción se elegir la salsa para acompañar");
 
-        c1.setIdReserve(110);
-        c2.setIdReserve(110);
-        c3.setIdReserve(111);
-        c4.setIdReserve(112);
-        c5.setIdReserve(113);
-
         a.add(c1);
         a.add(c2);
         a.add(c3);
         a.add(c4);
         a.add(c5);
+
+        //ToDo set idReserve
         return a;
     }
 

@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,8 +15,8 @@ import dam.app.model.User;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = {@ForeignKey(entity = User.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
-        @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
+@Entity(foreignKeys = {@ForeignKey(entity = UserRm.class, parentColumns = "id", childColumns = "idUser", onDelete = CASCADE),
+        @ForeignKey(entity = FieldRm.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE)},
         indices = {@Index(value = {"idUser"}), @Index(value = {"idField"})})
 public class ReserveRm implements Serializable {
     /* ---- RELATIONS ---- */
@@ -31,6 +32,7 @@ public class ReserveRm implements Serializable {
     private long id;
 
     @ColumnInfo(name="dateOfReserve")
+    @TypeConverters(Converters.class)
     private LocalDate dateOfReserve;
 
     @ColumnInfo(name="startTime")

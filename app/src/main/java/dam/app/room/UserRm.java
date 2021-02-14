@@ -3,6 +3,7 @@ package dam.app.room;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class UserRm implements Serializable {
     private String phone;
 
     @ColumnInfo(name="birth")
+    @TypeConverters(Converters.class)
     private LocalDate birth;
 
     public UserRm(){ }

@@ -1,6 +1,7 @@
 package dam.app.database;
 
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,6 @@ import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
 import dam.app.model.Field;
 import dam.app.model.Reserve;
-import dam.app.model.Schedule;
 import dam.app.model.User;
 import dam.app.recycler.CommentRecycler;
 import dam.app.recycler.FieldRecycler;
@@ -37,6 +37,11 @@ public class AppFirebase {
     private static AppCompatActivity _CONTEXT;
     private static AppFirebase _INSTANCE = null;
     private static DatabaseReference _FIREBASE;
+
+    public static final String _FIELDS = "fields";
+    public static final String _COMMENTS = "comments";
+    public static final String _RESERVES = "reserves";
+    public static final String _USERS = "users";
 
     private Uri downloadUri;
 
@@ -104,15 +109,19 @@ public class AppFirebase {
         return list;
     }
 
-    public void getCommentsFromField(long id, EnumSortOption sortBy, RecyclerView recyclerView) {
-        Query myTopPostsQuery = _FIREBASE.child("comments").orderByChild(sortBy.toString());
+    public void getCommentsFromField(String id, EnumSortOption sortBy, RecyclerView recyclerView) {
+        Query myTopPostsQuery;
+
+        if(sortBy.equals(EnumSortOption.FECHA_CERCANA)) myTopPostsQuery = _FIREBASE.child(_COMMENTS);
+        else myTopPostsQuery = _FIREBASE.child(_COMMENTS).orderByChild(sortBy.toString());
+
         myTopPostsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Comment> list = new ArrayList<>();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Comment c = postSnapshot.getValue(Comment.class);
-                    if(c.getIdReserve() == id) list.add(c);
+                    if(c.getIdField()!= null && c.getIdField().equals(id)) list.add(c);
                 }
                 recyclerView.setAdapter(new CommentRecycler(list, (ActivityMain) _CONTEXT));
             }
@@ -124,9 +133,9 @@ public class AppFirebase {
         });
     }
 
-    public long saveComment(Comment comment){
-        long idField = comment.getIdReserve();
+    public void saveComment(Comment comment){
         comment.setUsername("Setear el username");
+
         /*Reserve reserve = daoReserve.find(comment.getIdReserve());
         long idField = reserve.getIdField();
         User user = daoUser.find(reserve.getIdUser());
@@ -138,77 +147,10 @@ public class AppFirebase {
             uploadImage(comment.getImagePath());
             if(downloadUri != null) comment.setImagePath(downloadUri.toString());
         }
+
         writeNewObject(comment);
-        /*//long id = daoComment.insert(comment);
-        comment.setId(id);
-        writeNewObject(comment);
-        if(id >= 0) updateRating(idField);
-        return id;*/
-        return 1;
+        updateRatingField(comment.getIdField());
     }
-
-    /* todo UPDATE field rating
-    private void onStarClicked(DatabaseReference postRef) {
-        postRef.runTransaction(new Transaction.Handler() {
-            @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                Post p = mutableData.getValue(Post.class);
-                if (p == null) {
-                    return Transaction.success(mutableData);
-                }
-
-                if (p.stars.containsKey(getUid())) {
-                    // Unstar the post and remove self from stars
-                    p.starCount = p.starCount - 1;
-                    p.stars.remove(getUid());
-                } else {
-                    // Star the post and add self to stars
-                    p.starCount = p.starCount + 1;
-                    p.stars.put(getUid(), true);
-                }
-
-                // Set value and report transaction success
-                mutableData.setValue(p);
-                return Transaction.success(mutableData);
-            }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean committed,
-                                   DataSnapshot currentData) {
-                // Transaction completed
-                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
-            }
-        });
-    }*/
-
-    public void updateRating(long idField){
-        /*List<Comment> comments = daoComment.findAllByScore(idField);
-
-        float totalScore = 0f;
-        int totalComments = 0;
-
-        for (Comment c:comments) {
-            totalComments++;
-            totalScore += c.getScore();
-        }
-
-        Field field = daoField.find(idField);
-        field.setRating(totalScore/totalComments);
-        daoField.update(field);*/
-    }
-
-    public boolean isLogged(){
-        //ToDo SESSION verificar si está logueado
-        return true;
-    }
-
-    public static void close(){
-        _INSTANCE = null;
-        //_DATABASE.close();
-    }
-
-
-    // ------------------- FIREBASE ------------------------
 
     public void uploadImage(String pathImage) {
         Uri file = Uri.fromFile(new File(pathImage));
@@ -230,51 +172,96 @@ public class AppFirebase {
 
     // --------------------- SUBIR DATOS ---------------------
 
-    public void writeNewObject(Field f) {
-        _FIREBASE.child("fields").child(String.valueOf(f.getId())).setValue(f);
+    public String writeNewObject(Field f) {
+        DatabaseReference ref =  _FIREBASE.child(_FIELDS).push();
+        String key = ref.getKey();
+        f.setId(key);
+        ref.setValue(f);
+        return key;
+    }
+
+    public String writeNewObject(User u) {
+        DatabaseReference ref =  _FIREBASE.child(_USERS).push();
+        String key = ref.getKey();
+        u.setId(key);
+        ref.setValue(u);
+        return key;
 
     }
 
-    public void writeNewObject(Schedule s) {
-        _FIREBASE.child("fields").child(String.valueOf(s.getIdField())).child("schedule").setValue(s);
+    public String writeNewObject(Reserve r) {
+        DatabaseReference ref =  _FIREBASE.child(_RESERVES).push();
+        String key = ref.getKey();
+        r.setId(key);
+        ref.setValue(r);
+        return key;
     }
 
-    public void writeNewObject(User user) {
-        _FIREBASE.child("users").child( String.valueOf(user.getId()) ).setValue(user);
+    public String writeNewObject(Comment c) {
+        DatabaseReference ref = _FIREBASE.child(_COMMENTS).push();
+        String key = ref.getKey();
+        c.setId(key);
+        ref.setValue(c);
+        return key;
     }
-
-    public void writeNewObject(Reserve reserve) {
-        _FIREBASE.child("reserve").child( String.valueOf(reserve.getId()) ).setValue(reserve);
-    }
-
-    public void writeNewObject(Comment comment) {
-        DatabaseReference ref = _FIREBASE.child("comments").push();
-        //comment.setId(ref.getKey());
-        ref.setValue(comment);
-    }
-
-    // --------------------- MODIFICAR DATOS ---------------------
 
     public void updateObject(Field field) {
-        _FIREBASE.child("reserve").child( String.valueOf(field.getId()) ).setValue(field);
+        _FIREBASE.child(_FIELDS).child( String.valueOf(field.getId()) ).setValue(field);
     }
 
-    // --------------------- OBTENER DATOS ---------------------
-    /*private Field field;
-    public Field getField(){
-        ValueEventListener postListener = new ValueEventListener() {
+    public void updateRatingField(String id){
+        _FIREBASE.child(_FIELDS).child(id).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Field field = dataSnapshot.getValue(Field.class);
+                        updateRatingField(field);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("on AppRepository", "loadPost:onCancelled", databaseError.toException());
+                    }
+                }
+        );
+    }
+
+    public void updateRatingField(Field field) {
+        _FIREBASE.child(_COMMENTS).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                field = dataSnapshot.getValue(Field.class);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Comment> list = new ArrayList<>();
+
+                float totalScore = 0f;
+                int totalComments = 0;
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Comment c = postSnapshot.getValue(Comment.class);
+                    assert c != null;
+                    if(c.getIdField() != null && c.getIdField().equals(field.getId())){
+                        totalComments++;
+                        totalScore += c.getScore();
+                    }
+                }
+
+                field.setRating(totalScore/totalComments);
+                updateObject(field);
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("on AppRepository", "loadPost:onCancelled", databaseError.toException());
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
             }
-        };
-        _FIREBASE.addListenerForSingleValueEvent(postListener);
-        return  field;
-    }*/
+        });
+    }
+
+    public boolean isLogged(){
+        //ToDo SESSION verificar si está logueado
+        return true;
+    }
+
+    public static void close(){
+        _INSTANCE = null;
+    }
 }
 
