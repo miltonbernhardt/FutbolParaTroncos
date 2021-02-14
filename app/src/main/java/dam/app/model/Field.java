@@ -1,64 +1,36 @@
 package dam.app.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import com.google.android.gms.maps.model.LatLng;
-
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
 public class Field implements Serializable {
-    /* ---- ATTRIBUTES ---- */
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
-    private long id;
-
-    @ColumnInfo(name="name")
+    private String id;
     private String name;
-
-    @ColumnInfo(name="price")
     private float price;
-
-    //ToDo see when the maps is done
-    @ColumnInfo(name="address")
     private String address;
-
-    @ColumnInfo(name="phoneOfContact")
     private String phoneOfContact;
-
-    @ColumnInfo(name="rating")
     private float rating;
+    private String imagePath;
+    private String positionX;
+    private String positionY;
 
-    @ColumnInfo(name="imageUUID")
-    private String imageUUID;
+    private boolean MONDAY = false;
+    private boolean TUESDAY = false;
+    private boolean WEDNESDAY = false;
+    private boolean THURSDAY = false;
+    private boolean FRIDAY = false;
+    private boolean SATURDAY = false;
+    private boolean SUNDAY = false;
+    private int openingTime;
+    private int closingTime;
 
-    @ColumnInfo(name="positionX")
-    String positionX;
+    public Field() {}
 
-    @ColumnInfo(name="positionY")
-    String positionY;
-
-    public Field() {
-        name = address = phoneOfContact = imageUUID = "";
-        rating = 0f;
-    }
-
-   public String getPositionX(){return positionX;};
-
-    public void setPositionX(String positionX){this.positionX=positionX;}
-
-    public String getPositionY(){return positionY;};
-
-    public void setPositionY(String positionY){this.positionY=positionY;}
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -102,12 +74,92 @@ public class Field implements Serializable {
         this.rating = rating;
     }
 
-    public String getImageUUID() {
-        return imageUUID;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageUUID(String imageUUID) {
-        this.imageUUID = imageUUID;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getPositionX(){return positionX;};
+
+    public void setPositionX(String positionX){this.positionX=positionX;}
+
+    public String getPositionY(){return positionY;};
+
+    public void setPositionY(String positionY){this.positionY=positionY;}
+
+    public boolean isMONDAY() {
+        return MONDAY;
+    }
+
+    public void setMONDAY(boolean MONDAY) {
+        this.MONDAY = MONDAY;
+    }
+
+    public boolean isTUESDAY() {
+        return TUESDAY;
+    }
+
+    public void setTUESDAY(boolean TUESDAY) {
+        this.TUESDAY = TUESDAY;
+    }
+
+    public boolean isWEDNESDAY() {
+        return WEDNESDAY;
+    }
+
+    public void setWEDNESDAY(boolean WEDNESDAY) {
+        this.WEDNESDAY = WEDNESDAY;
+    }
+
+    public boolean isTHURSDAY() {
+        return THURSDAY;
+    }
+
+    public void setTHURSDAY(boolean THURSDAY) {
+        this.THURSDAY = THURSDAY;
+    }
+
+    public boolean isFRIDAY() {
+        return FRIDAY;
+    }
+
+    public void setFRIDAY(boolean FRIDAY) {
+        this.FRIDAY = FRIDAY;
+    }
+
+    public boolean isSATURDAY() {
+        return SATURDAY;
+    }
+
+    public void setSATURDAY(boolean SATURDAY) {
+        this.SATURDAY = SATURDAY;
+    }
+
+    public boolean isSUNDAY() {
+        return SUNDAY;
+    }
+
+    public void setSUNDAY(boolean SUNDAY) {
+        this.SUNDAY = SUNDAY;
+    }
+
+    public int getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime(int openingTime) {
+        this.openingTime = openingTime;
+    }
+
+    public int getClosingTime() {
+        return closingTime;
+    }
+
+    public void setClosingTime(int closingTime) {
+        this.closingTime = closingTime;
     }
 
     @Override

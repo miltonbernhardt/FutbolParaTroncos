@@ -2,9 +2,12 @@ package dam.app.recycler;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -28,6 +36,8 @@ import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewReserve;
 import dam.app.activity.ActivityMaps;
+import dam.app.extras.EnumPaths;
+import dam.app.extras.ImageHelper;
 import dam.app.model.Field;
 
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
@@ -37,7 +47,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
     private final DecimalFormat df = new DecimalFormat("##.#");
 
 
-    public FieldRecycler(ActivityMain _CONTEXT, List<Field> list){
+    public FieldRecycler(List<Field> list, ActivityMain _CONTEXT){
         this.list = list;
         this._CONTEXT = _CONTEXT;
     }
@@ -90,23 +100,29 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.field = list.get(position);
 
-        switch (holder.field.getImageUUID()){
-            default:
-            case "":
-                holder.imageField.setImageResource(R.mipmap.image_no_image_available);
-                break;
-            case "a":
-                holder.imageField.setImageResource(R.mipmap.image_field_a);
-                break;
-            case "b":
-                holder.imageField.setImageResource(R.mipmap.image_field_b);
-                break;
-            case "c":
-                holder.imageField.setImageResource(R.mipmap.image_field_c);
-                break;
-            case "d":
-                holder.imageField.setImageResource(R.mipmap.image_field_d);
-                break;
+        String path = holder.field.getImagePath();
+        if(path != null && !path.equals("")) {
+
+            Bitmap bitmapImage = BitmapFactory.decodeFile(holder.field.getImagePath());
+
+            if(bitmapImage != null)
+                holder.imageField.setImageBitmap(bitmapImage);
+            else{
+                Uri file = Uri.fromFile(new File(path));
+                StorageReference islandRef = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_FIELDS+file.getLastPathSegment());
+                File localFile = null;
+                try {
+                    localFile = File.createTempFile("images", "tmp");
+                } catch (IOException ignore) { }
+
+                File finalLocalFile = localFile;
+                islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                    Bitmap bitmap = BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
+                    holder.imageField.setImageBitmap(bitmap);
+
+                    ImageHelper.persistImage(bitmap, file.getLastPathSegment(), _CONTEXT, "", EnumPaths.PATH_FIELDS.toString());
+                });
+            }
         }
 
         holder.lblAddressFieldRow.setText(holder.field.getAddress());
@@ -125,7 +141,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
 
         holder.btnReserve.setOnClickListener(view -> {
             //ToDo SESSION cuando se implemente lo de session, solo permitir reservar a alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
-            if(_CONTEXT._REPOSITORY.isLogged()){
+            if(_CONTEXT._FIREBASE.isLogged()){
                 _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
             }
             else{

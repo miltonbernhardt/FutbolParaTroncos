@@ -25,10 +25,10 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="@dimen/padding_container"
-                    tools:context=".activity.ActivitySession">
+                    tools:context=".activity.ActivityLogin">
 
                         <TextView
-                            android:id="@+id/lblFTP"
+                            android:id="@+id/lblRegisterUser"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/name_title"
@@ -38,10 +38,11 @@
                             android:id="@+id/imageBall"
                             android:layout_width="217dp"
                             android:layout_height="339dp"
-                            android:src="@mipmap/icon_football_ball" />
+                            android:src="@mipmap/icon_football_ball"
+                            android:contentDescription="TODO" />
 
                         <EditText
-                            android:id="@+id/textUsername"
+                            android:id="@+id/textUserNameLogin"
                             style="@style/EditTextStyle"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
                             android:layout_height="@dimen/space" />
 
                         <EditText
-                            android:id="@+id/textPassword"
+                            android:id="@+id/textPasswordLogin"
                             style="@style/EditTextStyle"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"
@@ -75,7 +76,7 @@
                             android:layout_height="@dimen/space" />
 
                         <Button
-                            android:id="@+id/btnLogin"
+                            android:id="@+id/btnRegisterUser"
                             style="@style/ButtonStyle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

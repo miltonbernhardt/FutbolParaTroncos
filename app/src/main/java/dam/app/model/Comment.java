@@ -1,75 +1,54 @@
 package dam.app.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import dam.app.database.Converters;
-
-import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(foreignKeys = {@ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idReserve", onDelete = CASCADE)},
-        indices = {@Index(value = {"idReserve"})})
+@IgnoreExtraProperties
 public class Comment implements Serializable {
-    /* ---- RELATIONS ---- */
+    private String idReserve = "";
+    private String idField = "";
 
-    @ColumnInfo(name="idReserve")
-    private long idReserve;
+    private String id = "";
+    private String dateOfComment = "";
+    private String username = "";
+    private String comment = "";
+    private int score = 5;
+    private String imagePath = "";
 
-    /* ---- ATTRIBUTES ---- */
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
-    private long id;
+    public Comment(){ }
 
-    @TypeConverters(Converters.class)
-    @ColumnInfo(name="dateOfComment")
-    private LocalDate dateOfComment;
-
-    @ColumnInfo(name="username")
-    private String username;
-
-    @ColumnInfo(name="comment")
-    private String comment;
-
-    @ColumnInfo(name="score")
-    private int score;
-
-    @ColumnInfo(name="imageURI")
-    private String imageURI;
-
-    public Comment(){
-        dateOfComment = LocalDate.now();
-        comment = "";
-        score = 5;
-    }
-
-    public long getIdReserve() {
+    public String getIdReserve() {
         return idReserve;
     }
 
-    public void setIdReserve(long idReserve) {
+    public void setIdReserve(String idReserve) {
         this.idReserve = idReserve;
     }
 
-    public long getId() {
+    public String getIdField() {
+        return idField;
+    }
+
+    public void setIdField(String idField) {
+        this.idField = idField;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public LocalDate getDateOfComment() {
-        return dateOfComment;
+    public String getDateOfComment() {
+       return this.dateOfComment;
     }
 
-    public void setDateOfComment(LocalDate dateOfComment) {
+    public void setDateOfComment(String dateOfComment) {
         this.dateOfComment = dateOfComment;
     }
 
@@ -97,11 +76,29 @@ public class Comment implements Serializable {
         this.username = username;
     }
 
-    public String getImageURI() {
-        return imageURI;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageURI(String imageURI) {
-        this.imageURI = imageURI;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    @Exclude
+    public LocalDate getDateOfCommentAsDate() {
+        if (dateOfComment == null) {
+            return null;
+        } else {
+            return LocalDate.parse(this.dateOfComment);
+        }
+    }
+
+    @Exclude
+    public void setDateOfCommentFromDate(LocalDate dateOfComment) {
+        if (dateOfComment == null) {
+            this.dateOfComment = "";
+        } else {
+            this.dateOfComment = dateOfComment.toString();
+        }
     }
 }

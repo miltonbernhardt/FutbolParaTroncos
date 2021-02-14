@@ -10,6 +10,9 @@
     <string name="activity_comments_label">COMENTARIOS</string>
     <string name="activity_fields">VER CANCHAS</string>
     <string name="activity_fields_label">CANCHAS</string>
+    <string name="activity_login">PANTALLA SESIÓN</string>
+    <string name="activity_login_label">INICIAR SESIÓN</string>
+    <string name="activity_maps_label">Map</string>
     <string name="activity_menu">MENÚ</string>
     <string name="activity_new_comment">OPINAR SOBRE UNA CANCHA</string>
     <string name="activity_new_comment_label">RESEÑAR</string>
@@ -25,10 +28,8 @@
     <!-- activity_comments_recycler -->
     <string name="btnMakeOpinion">OPINAR</string>
     <string-array name="spinnerSortComments">
-        <item>MÁS RECIENTE PRIMERO</item>
-        <item>MAS VIEJO PRIMERO</item>
-        <item>CON PUNTAJES MÁS ALTOS</item>
-        <item>CON PUNTAJES MÁS BAJOS</item>
+        <item>POR FECHA</item>
+        <item>POR PUNTAJE</item>
     </string-array>
 
     <!-- activity_fields_recycler -->
@@ -37,8 +38,7 @@
         <item>SEGÚN EL NOMBRE DE LA CANCHA</item>
         <item>MÁS CERCANO</item>
         <item>MÁS LEJANO</item>
-        <item>CON PUNTAJE PROMEDIO MÁS ALTO</item>
-        <item>CON PUNTAJE PROMEDIO MÁS BAJO</item>
+        <item>SEGÚN EL PUNTAJE</item>
     </string-array>
 
     <!-- activity_menu -->
@@ -56,8 +56,8 @@
     <string name="lblUploadPhotoAsk">¿Deseas subir una imágen de la cancha?</string>
     <string name="lblRatingAsk">¿Cómo es tu valoración de la cancha?</string>
 
-    <string name="errorCamera">Permiso de usar la cámara denegado</string>
-    <string name="errorGallery">Permiso de usar la galería denegado</string>
+    <string name="errorCamera">Permiso de cámara denegado</string>
+    <string name="errorGallery">Permiso de galería denegado</string>
     <string name="errorUploading">Hubo un error al subir la imágen de la cancha</string>
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
@@ -107,6 +107,8 @@
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- activity_new_reserve -->
     <string name="lblFieldTittle">TituloField</string>
     <string name="lblLocation">Ubicación</string>
     <string name="lblCostTittle">titulo costo</string>

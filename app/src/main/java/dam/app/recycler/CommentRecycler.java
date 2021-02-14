@@ -29,6 +29,7 @@ import java.util.List;
 
 import dam.app.R;
 import dam.app.activity.ActivityMain;
+import dam.app.extras.EnumPaths;
 import dam.app.extras.ImageHelper;
 import dam.app.model.Comment;
 
@@ -85,15 +86,16 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
         holder.ratingBarCommentRow.setTag(position);
         holder.textCommentRow.setTag(position);
 
-        if(holder.comment.getImageURI() != null && !holder.comment.getImageURI().equals("")) {
+        String path = holder.comment.getImagePath();
+        if(path != null && !path.equals("")) {
 
-            Bitmap bitmapImage = BitmapFactory.decodeFile(holder.comment.getImageURI());
+            Bitmap bitmapImage = BitmapFactory.decodeFile(path);
 
             if(bitmapImage != null)
                 holder.imageViewNewComment.setImageBitmap(bitmapImage);
             else{
-                Uri file = Uri.fromFile(new File(holder.comment.getImageURI()));
-                StorageReference islandRef = FirebaseStorage.getInstance().getReference().child("reviewImages/"+file.getLastPathSegment());
+                Uri file = Uri.fromFile(new File(path));
+                StorageReference islandRef = FirebaseStorage.getInstance().getReference().child(EnumPaths.PATH_IMAGES_REVIEW +file.getLastPathSegment());
 
                 File localFile = null;
                 try {
@@ -105,12 +107,12 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
                     Bitmap bitmap = BitmapFactory.decodeFile(finalLocalFile.getAbsolutePath());
                     holder.imageViewNewComment.setImageBitmap(bitmap);
 
-                    ImageHelper.persistImage(bitmap, file.getLastPathSegment(), _CONTEXT, "");
+                    ImageHelper.persistImage(bitmap, file.getLastPathSegment(), _CONTEXT, "", EnumPaths.PATH_IMAGES_REVIEW.toString());
                 });
             }
         }
 
-        holder.lblDateCommentRow.setText(holder.comment.getDateOfComment().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        holder.lblDateCommentRow.setText(holder.comment.getDateOfCommentAsDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         df.setRoundingMode(RoundingMode.DOWN);
         holder.lblRatingFieldRow.setText(df.format(holder.comment.getScore()));
         holder.lblUsernameCommentRow.setText(holder.comment.getUsername());

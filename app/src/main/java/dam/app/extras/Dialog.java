@@ -13,7 +13,7 @@ import androidx.fragment.app.DialogFragment;
 
 import dam.app.R;
 import dam.app.activity.ActivityMain;
-import dam.app.activity.ActivitySession;
+import dam.app.activity.ActivityMenu;
 
 public class Dialog extends DialogFragment {
 
@@ -44,9 +44,9 @@ public class Dialog extends DialogFragment {
 
         btnYes.setOnClickListener(viewBtn -> {
             dismiss();
-            Intent makeReviewScreen = new Intent(_CONTEXT, ActivitySession.class);
+            Intent makeReviewScreen = new Intent(_CONTEXT, ActivityMenu.class);
             startActivity(makeReviewScreen);
-            Log.d("on Dialog", _CONTEXT.getResources().getString(R.string.activity_session));
+            Log.d("on Dialog", _CONTEXT.getResources().getString(R.string.activity_menu));
         });
 
         return view;

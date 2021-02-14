@@ -1,4 +1,4 @@
-package dam.app.dao;
+package dam.app.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,22 +9,21 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import dam.app.model.Schedule;
-
+@Deprecated
 @Dao
 public interface DAOSchedule {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(Schedule schedule);
+    Long insert(ScheduleRm schedule);
 
     @Delete
-    void delete(Schedule schedule);
+    void delete(ScheduleRm schedule);
 
     @Update
-    void update(Schedule schedule);
+    void update(ScheduleRm schedule);
 
-    @Query("SELECT * FROM schedule WHERE id = :id LIMIT 1")
-    Schedule find(long id);
+    @Query("SELECT * FROM scheduleRm WHERE id = :id LIMIT 1")
+    ScheduleRm find(long id);
 
-    @Query("SELECT * FROM schedule")
-    List<Schedule> findAll();
+    @Query("SELECT * FROM scheduleRm")
+    List<ScheduleRm> findAll();
 }

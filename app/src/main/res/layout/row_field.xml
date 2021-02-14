@@ -96,26 +96,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_container">
 
             <Button
                 android:id="@+id/btnReserve"
-                style="?attr/borderlessButtonStyle"
+                style="@style/ButtonStyleTransparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space"
                 android:layout_weight="0"
                 android:text="@string/btnReserve"
-                android:textColor="@color/fontColorDark"
                 android:textSize="@dimen/size_text_button" />
 
             <Button
                 android:id="@+id/btnOpinions"
-                style="?attr/borderlessButtonStyle"
+                style="@style/ButtonStyleTransparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="@string/btnOpinions"
-                android:textColor="@color/fontColorDark"
                 android:textSize="@dimen/size_text_button"
                 app:iconTintMode="src_atop" />
 
@@ -126,14 +126,14 @@
 
             <ImageButton
                 android:id="@+id/btnLocate"
-                android:layout_width="@dimen/size_image_button_small"
-                android:layout_height="@dimen/size_image_button_small"
+                style="@style/ButtonStyleTransparent"
+                android:layout_width="@dimen/size_image_button"
+                android:layout_height="@dimen/size_image_button"
                 android:layout_gravity="center"
                 android:layout_weight="0"
-                android:background="@android:color/transparent"
+                android:padding="@dimen/bigger_padding_container"
                 android:scaleType="fitCenter"
                 android:src="@mipmap/icon_map_marker"
-                android:tint="@color/fontColorDark"
                 tools:ignore="ContentDescription" />
 
             <Space

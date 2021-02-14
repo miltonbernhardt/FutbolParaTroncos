@@ -1,4 +1,4 @@
-package dam.app.dao;
+package dam.app.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,22 +9,21 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import dam.app.model.User;
-
+@Deprecated
 @Dao
 public interface DAOUser {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(User user);
+    Long insert(UserRm user);
 
     @Delete
-    void delete(User user);
+    void delete(UserRm user);
 
     @Update
-    void update(User user);
+    void update(UserRm user);
 
-    @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
-    User find(long id);
+    @Query("SELECT * FROM userRm WHERE id = :id LIMIT 1")
+    UserRm find(long id);
 
-    @Query("SELECT * FROM user")
-    List<User> findAll();
+    @Query("SELECT * FROM userRm")
+    List<UserRm> findAll();
 }

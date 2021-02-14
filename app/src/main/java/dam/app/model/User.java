@@ -1,49 +1,24 @@
 package dam.app.model;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
+import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import dam.app.database.Converters;
-
-@Entity
 public class User implements Serializable {
-    /* ---- ATTRIBUTES -----*/
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
-    private long id;
-
-    @ColumnInfo(name="userName")
+    private String id;
     private String userName;
-
-    @ColumnInfo(name="key")
     private String key;
-
-    //ToDo is the first and last name required?
-
-    @ColumnInfo(name="phone")
     private String phone;
+    private String birth;
 
-    @TypeConverters(Converters.class)
-    @ColumnInfo(name="birth")
-    private LocalDate birth;
+    public User(){ }
 
-    public User(){
-        userName = "";
-        key = "";
-        phone = "";
-        birth = LocalDate.now();
-    }
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,11 +46,29 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public LocalDate getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
+    }
+
+    @Exclude
+    public LocalDate getBirthAsDate() {
+        if (birth == null) {
+            return null;
+        } else {
+            return LocalDate.parse(this.birth);
+        }
+    }
+
+    @Exclude
+    public void setBirthFromDate(LocalDate dateOfComment) {
+        if (dateOfComment == null) {
+            this.birth = "";
+        } else {
+            this.birth = dateOfComment.toString();
+        }
     }
 }

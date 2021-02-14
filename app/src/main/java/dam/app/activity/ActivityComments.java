@@ -10,23 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import dam.app.R;
 import dam.app.extras.EnumSortOption;
-import dam.app.model.Comment;
 import dam.app.recycler.CommentRecycler;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class ActivityComments extends ActivityMain {
     protected RecyclerView recyclerView;
@@ -34,7 +26,7 @@ public class ActivityComments extends ActivityMain {
     protected TextView lblNameField;
     protected Spinner spinnerSortComments;
 
-    private long idField;
+    private String idField;
     private String fieldName;
 
     @Override
@@ -43,10 +35,7 @@ public class ActivityComments extends ActivityMain {
         setContentView(R.layout.activity_comments_recycler);
         createDrawable(this);
 
-        mAuth = FirebaseAuth.getInstance();
-        signInAnonymously();//ToDo cambiar con el session
-
-        idField = getIntent().getLongExtra("idField", -1);
+        idField = getIntent().getStringExtra("idField");
         fieldName = getIntent().getStringExtra("nameField");
 
         lblNameField = findViewById(R.id.lblNameField);
@@ -60,9 +49,9 @@ public class ActivityComments extends ActivityMain {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
                     case 0: setComments(idField, EnumSortOption.FECHA_CERCANA); break;
-                    case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
-                    case 2: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
-                    case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
+                    //case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
+                    case 1: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
+                    //case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
                 }
             }
             @Override
@@ -71,9 +60,10 @@ public class ActivityComments extends ActivityMain {
 
         btnMakeOpinion = findViewById(R.id.btnMakeOpinion);
         btnMakeOpinion.setOnClickListener(v -> {
-            if(_REPOSITORY.isLogged()){
-                //ToDo SESSION cuando se implemente lo de session, solo permitir comentar DebugExampleTwoFragment alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
+            if(_FIREBASE.isLogged()){
+                //ToDo SESSION cuando se implemente lo de session, solo permitir comentar alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
                 Intent intent = new Intent(_CONTEXT, ActivityNewComment.class);
+                intent.putExtra("idField", idField);
                 intent.putExtra("idReserve", idField);
                 intent.putExtra("fieldTitle", fieldName);
                 setResult(Activity.RESULT_OK, intent);
@@ -84,20 +74,25 @@ public class ActivityComments extends ActivityMain {
         });
     }
 
-    public void setComments(long idField, EnumSortOption sortBy) {
+    public void setComments(String idField, EnumSortOption sortBy) {
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CommentRecycler(new ArrayList<>(), _CONTEXT));
 
+        /*  - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
+            - Esto quedo de haber implementado en un principio ROOM
+
         Observable<List<Comment>> observer = Observable.create(subscriber -> {
-            subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy));
+            subscriber.onNext(_REPOSITORY.getCommentsFromField(idField, sortBy, recyclerView));
             subscriber.onCompleted();
         });
 
         _SUBSCRIPTION = observer.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                 fields -> recyclerView.setAdapter(new CommentRecycler(fields, _CONTEXT)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
+        */
+        _FIREBASE.getCommentsFromField(idField, sortBy, recyclerView);
     }
 }
 

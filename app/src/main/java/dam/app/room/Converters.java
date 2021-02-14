@@ -1,10 +1,11 @@
-package dam.app.database;
+package dam.app.room;
 
 import androidx.room.TypeConverter;
 
 import java.time.LocalDate;
 import java.util.Date;
 
+@Deprecated
 public class Converters {
     @TypeConverter
     public static Date fromTimestamp(Long value) {

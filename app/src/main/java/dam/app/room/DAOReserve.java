@@ -1,4 +1,4 @@
-package dam.app.dao;
+package dam.app.room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,22 +9,21 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import dam.app.model.Reserve;
-
+@Deprecated
 @Dao
 public interface DAOReserve {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(Reserve reserve);
+    Long insert(ReserveRm reserve);
 
     @Delete
-    void delete(Reserve reserve);
+    void delete(ReserveRm reserve);
 
     @Update
-    void update(Reserve reserve);
+    void update(ReserveRm reserve);
 
-    @Query("SELECT * FROM reserve WHERE id = :id LIMIT 1")
-    Reserve find(long id);
+    @Query("SELECT * FROM reserveRm WHERE id = :id LIMIT 1")
+    ReserveRm find(long id);
 
-    @Query("SELECT * FROM reserve")
-    List<Reserve> findAll();
+    @Query("SELECT * FROM reserveRm")
+    List<ReserveRm> findAll();
 }

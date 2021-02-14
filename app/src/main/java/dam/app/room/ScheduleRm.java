@@ -1,4 +1,4 @@
-package dam.app.model;
+package dam.app.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,10 +8,12 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+import dam.app.model.Field;
+
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = Field.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
-public class Schedule implements Serializable {
+@Entity(foreignKeys = @ForeignKey(entity = FieldRm.class, parentColumns = "id", childColumns = "idField", onDelete = CASCADE), indices = {@Index(value = {"idField"})})
+public class ScheduleRm implements Serializable {
     /* ---- RELATIONS ---- */
     @ColumnInfo(name="idField")
     private long idField;
@@ -41,10 +43,7 @@ public class Schedule implements Serializable {
     @ColumnInfo(name="closingTime")
     private int closingTime;
 
-    public Schedule (){
-        openingTime = 8;
-        closingTime = 21;
-    }
+    public ScheduleRm (){}
 
     public long getIdField() {
         return idField;
