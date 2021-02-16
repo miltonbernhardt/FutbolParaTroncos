@@ -11,163 +11,224 @@
     <!--tools:openDrawer="start"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">>
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/navigator_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_conversion_absoluteHeight="56dp"
+            tools:layout_conversion_absoluteWidth="411dp" />
 
         <TextView
             android:id="@+id/lblFieldTittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lblFieldTittle"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/name_title"
             android:textSize="@dimen/size_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.91"
             tools:layout_conversion_absoluteHeight="31dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp"
             tools:layout_conversion_absoluteWidth="411dp" />
 
-        <include
-            layout="@layout/navigator_toolbar"
-            tools:layout_conversion_absoluteHeight="56dp"
-            tools:layout_editor_absoluteY="31dp"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_height="wrap_content"
-            tools:layout_conversion_absoluteWidth="411dp"
-            android:layout_width="wrap_content" />
-
-        <Button
-            android:id="@+id/btnNewReserve"
-            style="?attr/borderlessButtonStyle"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btnReserve"
-            android:textColor="@color/colorPrimaryVariant"
-            android:textSize="@dimen/size_text_button"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_editor_absoluteY="87dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="115dp" />
-
-        <TextView
-            android:id="@+id/lblLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblLocation"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/size_sub_subtitle"
-            tools:layout_conversion_absoluteHeight="96dp"
-            tools:layout_editor_absoluteY="135dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <TextView
-            android:id="@+id/lblCostValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblCostValue"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/size_sub_subtitle"
-            tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_editor_absoluteY="230dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="91dp" />
-
-        <ImageButton
-            android:id="@+id/btnLocationNewReserve"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/icon_map_marker"
-            android:tint="@color/colorPrimaryVariant"
-            tools:layout_conversion_absoluteHeight="37dp"
-            tools:layout_editor_absoluteY="250dp"
-            tools:layout_editor_absoluteX="206dp"
-            tools:layout_conversion_absoluteWidth="0dp" />
-
-        <Spinner
-            android:id="@+id/spinnerFinishTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_conversion_absoluteHeight="24dp"
-            tools:layout_editor_absoluteY="287dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="48dp" />
-
-        <TextView
-            android:id="@+id/lblCostTittle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblCostTittle"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/size_sub_subtitle"
-            tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_editor_absoluteY="311dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="94dp" />
-
-        <Spinner
-            android:id="@+id/spinnerStartingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_conversion_absoluteHeight="24dp"
-            tools:layout_editor_absoluteY="330dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="48dp" />
-
-        <TextView
-            android:id="@+id/lblStartingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lblOpeningTime"
-            android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
-            android:textSize="@dimen/size_sub_subtitle"
-            tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_editor_absoluteY="354dp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="110dp" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/corner_radius"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal1"
             tools:layout_conversion_absoluteHeight="338dp"
-            tools:layout_editor_absoluteY="374dp"
-            tools:layout_editor_absoluteX="31dp"
             tools:layout_conversion_absoluteWidth="350dp">
 
             <CalendarView
                 android:id="@+id/calendarNewReserve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorSecondaryVariant"
-                android:selectedWeekBackgroundColor="#FFFFFF"
-                android:unfocusedMonthDateColor="@color/colorOnPrimary"
                 tools:layout_conversion_absoluteHeight="338dp"
-                tools:layout_editor_absoluteY="374dp"
+                tools:layout_conversion_absoluteWidth="350dp"
                 tools:layout_editor_absoluteX="31dp"
-                tools:layout_conversion_absoluteWidth="350dp" />
+                tools:layout_editor_absoluteY="374dp" />
         </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.70" />
+
+        <TextView
+            android:id="@+id/lblStartingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:text="@string/lblStartingTime"
+            android:textAllCaps="true"
+            android:textSize="@dimen/size_sub_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/lblLocation"
+            app:layout_constraintEnd_toStartOf="@id/spinnerStartingTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2"
+            tools:layout_conversion_absoluteHeight="19dp"
+            tools:layout_conversion_absoluteWidth="110dp" />
+
+        <Spinner
+            android:id="@+id/spinnerStartingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:layout_marginEnd="@dimen/bigger_padding_container"
+            app:layout_constraintBottom_toTopOf="@id/lblLocation"
+            app:layout_constraintEnd_toStartOf="@id/lblFinishTime"
+            app:layout_constraintStart_toEndOf="@id/lblStartingTime"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2"
+            tools:layout_conversion_absoluteHeight="24dp"
+            tools:layout_conversion_absoluteWidth="48dp" />
 
         <TextView
             android:id="@+id/lblFinishTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
             android:text="@string/lblFinishTime"
             android:textAllCaps="true"
-            android:textColor="@color/colorOnSecondary"
             android:textSize="@dimen/size_sub_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/lblLocation"
+            app:layout_constraintEnd_toStartOf="@id/spinnerFinishTime"
+            app:layout_constraintStart_toStartOf="@id/spinnerStartingTime"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2"
             tools:layout_conversion_absoluteHeight="19dp"
-            tools:layout_editor_absoluteY="712dp"
-            tools:layout_editor_absoluteX="0dp"
             tools:layout_conversion_absoluteWidth="153dp" />
+
+        <Spinner
+            android:id="@+id/spinnerFinishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:layout_marginStart="@dimen/padding_container"
+            app:layout_constraintBottom_toTopOf="@id/lblLocation"
+            app:layout_constraintStart_toEndOf="@id/lblFinishTime"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal2"
+            tools:layout_conversion_absoluteHeight="24dp"
+            tools:layout_conversion_absoluteWidth="48dp" />
+
+        <TextView
+            android:id="@+id/lblLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/lblLocation"
+            android:textAllCaps="true"
+            android:textSize="@dimen/size_sub_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/lblCostTitle"
+            app:layout_constraintEnd_toStartOf="@id/lblLocationValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerStartingTime"
+            tools:layout_conversion_absoluteHeight="96dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <TextView
+            android:id="@+id/lblLocationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_container"
+            android:text="@string/lblLocationValue"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/lblCostTitle"
+            app:layout_constraintStart_toEndOf="@id/lblLocation"
+            app:layout_constraintTop_toBottomOf="@id/spinnerStartingTime" />
+
+        <ImageButton
+            android:id="@+id/btnLocationNewReserve"
+            android:layout_width="@dimen/size_image_button_small"
+            android:layout_height="@dimen/size_image_button_small"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/padding_container"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/icon_map_marker"
+            app:layout_constraintBottom_toTopOf="@id/lblCostTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinnerStartingTime"
+            tools:layout_conversion_absoluteHeight="37dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <TextView
+            android:id="@+id/lblCostTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/lblCostTittle"
+            android:textAllCaps="true"
+            android:textSize="@dimen/size_sub_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal4"
+            app:layout_constraintEnd_toStartOf="@id/lblCostValue"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblLocation"
+            tools:layout_conversion_absoluteHeight="19dp"
+            tools:layout_conversion_absoluteWidth="94dp" />
+
+        <TextView
+            android:id="@+id/lblCostValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/lblCostValue"
+            android:textAllCaps="true"
+            android:textSize="@dimen/size_sub_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal4"
+            app:layout_constraintStart_toEndOf="@id/lblCostTitle"
+            app:layout_constraintTop_toBottomOf="@id/lblLocation"
+            tools:layout_conversion_absoluteHeight="19dp"
+            tools:layout_conversion_absoluteWidth="91dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.87" />
+
+        <Button
+            android:id="@+id/btnNewReserve"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnReserve"
+            android:textSize="@dimen/size_text_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal4"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="115dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

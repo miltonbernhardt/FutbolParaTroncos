@@ -10,9 +10,8 @@ import dam.app.R;
 import static android.view.View.GONE;
 
 public class ActivityMenu extends ActivityMain {
-
-    protected Button btnLoginHome;
-    protected Button btnRegister;
+    Button btnLoginHome;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

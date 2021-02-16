@@ -22,10 +22,10 @@ import dam.app.extras.EnumSortOption;
 import dam.app.recycler.CommentRecycler;
 
 public class ActivityComments extends ActivityMain {
-    protected RecyclerView recyclerView;
-    protected Button btnMakeOpinion;
-    protected TextView lblNameField;
-    protected Spinner spinnerSortComments;
+    RecyclerView recyclerView;
+    Button btnMakeOpinion;
+    TextView lblNameField;
+    Spinner spinnerSortComments;
 
     private String idField;
     private String fieldName;
@@ -62,17 +62,18 @@ public class ActivityComments extends ActivityMain {
         btnMakeOpinion = findViewById(R.id.btnMakeOpinion);
         btnMakeOpinion.setOnClickListener(v -> {
             if(_FIREBASE.isLogged()){
-                //ToDo SESSION cuando se implemente lo de session, solo permitir comentar alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
                 Intent intent = new Intent(_CONTEXT, ActivityNewComment.class);
                 intent.putExtra("idField", idField);
                 intent.putExtra("idReserve", idField);
-                intent.putExtra("fieldTitle", fieldName);
+                intent.putExtra("fieldName", fieldName);
                 setResult(Activity.RESULT_OK, intent);
                 startActivity(intent);
                 Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
             }
             else Toast.makeText(_CONTEXT, R.string.user_not_logged, Toast.LENGTH_LONG).show();
         });
+
+        if(!_FIREBASE.isLogged()) setMenu(R.menu.menu_all_options_without_session);
     }
 
     public void setComments(String idField, EnumSortOption sortBy) {

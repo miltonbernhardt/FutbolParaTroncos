@@ -35,6 +35,7 @@ import java.util.List;
 import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
+import dam.app.activity.ActivityNewComment;
 import dam.app.activity.ActivityNewReserve;
 import dam.app.activity.ActivityMaps;
 import dam.app.extras.EnumPaths;
@@ -141,20 +142,22 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         });
 
         holder.btnReserve.setOnClickListener(view -> {
-            //ToDo SESSION cuando se implemente lo de session, solo permitir reservar a alguien logueado o mostrar un dialogo para que se loguee si quiere comentar
             if(_CONTEXT._FIREBASE.isLogged()){
-                _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityNewReserve.class));
+                Intent intent = new Intent(_CONTEXT, ActivityNewReserve.class);
+                intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
+                intent.putExtra("fieldName", list.get(holder.getAdapterPosition()).getName());
+                _CONTEXT.setResult(Activity.RESULT_OK, intent);
+                _CONTEXT.startActivity(intent);
+                Log.d("on ActivityReserves", _CONTEXT.getResources().getString(R.string.activity_new_reserves));
             }
-            else{
-                //_CONTEXT.showDialog(R.string.user_not_logged, R.string.wish_to_log_for_comment);
-                Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
-            }
+            else Toast.makeText(_CONTEXT, R.string.user_not_logged, Toast.LENGTH_LONG).show();
         });
 
         holder.btnReviews.setOnClickListener(view -> {
+            //TODO quitar
             Intent intent = new Intent(_CONTEXT, ActivityComments.class);
             intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
-            intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());
+            intent.putExtra("fieldName", list.get(holder.getAdapterPosition()).getName());
             _CONTEXT.setResult(Activity.RESULT_OK, intent);
             _CONTEXT.startActivity(intent);
             Log.d("on ActivityFields", _CONTEXT.getResources().getString(R.string.activity_comments));

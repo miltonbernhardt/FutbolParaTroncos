@@ -18,10 +18,12 @@ import dam.app.R;
 
 public class ActivityRegisterUser extends ActivityMain  {
 
-    protected FirebaseAuth mAuth;
-    protected Button mRegisterBtn;
-    protected EditText mUserName, mEmail, mPassword, mPasswordConfirmation;
-    protected ProgressBar mLoadingBar;
+    Button mRegisterBtn;
+    EditText mUserName;
+    EditText mEmail;
+    EditText mPassword;
+    EditText mPasswordConfirmation;
+    ProgressBar mLoadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class ActivityRegisterUser extends ActivityMain  {
         setContentView(R.layout.activity_register_user);
         createDrawable(this, true);
         _CONTEXT = this;
-        mAuth = FirebaseAuth.getInstance();
+        _AUTH = FirebaseAuth.getInstance();
         mRegisterBtn = findViewById(R.id.btnRegisterUser);
         mUserName = findViewById(R.id.textUserName);
         mEmail = findViewById(R.id.textEmail);
@@ -38,7 +40,7 @@ public class ActivityRegisterUser extends ActivityMain  {
         mLoadingBar = findViewById(R.id.progressBarRegister);
 
         //if the user is login, so we redirect to the main menu
-        if(mAuth.getCurrentUser() != null) startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
+        if(_AUTH.getCurrentUser() != null) startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
         //Regular Expression for Standard Email adress
         String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern emailPattern = Pattern.compile(emailRegex);
@@ -82,7 +84,7 @@ public class ActivityRegisterUser extends ActivityMain  {
                 }
                 //if all field are right, so go on
                 if(!wrongField) {
-                    mAuth.createUserWithEmailAndPassword(email, password1)
+                    _AUTH.createUserWithEmailAndPassword(email, password1)
                             .addOnCompleteListener(ActivityRegisterUser.this, task -> {
                                 if (task.isSuccessful()) {
                                     // Sign in success

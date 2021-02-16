@@ -268,5 +268,9 @@ public class AppFirebase {
     public static void close(){
         _INSTANCE = null;
     }
+
+    public void signOut() {
+        FirebaseAuth.getInstance().signOut();
+    }
 }
 

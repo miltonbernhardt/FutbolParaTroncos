@@ -11,8 +11,10 @@ public class ActivityReserves extends ActivityMain {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserves_recycler);
         createDrawable(this, true);
+
         if(_FIREBASE.isLogged()) setMenu(R.menu.menu_without_reserves_with_session);
         else setMenu(R.menu.menu_without_reserves_and_session);
+
     }
 
 }

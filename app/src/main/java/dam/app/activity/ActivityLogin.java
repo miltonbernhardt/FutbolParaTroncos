@@ -13,10 +13,9 @@ import android.widget.Toast;
 import dam.app.R;
 
 public class ActivityLogin extends ActivityMain {
-
-    protected Button bntLogin;
-    protected EditText mEmail;
-    protected EditText mPassword;
+    Button bntLogin;
+    EditText mEmail;
+    EditText mPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class ActivityLogin extends ActivityMain {
     }
 
     private void signIn(String email, String password){
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(_CONTEXT, task -> {
+        _AUTH.signInWithEmailAndPassword(email, password).addOnCompleteListener(_CONTEXT, task -> {
             if (task.isSuccessful()) {
                 Log.w("on ActivityLogin", _CONTEXT.getResources().getString(R.string.successfulLogin));
                 Toast.makeText(_CONTEXT, R.string.successfulLogin, Toast.LENGTH_SHORT).show();

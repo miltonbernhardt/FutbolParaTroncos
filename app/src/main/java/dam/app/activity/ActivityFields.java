@@ -20,8 +20,8 @@ import dam.app.extras.EnumSortOption;
 import dam.app.recycler.FieldRecycler;
 
 public class ActivityFields extends ActivityMain {
-    protected RecyclerView recyclerView;
-    protected Spinner spinnerOptionsFields;
+    RecyclerView recyclerView;
+    Spinner spinnerOptionsFields;
 
     private static final int WRITE_DIRECTORY = 100;
 

@@ -35,18 +35,18 @@ import dam.app.extras.ImageHelper;
 import dam.app.model.Comment;
 
 public class ActivityNewComment extends ActivityMain {
-    protected Button btnAddComment;
-    protected EditText textComment;
-    protected ImageButton btnCamera;
-    protected ImageButton btnDeleteImage;
-    protected ImageButton btnGallery;
-    protected ImageView imageUpload;
-    protected RatingBar ratingBar;
-    protected TextView lblNameField;
+    Button btnAddComment;
+    EditText textComment;
+    ImageButton btnCamera;
+    ImageButton btnDeleteImage;
+    ImageButton btnGallery;
+    ImageView imageUpload;
+    RatingBar ratingBar;
+    TextView lblNameField;
 
-    protected String idField;
-    protected String idReserve;
-    protected String fieldName;
+    private String idField;
+    private String idReserve;
+    private String fieldName;
 
     private static final int CAMERA_REQUEST = 1;
     private static final int GALLERY_REQUEST = 2;
@@ -186,7 +186,7 @@ public class ActivityNewComment extends ActivityMain {
 
         idField = getIntent().getStringExtra("idField");
         idReserve = getIntent().getStringExtra("idReserve");
-        fieldName = getIntent().getStringExtra("fieldTitle");
+        fieldName = getIntent().getStringExtra("fieldName");
         
         setIdPicture();
 

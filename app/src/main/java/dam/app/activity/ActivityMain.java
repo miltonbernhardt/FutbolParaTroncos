@@ -21,18 +21,16 @@ import dam.app.AppFirebase;
 import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle toggle;
+    NavigationView navigationView;
 
     public AppFirebase _FIREBASE = null;
+
     protected ActivityMain _CONTEXT;
-
     protected Subscription _SUBSCRIPTION;
-
-    protected Toolbar toolbar;
-    protected DrawerLayout drawerLayout;
-    protected ActionBarDrawerToggle toggle;
-    protected NavigationView navigationView;
-
-    protected FirebaseAuth mAuth;
+    protected FirebaseAuth _AUTH;
 
     private boolean backToMenu = false;
 
@@ -51,9 +49,10 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         _CONTEXT = context;
         _FIREBASE = AppFirebase.getInstance(_CONTEXT);
 
-        mAuth = FirebaseAuth.getInstance();
+        _AUTH = FirebaseAuth.getInstance();
 
         this.backToMenu = backToMenu;
+        setMenu(R.menu.menu_all_options);
     }
 
     protected void setMenu(int menu){
@@ -68,20 +67,30 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             case R.id.menu_option_fields:
                 Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
                 startActivity(makeFieldsScreen);
+
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_fields));
-                finish();
+
+                finishAffinity();
                 break;
             case R.id.menu_option_reserves:
-                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
+                //Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
+                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewReserve.class);
                 startActivity(makeReviewScreen);
+
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
-                finish();
+
+                finishAffinity();
                 break;
             case R.id.menu_option_close_session:
                 Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
-                finish();
+                _FIREBASE.signOut();
+
+                Intent intent = new Intent(_CONTEXT, ActivityMenu.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+
+                finishAffinity();
                 break;
         }
         return true;

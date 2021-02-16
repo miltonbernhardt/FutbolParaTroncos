@@ -7,100 +7,205 @@
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/bigger_padding_container"
     android:orientation="vertical"
-    app:cardBackgroundColor="@color/colorPrimaryVariant"
-    app:cardCornerRadius="@dimen/corner_radius"
-    app:cardElevation="@dimen/card_elevation"
+    android:padding="@dimen/bigger_padding_container"
     app:cardUseCompatPadding="false">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|start"
-        android:orientation="vertical"
-        android:padding="@dimen/bigger_padding_container"
-        android:showDividers="none">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/lblNameField"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center|start"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/name_title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lblStateReserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:background="@drawable/edit_text_background"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="@dimen/padding_container"
+            android:text="@string/lblStateReserve"
+            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/lblNameField"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_container">
+            app:layout_constraintGuide_percent="0.20" />
 
-            <TextView
-                android:id="@+id/lblRatingFieldRow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/padding_container"
-                android:background="@drawable/rating_background"
-                android:paddingHorizontal="@dimen/bigger_padding_container"
-                android:text="@string/lblRatingFieldRow"
-                android:textAllCaps="true"
-                android:textColor="@color/fontColorLight" />
+        <TextView
+            android:id="@+id/lblDateReserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:text="@string/lblDateReserve"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/lblDateReserveValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline1" />
 
-            <RatingBar
-                android:id="@+id/ratingBarCommentRow"
-                style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:progressTint="@color/colorSecondary"
-                android:rating="3.5"
-                android:stepSize="0.5" />
+        <TextView
+            android:id="@+id/lblDateReserveValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:layout_marginEnd="@dimen/bigger_padding_container"
+            android:text="@string/lblDateCommentRow"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/lblPrice"
+            app:layout_constraintStart_toEndOf="@id/lblDateReserve"
+            app:layout_constraintTop_toBottomOf="@id/guideline1" />
 
-            <TextView
-                android:id="@+id/lblUsernameCommentRow"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/lblUsernameCommentRow"
-                android:textAllCaps="true" />
 
-            <TextView
-                android:id="@+id/lblDateCommentRow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center|end"
-                android:text="@string/lblDateCommentRow" />
+        <TextView
+            android:id="@+id/lblPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:layout_marginEnd="@dimen/bigger_padding_container"
+            android:text="@string/lblPrice"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/lblPriceValue"
+            app:layout_constraintStart_toEndOf="@id/lblDateReserveValue"
+            app:layout_constraintTop_toBottomOf="@id/guideline1" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/lblPriceValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:text="@string/lblPriceValue"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+            app:layout_constraintStart_toEndOf="@id/lblPrice"
+            app:layout_constraintTop_toBottomOf="@id/guideline1" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.37" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|top"
-                android:layout_marginTop="@dimen/padding_container">
+        <TextView
+            android:id="@+id/lblStartingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:text="@string/lblStartingTime"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintEnd_toStartOf="@id/lblStartingTimeValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-                <ImageView
-                    android:id="@+id/imageViewNewComment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/edit_text_background"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/image_no_image_available"
-                    app:srcCompat="@mipmap/image_no_image_available"
-                    tools:ignore="ContentDescription" />
-            </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/lblStartingTimeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:layout_marginEnd="@dimen/bigger_padding_container"
+            android:text="@string/lblStartingTimeValue"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintEnd_toStartOf="@id/lblFinishTime"
+            app:layout_constraintStart_toEndOf="@id/lblStartingTime"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+            app:layout_goneMarginEnd="@dimen/bigger_padding_container" />
 
-            <TextView
-                android:id="@+id/textCommentRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:justificationMode="inter_word"
-                android:paddingStart="@dimen/bigger_padding_container"
-                android:text="@string/textCommentRow"
-                android:textAlignment="textStart"
-                android:textAllCaps="false" />
+        <TextView
+            android:id="@+id/lblFinishTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:layout_marginEnd="@dimen/bigger_padding_container"
+            android:text="@string/lblFinishTime"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintEnd_toStartOf="@id/lblFinishTimeValue"
+            app:layout_constraintStart_toEndOf="@id/lblStartingTimeValue"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/lblFinishTimeValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:text="@string/lblFinishTimeValue"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+            app:layout_constraintStart_toEndOf="@id/lblFinishTime"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.54" />
+
+        <TextView
+            android:id="@+id/lblLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/bigger_padding_container"
+            android:text="@string/lblLocation"
+            app:layout_constraintBottom_toTopOf="@id/guideline4"
+            app:layout_constraintEnd_toStartOf="@id/lblLocationValue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+
+        <TextView
+            android:id="@+id/lblLocationValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_container"
+            android:text="@string/lblLocationValue"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/guideline4"
+            app:layout_constraintStart_toEndOf="@id/lblLocation"
+            app:layout_constraintTop_toBottomOf="@id/guideline3"
+            app:layout_goneMarginEnd="@dimen/bigger_padding_container" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.76" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/ButtonStyleTransparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnCancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnReview"
+            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+
+        <Button
+            android:id="@+id/btnReview"
+            style="@style/ButtonStyleTransparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnReview"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnCancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

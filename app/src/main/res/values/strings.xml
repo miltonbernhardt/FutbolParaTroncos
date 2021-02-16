@@ -26,7 +26,6 @@
     <string name="activity_session_label">INICIAR SESIÓN</string>
 
     <!-- activity_comments_recycler -->
-    <string name="btnMakeOpinion">OPINAR</string>
     <string-array name="spinnerSortComments">
         <item>POR FECHA</item>
         <item>POR PUNTAJE</item>
@@ -64,11 +63,12 @@
 
     <!-- activity_new_reserve -->
     <string name="lblFieldTittle">TituloField</string>
-    <string name="lblLocation">Ubicación</string>
-    <string name="lblCostTittle">titulo costo</string>
+    <string name="lblLocation">Ubicación:</string>
+    <string name="lblLocationValue">Ubicación 1080</string>
+    <string name="lblCostTittle">Costo por hora:</string>
     <string name="lblCostValue">costo valor</string>
-    <string name="lblOpeningTime">Hora apertura</string>
-    <string name="lblFinishTime">Hora de finalización</string>
+    <string name="lblStartingTime">Hora de inicio:</string>
+    <string name="lblFinishTime">Hora de finalización:</string>
 
 
     <!-- activity_new_user -->
@@ -121,4 +121,14 @@
     <string name="lblUsernameCommentRow">PISCULICHI</string>
     <string name="lblFieldCommentRow">@string/lblTitleFieldRow</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- activity_new_reserve -->
+    <string name="lblStateReserve">activa</string>
+    <string name="lblDateReserve">Fecha:</string>
+    <string name="lblPrice">Precio por hora:</string>
+    <string name="lblPriceValue">500$</string>
+    <string name="lblStartingTimeValue">17:00</string>
+    <string name="lblFinishTimeValue">18:00</string>
+    <string name="btnCancel">Cancelar reserva</string>
+    <string name="btnReview">OPINAR</string>
 </resources>

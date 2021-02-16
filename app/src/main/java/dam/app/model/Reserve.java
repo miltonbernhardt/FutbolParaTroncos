@@ -13,7 +13,11 @@ public class Reserve implements Serializable {
     private String dateOfReserve;
     private int startTime;
     private int finishTime;
+
+    private boolean used = false;
     private boolean hasCommented = false;
+
+    public Field field;
 
     public Reserve(){ }
 
@@ -71,6 +75,14 @@ public class Reserve implements Serializable {
 
     public void setHasCommented(boolean hasCommented) {
         this.hasCommented = hasCommented;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 
     @Exclude
