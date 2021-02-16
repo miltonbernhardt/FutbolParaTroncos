@@ -45,6 +45,11 @@ import dam.app.model.Field;
 public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolder> {
 
     private final ActivityMain _CONTEXT;
+
+    public List<Field> getList() {
+        return list;
+    }
+
     private final List<Field> list;
     private final DecimalFormat df = new DecimalFormat("##.#");
 
@@ -137,7 +142,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             Intent i= new Intent(_CONTEXT, ActivityMaps.class);
             i.putExtra("positionX",list.get(holder.getAdapterPosition()).getPositionX());
             i.putExtra("positionY",list.get(holder.getAdapterPosition()).getPositionY());
-            i.putExtra("fieldName",list.get(holder.getAdapterPosition()).getName());
+            i.putExtra("nameField",list.get(holder.getAdapterPosition()).getName());
             _CONTEXT.startActivity(i);
         });
 
@@ -145,7 +150,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             if(_CONTEXT._FIREBASE.isLogged()){
                 Intent intent = new Intent(_CONTEXT, ActivityNewReserve.class);
                 intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
-                intent.putExtra("fieldName", list.get(holder.getAdapterPosition()).getName());
+                intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());
                 _CONTEXT.setResult(Activity.RESULT_OK, intent);
                 _CONTEXT.startActivity(intent);
                 Log.d("on ActivityReserves", _CONTEXT.getResources().getString(R.string.activity_new_reserves));
@@ -157,7 +162,7 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
             //TODO quitar
             Intent intent = new Intent(_CONTEXT, ActivityComments.class);
             intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
-            intent.putExtra("fieldName", list.get(holder.getAdapterPosition()).getName());
+            intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());
             _CONTEXT.setResult(Activity.RESULT_OK, intent);
             _CONTEXT.startActivity(intent);
             Log.d("on ActivityFields", _CONTEXT.getResources().getString(R.string.activity_comments));

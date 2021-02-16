@@ -8,23 +8,28 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import dam.app.R;
 import dam.app.AppFirebase;
+import dam.app.model.User;
 import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
+    DrawerLayout drawerLayout;
+    Menu menu;
     NavigationView navigationView;
+    Toolbar toolbar;
 
     public AppFirebase _FIREBASE = null;
 
@@ -34,10 +39,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private boolean backToMenu = false;
 
+    private User user;
+
     public void createDrawable(ActivityMain context, boolean backToMenu){
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigation_view);
+        menu = findViewById(R.id.menu_all_options);
 
         setSupportActionBar(toolbar);
         navigationView.setNavigationItemSelectedListener(this);
@@ -48,8 +56,11 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         _CONTEXT = context;
         _FIREBASE = AppFirebase.getInstance(_CONTEXT);
-
         _AUTH = FirebaseAuth.getInstance();
+
+
+
+
 
         this.backToMenu = backToMenu;
         setMenu(R.menu.menu_all_options);
@@ -64,6 +75,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.menu_option_session:
+                startActivity(new Intent(_CONTEXT, ActivityMenu.class));
+
+                Log.d("on DrawerLayout", getResources().getString(R.string.activity_session));
+
+                finishAffinity();
+                break;
             case R.id.menu_option_fields:
                 Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
                 startActivity(makeFieldsScreen);
@@ -73,22 +91,28 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 finishAffinity();
                 break;
             case R.id.menu_option_reserves:
-                //Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
-                Intent makeReviewScreen = new Intent(_CONTEXT, ActivityNewReserve.class);
-                startActivity(makeReviewScreen);
+                if(_FIREBASE.isLogged()) {
+                    FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+                    Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
+                    makeReviewScreen.putExtra("iduser", u.getUid());
+                    setResult(Activity.RESULT_OK, makeReviewScreen);
+                    startActivity(makeReviewScreen);
 
-                Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
+                    Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
 
-                finishAffinity();
+                    finish();
+
+                }
+
                 break;
             case R.id.menu_option_close_session:
                 Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
                 _FIREBASE.signOut();
 
                 Intent intent = new Intent(_CONTEXT, ActivityMenu.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
                 startActivity(intent);
+
+                Log.d("on DrawerLayout", getResources().getString(R.string.message_closing_session));
 
                 finishAffinity();
                 break;

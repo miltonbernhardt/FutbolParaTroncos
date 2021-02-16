@@ -10,4 +10,4 @@
     app:headerLayout="@layout/navigation_header"
     app:itemIconTint="@color/fontColorDark"
     app:itemTextColor="@color/fontColorDark"
-    app:menu="@menu/menu_all_options_without_session" />
+    app:menu="@menu/menu_all_options" />

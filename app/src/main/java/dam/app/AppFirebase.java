@@ -1,5 +1,6 @@
 package dam.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,7 +15,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dam.app.activity.ActivityMain;
+import dam.app.activity.ActivityMenu;
+import dam.app.activity.ActivityRegisterUser;
+import dam.app.activity.ActivityReserves;
 import dam.app.extras.EnumPaths;
 import dam.app.extras.EnumSortOption;
 import dam.app.model.Comment;
@@ -33,9 +36,12 @@ import dam.app.model.Reserve;
 import dam.app.model.User;
 import dam.app.recycler.CommentRecycler;
 import dam.app.recycler.FieldRecycler;
+import dam.app.recycler.ReservesRecycler;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class AppFirebase {
-    private static AppCompatActivity _CONTEXT;
+    private static ActivityMain _CONTEXT;
     private static AppFirebase _INSTANCE = null;
     private static DatabaseReference _FIREBASE;
 
@@ -44,85 +50,100 @@ public class AppFirebase {
     public static final String _RESERVES = "reserves";
     public static final String _USERS = "users";
 
+    private User user;
+
     private Uri downloadUri;
 
-    private AppFirebase(final AppCompatActivity context){
+    private AppFirebase(final ActivityMain context){
         _CONTEXT = context;
         _FIREBASE = FirebaseDatabase.getInstance().getReference();
     }
 
-    public static AppFirebase getInstance(final AppCompatActivity context) {
+    public static AppFirebase getInstance(final ActivityMain context) {
         if (_INSTANCE == null) _INSTANCE = new AppFirebase(context);
         return _INSTANCE;
     }
 
     public void getAllFields(EnumSortOption sortBy, RecyclerView recyclerView) {
-        Query myTopPostsQuery = null;
-        if(sortBy.equals(EnumSortOption.DIRECCION_CERCANA)){
-            myTopPostsQuery = _FIREBASE.child("fields");
-            myTopPostsQuery.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    List<Field> fields = convertFieldsFromServer(dataSnapshot);
+        switch (sortBy){
+            case PUNTUACION_BAJA:
+            case NOMBRE_ALFABETICO:
+                _FIREBASE.child("fields").orderByChild(sortBy.toString()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Field> list = new ArrayList<>();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) list.add(postSnapshot.getValue(Field.class));
+                        recyclerView.setAdapter(new FieldRecycler(list, (ActivityMain) _CONTEXT));
+                    }
 
-                    //ToDo hacer lo de la dirección más cercana
-                        /*Location locationA = new Location("punto A");
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
+                    }
+                });
+                break;
 
-                        locationA.setLatitude(latA);
-                        locationA.setLongitude(lngA);
+            default:
+                _FIREBASE.child("fields").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        List<Field> list = new ArrayList<>();
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) list.add(postSnapshot.getValue(Field.class));
+                        switch (sortBy){
+                            case PUNTUACION_ALTA:
+                                list.sort((c1, c2) -> c2.getRating().compareTo(c1.getRating()));
+                                break;
 
-                        Location locationB = new Location("punto B");
+                            case DIRECCION_CERCANA:
+                                list.sort((c1, c2) -> c1.getAddress().compareTo(c2.getAddress()));
+                                break;
+                            case DIRECCION_LEJANA:
+                                //ToDo hacer lo de la dirección más cercana
+                                /*Location locationA = new Location("punto A");
 
-                        locationB.setLatitude(latB);
-                        locationB.setLongitude(lngB);
+                                locationA.setLatitude(latA);
+                                locationA.setLongitude(lngA);
 
-                        float distance = locationA.distanceTo(locationB);*/
+                                Location locationB = new Location("punto B");
 
-                    recyclerView.setAdapter(new FieldRecycler(fields, (ActivityMain) _CONTEXT));
-                }
+                                locationB.setLatitude(latB);
+                                locationB.setLongitude(lngB);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-        }
-        else{
-            myTopPostsQuery = _FIREBASE.child("fields").orderByChild(sortBy.toString());
-            myTopPostsQuery.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    recyclerView.setAdapter(new FieldRecycler(convertFieldsFromServer(dataSnapshot), (ActivityMain) _CONTEXT));
-                }
+                                float distance = locationA.distanceTo(locationB);*/
+                                list.sort((c1, c2) -> c2.getAddress().compareTo(c1.getAddress()));
+                                break;
+                        }
+                        recyclerView.setAdapter(new FieldRecycler(list, (ActivityMain) _CONTEXT));
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+                break;
+
         }
     }
 
-    private List<Field> convertFieldsFromServer(DataSnapshot dataSnapshot){
-        List<Field> list = new ArrayList<>();
-        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-            list.add(postSnapshot.getValue(Field.class));
-        }
-        return list;
-    }
-
-    public void getCommentsFromField(String id, EnumSortOption sortBy, RecyclerView recyclerView) {
-        Query myTopPostsQuery;
-
-        if(sortBy.equals(EnumSortOption.FECHA_CERCANA)) myTopPostsQuery = _FIREBASE.child(_COMMENTS);
-        else myTopPostsQuery = _FIREBASE.child(_COMMENTS).orderByChild(sortBy.toString());
-
-        myTopPostsQuery.addValueEventListener(new ValueEventListener() {
+    public void getCommentsFromField(String idField, EnumSortOption sortBy, RecyclerView recyclerView) {
+        _FIREBASE.child(_COMMENTS).orderByChild("idField").equalTo(idField).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<Comment> list = new ArrayList<>();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Comment c = postSnapshot.getValue(Comment.class);
-                    if(c.getIdField()!= null && c.getIdField().equals(id)) list.add(c);
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) { list.add(postSnapshot.getValue(Comment.class)); }
+                switch (sortBy){
+                    case FECHA_CERCANA:
+                        list.sort((c1, c2) -> c2.getDateOfCommentAsDate().compareTo(c1.getDateOfCommentAsDate()));
+                        break;
+                    case FECHA_LEJANA:
+                        list.sort((c1, c2) -> c1.getDateOfCommentAsDate().compareTo(c2.getDateOfCommentAsDate()));
+                        break;
+                    case PUNTUACION_ALTA:
+                        list.sort((c1, c2) -> c2.getScore().compareTo(c1.getScore()));
+                        break;
+                    case PUNTUACION_BAJA:
+                        list.sort((c1, c2) -> c1.getScore().compareTo(c2.getScore()));
+                        break;
                 }
                 recyclerView.setAdapter(new CommentRecycler(list, (ActivityMain) _CONTEXT));
             }
@@ -134,15 +155,42 @@ public class AppFirebase {
         });
     }
 
-    public void saveComment(Comment comment){
-        comment.setUsername("Setear el username");
+    public void getReservesByUser(String idUser, RecyclerView recyclerView) {
+        _FIREBASE.child("reserves").orderByChild("idUser").equalTo(idUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Reserve> list = new ArrayList<>();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    list.add(postSnapshot.getValue(Reserve.class));
+                }
+                list.sort((c1, c2) -> c2.getDateOfReserveAsDate().compareTo(c1.getDateOfReserveAsDate()));
+                recyclerView.setAdapter(new ReservesRecycler(list, _CONTEXT));
+            }
 
-        /*Reserve reserve = daoReserve.find(comment.getIdReserve());
-        long idField = reserve.getIdField();
-        User user = daoUser.find(reserve.getIdUser());
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void setActualUser() {
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+        assert u != null;
+        _FIREBASE.child(_USERS).child(u.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void saveComment(Comment comment){
         comment.setUsername(user.getUserName());
-        ToDo USER descomentar al hacer bien lo del user
-        */
 
         if(comment.getImagePath() != null && !comment.getImagePath().equals("")) {
             uploadImage(comment.getImagePath());
@@ -181,12 +229,8 @@ public class AppFirebase {
         return key;
     }
 
-    public String writeNewObject(User u) {
-        DatabaseReference ref =  _FIREBASE.child(_USERS).push();
-        String key = ref.getKey();
-        u.setId(key);
-        ref.setValue(u);
-        return key;
+    public void writeNewObject(User u) {
+        _FIREBASE.child(_USERS).child(u.getId()).setValue(u);
     }
 
     public String writeNewObject(Reserve r) {
@@ -205,6 +249,9 @@ public class AppFirebase {
         return key;
     }
 
+
+
+
     public void updateObject(Field field) {
         _FIREBASE.child(_FIELDS).child( String.valueOf(field.getId()) ).setValue(field);
     }
@@ -213,13 +260,13 @@ public class AppFirebase {
         _FIREBASE.child(_FIELDS).child(id).addValueEventListener(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Field field = dataSnapshot.getValue(Field.class);
                         updateRatingField(field);
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.w("on AppRepository", "loadPost:onCancelled", databaseError.toException());
                     }
                 }
@@ -227,21 +274,16 @@ public class AppFirebase {
     }
 
     public void updateRatingField(Field field) {
-        _FIREBASE.child(_COMMENTS).addValueEventListener(new ValueEventListener() {
+        _FIREBASE.child(_COMMENTS).orderByChild("idField").equalTo(field.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Comment> list = new ArrayList<>();
-
                 float totalScore = 0f;
                 int totalComments = 0;
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Comment c = postSnapshot.getValue(Comment.class);
-                    assert c != null;
-                    if(c.getIdField() != null && c.getIdField().equals(field.getId())){
-                        totalComments++;
-                        totalScore += c.getScore();
-                    }
+                    totalComments++;
+                    totalScore += c.getScore();
                 }
 
                 field.setRating(totalScore/totalComments);
@@ -255,11 +297,30 @@ public class AppFirebase {
         });
     }
 
+
+
+    public void registerUser(User user){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getMail(), user.getPassword())
+                .addOnCompleteListener(_CONTEXT, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(_CONTEXT, _CONTEXT.getResources().getString(R.string.successfulRegister), Toast.LENGTH_SHORT).show();
+                        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+                        user.setId(u.getUid());
+                        writeNewObject(user);
+                        _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityMenu.class));
+                        _CONTEXT.finish();
+                    } else {
+                        Log.w("FAIL", "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(_CONTEXT,  _CONTEXT.getResources().getString(R.string.errorRegister), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+
     public boolean isLogged(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null) {
-            Log.d("user", " - " + user.getDisplayName());
-            Log.d("pass", " - " + user.getEmail());
             return true;
         }
         return false;

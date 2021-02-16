@@ -22,8 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.Normalizer;
@@ -57,6 +55,85 @@ public class ActivityNewComment extends ActivityMain {
     private String ID_PICTURE;
     private String IMAGE_PATH_CACHE;
     private String IMAGE_PATH_FINAL;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_comment);
+        createDrawable(this, false);
+
+        idField = getIntent().getStringExtra("idField");
+        idReserve = getIntent().getStringExtra("idReserve");
+        fieldName = getIntent().getStringExtra("fieldName");
+
+        btnAddComment = findViewById(R.id.btnAddComment);
+        btnCamera = findViewById(R.id.btnCamera);
+        btnDeleteImage = findViewById(R.id.btnDeleteImage);
+        btnGallery = findViewById(R.id.btnGallery);
+        imageUpload = findViewById(R.id.imageUpload);
+        lblNameField = findViewById(R.id.lblNameField);
+        ratingBar = findViewById(R.id.ratingBar);
+        textComment = findViewById(R.id.textComment);
+
+        lblNameField.setText(fieldName);
+
+        btnAddComment.setOnClickListener(v -> { saveComment(); });
+
+        btnCamera.setOnClickListener(v -> {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSION_CODE_MY_CAMERA);
+            else openCamera();
+        });
+
+        btnDeleteImage.setVisibility(View.INVISIBLE);
+        btnDeleteImage.setOnClickListener(v -> { deleteImage(); });
+
+        btnGallery.setOnClickListener(v -> {
+            if (ActivityCompat.checkSelfPermission(_CONTEXT, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(_CONTEXT, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY_PERMISSION_CODE);
+            else  openGallery();
+        });
+        setIdPicture();
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode){
+                case GALLERY_REQUEST:
+                    Uri imageUri = data.getData();
+                    try {
+                        Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                        setImageFinal(bitmapImage);
+                    } catch (IOException ignored) { }
+                    break;
+                case CAMERA_REQUEST:
+                    Bitmap bitmapImage = BitmapFactory.decodeFile(IMAGE_PATH_CACHE);
+                    setImageFinal(bitmapImage);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_CODE_MY_CAMERA){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) openCamera();
+            else Toast.makeText(_CONTEXT, R.string.errorCamera, Toast.LENGTH_SHORT).show();
+        } else if  (requestCode == PICK_FROM_GALLERY_PERMISSION_CODE){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) openGallery();
+            else Toast.makeText(_CONTEXT, R.string.errorGallery, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deleteCache();
+    }
 
     private void openCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -155,85 +232,6 @@ public class ActivityNewComment extends ActivityMain {
                         }
                     } ,
                     error -> { error.printStackTrace(); Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();});*/
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode){
-                case GALLERY_REQUEST:
-                    Uri imageUri = data.getData();
-                    try {
-                        Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-                        setImageFinal(bitmapImage);
-                    } catch (IOException ignored) { }
-                    break;
-                case CAMERA_REQUEST:
-                    Bitmap bitmapImage = BitmapFactory.decodeFile(IMAGE_PATH_CACHE);
-                    setImageFinal(bitmapImage);
-                    break;
-            }
-        }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_comment);
-        createDrawable(this, false);
-
-        idField = getIntent().getStringExtra("idField");
-        idReserve = getIntent().getStringExtra("idReserve");
-        fieldName = getIntent().getStringExtra("fieldName");
-        
-        setIdPicture();
-
-        btnAddComment = findViewById(R.id.btnAddComment);
-        btnCamera = findViewById(R.id.btnCamera);
-        btnDeleteImage = findViewById(R.id.btnDeleteImage);
-        btnGallery = findViewById(R.id.btnGallery);
-        imageUpload = findViewById(R.id.imageUpload);
-        lblNameField = findViewById(R.id.lblNameField);
-        ratingBar = findViewById(R.id.ratingBar);
-        textComment = findViewById(R.id.textComment);
-
-        lblNameField.setText(fieldName);
-
-        btnAddComment.setOnClickListener(v -> { saveComment(); });
-
-        btnCamera.setOnClickListener(v -> {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSION_CODE_MY_CAMERA);
-            else openCamera();
-        });
-
-        btnDeleteImage.setVisibility(View.INVISIBLE);
-        btnDeleteImage.setOnClickListener(v -> { deleteImage(); });
-
-        btnGallery.setOnClickListener(v -> {
-            if (ActivityCompat.checkSelfPermission(_CONTEXT, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(_CONTEXT, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_FROM_GALLERY_PERMISSION_CODE);
-            else  openGallery();
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        deleteCache();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_CODE_MY_CAMERA){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) openCamera();
-            else Toast.makeText(_CONTEXT, R.string.errorCamera, Toast.LENGTH_SHORT).show();
-        } else if  (requestCode == PICK_FROM_GALLERY_PERMISSION_CODE){
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) openGallery();
-            else Toast.makeText(_CONTEXT, R.string.errorGallery, Toast.LENGTH_SHORT).show();
         }
     }
 }

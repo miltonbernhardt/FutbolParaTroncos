@@ -14,15 +14,15 @@ public class Field implements Serializable {
     private String positionX;
     private String positionY;
 
-    private boolean MONDAY = false;
-    private boolean TUESDAY = false;
-    private boolean WEDNESDAY = false;
-    private boolean THURSDAY = false;
-    private boolean FRIDAY = false;
-    private boolean SATURDAY = false;
+    private boolean MONDAY = true;
+    private boolean TUESDAY = true;
+    private boolean WEDNESDAY = true;
+    private boolean THURSDAY = true;
+    private boolean FRIDAY = true;
+    private boolean SATURDAY = true;
     private boolean SUNDAY = false;
-    private int openingTime;
-    private int closingTime;
+    private int openingTime = 10;
+    private int closingTime = 22;
 
     public Field() {}
 
@@ -66,7 +66,7 @@ public class Field implements Serializable {
         this.phoneOfContact = phoneOfContact;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 

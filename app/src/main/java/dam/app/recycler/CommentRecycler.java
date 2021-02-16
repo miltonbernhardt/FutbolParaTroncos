@@ -39,6 +39,10 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
     private final DecimalFormat df = new DecimalFormat("##.#");
     private final ActivityMain _CONTEXT;
 
+    public List<Comment> getList() {
+        return list;
+    }
+
     public CommentRecycler(List<Comment> list, ActivityMain _CONTEXT){
         this.list = list;
         this._CONTEXT = _CONTEXT;
@@ -123,4 +127,6 @@ public class CommentRecycler extends RecyclerView.Adapter<CommentRecycler.ViewHo
     public int getItemCount() {
         return list.size();
     }
+
+
 }

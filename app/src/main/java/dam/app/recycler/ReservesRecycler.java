@@ -2,30 +2,22 @@ package dam.app.recycler;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 import dam.app.R;
-import dam.app.activity.ActivityComments;
-import dam.app.activity.ActivityMaps;
+import dam.app.activity.ActivityMain;
 import dam.app.activity.ActivityNewComment;
 import dam.app.activity.ActivityNewReserve;
 import dam.app.activity.ActivityReserves;
@@ -33,11 +25,11 @@ import dam.app.model.Reserve;
 
 public class ReservesRecycler extends RecyclerView.Adapter<ReservesRecycler.ViewHolderReserve> {
 
-    private final ActivityReserves _CONTEXT;
+    private final ActivityMain _CONTEXT;
     private final List<Reserve> list;
     private final DecimalFormat df = new DecimalFormat("##.#");
 
-    public ReservesRecycler(List<Reserve> list, ActivityReserves _CONTEXT){
+    public ReservesRecycler(List<Reserve> list, ActivityMain _CONTEXT){
         this.list = list;
         this._CONTEXT = _CONTEXT;
     }

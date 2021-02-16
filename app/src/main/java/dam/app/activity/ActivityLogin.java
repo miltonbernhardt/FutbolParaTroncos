@@ -35,6 +35,8 @@ public class ActivityLogin extends ActivityMain {
             String password = mPassword.getText().toString();
             signIn(email,password);
         });
+
+        setMenu(R.menu.menu_only_fields);
     }
 
     private void addListenerTextView(TextView t){

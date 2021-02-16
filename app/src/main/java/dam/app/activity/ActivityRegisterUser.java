@@ -1,6 +1,5 @@
 package dam.app.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,12 +8,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import dam.app.R;
+import dam.app.model.User;
 
 public class ActivityRegisterUser extends ActivityMain  {
 
@@ -30,8 +28,9 @@ public class ActivityRegisterUser extends ActivityMain  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
         createDrawable(this, true);
-        _CONTEXT = this;
-        _AUTH = FirebaseAuth.getInstance();
+
+        setMenu(R.menu.menu_only_fields);
+
         mRegisterBtn = findViewById(R.id.btnRegisterUser);
         mUserName = findViewById(R.id.textUserName);
         mEmail = findViewById(R.id.textEmail);
@@ -39,77 +38,53 @@ public class ActivityRegisterUser extends ActivityMain  {
         mPasswordConfirmation = findViewById(R.id.textPasswordConfirmation);
         mLoadingBar = findViewById(R.id.progressBarRegister);
 
-        //if the user is login, so we redirect to the main menu
-        if(_AUTH.getCurrentUser() != null) startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
-        //Regular Expression for Standard Email adress
         String emailRegex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern emailPattern = Pattern.compile(emailRegex);
 
-        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mRegisterBtn.setOnClickListener(view -> {
+            String email = mEmail.getText().toString().trim();
+            String userName = mUserName.getText().toString();
+            String password1 = mPassword.getText().toString().trim();
+            String password2 = mPasswordConfirmation.getText().toString().trim();
+            String error = "";
+            Matcher matcher = emailPattern.matcher(email);
+            boolean wrongField = false;
 
-                //Fields to validate
-                String email = mEmail.getText().toString().trim();
-                String userName = mUserName.getText().toString();
-                String password1 = mPassword.getText().toString().trim();
-                String password2 = mPasswordConfirmation.getText().toString().trim();
-                Log.d("pass",password1);
+            mLoadingBar.setVisibility(View.VISIBLE);
 
-                Matcher matcher = emailPattern.matcher(email);
-                Boolean wrongField = false;
-
-                //progressBar animation
-                mLoadingBar.setVisibility(View.VISIBLE);
-
-                if(matcher.matches()){
-
-                }else{
-                    //icon wrong email
-                    wrongField = true;
-                }
-                if(userName.length() > 0){
-
-                }
-                else{
-                    //icon wrong name
-                    wrongField = true;
-                }
-                if(password1.equals(password2)){
-
-                }
-                else{
-                    //icon wrong password icon
-                    wrongField = true;
-                }
-                //if all field are right, so go on
-                if(!wrongField) {
-                    _AUTH.createUserWithEmailAndPassword(email, password1)
-                            .addOnCompleteListener(ActivityRegisterUser.this, task -> {
-                                if (task.isSuccessful()) {
-                                    // Sign in success
-                                    Toast.makeText(ActivityRegisterUser.this, "Registración exitosa.",
-                                            Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(),ActivityMenu.class));
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("FAIL", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(ActivityRegisterUser.this, "Error en la registración.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
-                mLoadingBar.setVisibility(View.INVISIBLE);
-                //ToDo save user on firebase
-
-
-                //ToDo end all validations
+            if(!matcher.matches()) {
+                wrongField = true;
+                error += "- Formato de email inválido.\n";
             }
+
+            if(!(userName.length() > 0)) {
+                wrongField = true;
+                error += "- Nombre de usuario vacío.\n";
+            }
+
+            if(!(password1.length()>5)) {
+                wrongField = true;
+                error += "- Contraseña demasiado corta.";
+            }
+            else if (!password1.equals(password2)) {
+                    wrongField = true;
+                    error += "- Las contraseñas no coinciden.";
+            }
+
+            if(!wrongField) {
+                User user = new User();
+                user.setUserName(userName);
+                user.setMail(email);
+                user.setPassword(password1);
+
+                _FIREBASE.registerUser(user);
+            }
+            else {
+                Log.w("FAIL", error);
+                Toast.makeText(_CONTEXT, error, Toast.LENGTH_SHORT).show();
+            }
+            mLoadingBar.setVisibility(View.INVISIBLE);
         });
-
-
-
     }
 
 }

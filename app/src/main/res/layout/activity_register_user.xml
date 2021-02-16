@@ -46,7 +46,7 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:gravity="center"
-                android:hint="@string/hintTextEmail"
+                android:hint="@string/hintUserName"
                 android:inputType="textPersonName" />
 
             <Space

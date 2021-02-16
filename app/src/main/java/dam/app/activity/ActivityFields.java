@@ -20,8 +20,8 @@ import dam.app.extras.EnumSortOption;
 import dam.app.recycler.FieldRecycler;
 
 public class ActivityFields extends ActivityMain {
-    RecyclerView recyclerView;
-    Spinner spinnerOptionsFields;
+    RecyclerView recyclerFields;
+    Spinner spinnerSortFields;
 
     private static final int WRITE_DIRECTORY = 100;
 
@@ -35,34 +35,34 @@ public class ActivityFields extends ActivityMain {
             ActivityCompat.requestPermissions(_CONTEXT, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_DIRECTORY);
 
         if(_FIREBASE.isLogged()) setMenu(R.menu.menu_without_fields_with_session);
-        else setMenu(R.menu.menu_without_fields_and_session);
+        else setMenu(R.menu.menu_empty);
 
-        spinnerOptionsFields = findViewById(R.id.spinnerSortFields);
-        spinnerOptionsFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortFields)));
+        spinnerSortFields = findViewById(R.id.spinnerSortFields);
+        spinnerSortFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortFields)));
 
-        spinnerOptionsFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerSortFields.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
-                    case 0: setFields(EnumSortOption.NOMBRE_ALFABETICO);  break;
-                    case 1: setFields(EnumSortOption.DIRECCION_CERCANA); break;
-                    case 2: setFields(EnumSortOption.DIRECCION_LEJANA); break;
-                    case 3: setFields(EnumSortOption.PUNTUACION_ALTA); break;
-                    //case 4: setFields(EnumSortOption.PUNTUACION_BAJA); break;
+                    case 0: setFields(EnumSortOption.PUNTUACION_ALTA); break;
+                    case 1: setFields(EnumSortOption.PUNTUACION_BAJA); break;
+                    case 2: setFields(EnumSortOption.NOMBRE_ALFABETICO);  break;
+                    case 3: setFields(EnumSortOption.DIRECCION_CERCANA); break;
+                    case 4: setFields(EnumSortOption.DIRECCION_LEJANA); break;
                 }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) { }
         });
+
+        recyclerFields = findViewById(R.id.recyclerFields);
+        recyclerFields.setHasFixedSize(true);
+        recyclerFields.setLayoutManager(new LinearLayoutManager(this));
+        recyclerFields.setAdapter(new FieldRecycler(new ArrayList<>(), _CONTEXT));
     }
 
     public void setFields(EnumSortOption sortBy) {
-        recyclerView = findViewById(R.id.recyclerFields);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new FieldRecycler(new ArrayList<>(), _CONTEXT));
-        _FIREBASE.getAllFields(sortBy, recyclerView);
-
+        _FIREBASE.getAllFields(sortBy, recyclerFields);
         /* - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
            - Esto quedo de haber implementado en un principio ROOM
         Observable<List<Field>> observer = Observable.create(subscriber -> {
@@ -74,8 +74,6 @@ public class ActivityFields extends ActivityMain {
                 fields -> recyclerView.setAdapter(new FieldRecycler(_CONTEXT, fields)),
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
          */
-
-        _FIREBASE.getAllFields(sortBy, recyclerView);
     }
 
     @Override

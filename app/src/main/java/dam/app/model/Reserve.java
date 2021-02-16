@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import dam.app.extras.EnumStateReserve;
+
 public class Reserve implements Serializable {
     private String idUser;
     private String idField;
@@ -14,7 +16,7 @@ public class Reserve implements Serializable {
     private int startTime;
     private int finishTime;
 
-    private boolean used = false;
+    private String state = EnumStateReserve.ACTIVA.toString();
     private boolean hasCommented = false;
 
     public Field field;
@@ -77,12 +79,12 @@ public class Reserve implements Serializable {
         this.hasCommented = hasCommented;
     }
 
-    public boolean isUsed() {
-        return used;
+    public String isUsed() {
+        return state;
     }
 
-    public void setUsed(boolean used) {
-        this.used = used;
+    public void setUsed(String state) {
+        this.state = state;
     }
 
     @Exclude

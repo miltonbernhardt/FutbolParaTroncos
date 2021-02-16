@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import dam.app.R;
 import dam.app.extras.EnumSortOption;
+import dam.app.model.Comment;
 import dam.app.recycler.CommentRecycler;
 
 public class ActivityComments extends ActivityMain {
@@ -50,9 +51,9 @@ public class ActivityComments extends ActivityMain {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 switch (position){
                     case 0: setComments(idField, EnumSortOption.FECHA_CERCANA); break;
-                    //case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
-                    case 1: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
-                    //case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
+                    case 1: setComments(idField, EnumSortOption.FECHA_LEJANA); break;
+                    case 2: setComments(idField, EnumSortOption.PUNTUACION_ALTA); break;
+                    case 3: setComments(idField, EnumSortOption.PUNTUACION_BAJA); break;
                 }
             }
             @Override
@@ -73,15 +74,16 @@ public class ActivityComments extends ActivityMain {
             else Toast.makeText(_CONTEXT, R.string.user_not_logged, Toast.LENGTH_LONG).show();
         });
 
-        if(!_FIREBASE.isLogged()) setMenu(R.menu.menu_all_options_without_session);
-    }
+        if(!_FIREBASE.isLogged()) setMenu(R.menu.menu_only_fields);
 
-    public void setComments(String idField, EnumSortOption sortBy) {
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CommentRecycler(new ArrayList<>(), _CONTEXT));
+    }
 
+    public void setComments(String idField, EnumSortOption sortBy) {
+        _FIREBASE.getCommentsFromField(idField, sortBy, recyclerView);
         /*  - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
             - Esto quedo de haber implementado en un principio ROOM
 
@@ -94,7 +96,7 @@ public class ActivityComments extends ActivityMain {
                 fields -> recyclerView.setAdapter(new CommentRecycler(fields, _CONTEXT)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
         */
-        _FIREBASE.getCommentsFromField(idField, sortBy, recyclerView);
+
     }
 }
 

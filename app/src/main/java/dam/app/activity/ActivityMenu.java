@@ -3,9 +3,11 @@ package dam.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Button;
 
 import dam.app.R;
+import dam.app.extras.VolatileData;
 
 import static android.view.View.GONE;
 
@@ -25,12 +27,14 @@ public class ActivityMenu extends ActivityMain {
         //VolatileData.persist(_FIREBASE);//Todo quitar o ver donde poner
 
         if(_FIREBASE.isLogged()){
+            //menu.findItem(R.id.menu_option_session).setEnabled(true);
+            //menu.findItem(R.id.menu_option_fields).setEnabled(false);
             setMenu(R.menu.menu_all_options);
             btnLoginHome.setVisibility(GONE);
             btnRegister.setVisibility(GONE);
         }
         else {
-            setMenu(R.menu.menu_all_options_without_session);
+            setMenu(R.menu.menu_without_reserves_and_session);
             btnLoginHome.setOnClickListener(v -> {
                 Intent makeMenuScreen = new Intent(_CONTEXT, ActivityLogin.class);
                 startActivity(makeMenuScreen);

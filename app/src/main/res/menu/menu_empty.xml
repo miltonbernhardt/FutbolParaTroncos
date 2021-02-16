@@ -8,10 +8,5 @@
             android:id="@+id/menu_option_session"
             android:icon="@mipmap/icon_session"
             android:title="@string/menu_option_session" />
-        <item
-            android:id="@+id/menu_option_fields"
-            android:icon="@mipmap/icon_field_2"
-            android:title="@string/menu_option_fields" />
-
     </group>
 </menu>

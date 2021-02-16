@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showInd="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_all_options"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_option_session"
+            android:icon="@mipmap/icon_session"
+            android:title="@string/menu_option_session" />
+
         <item
             android:id="@+id/menu_option_fields"
             android:icon="@mipmap/icon_field_2"
@@ -19,20 +26,6 @@
             android:id="@+id/menu_option_close_session"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
             android:title="@string/menu_option_close_session" />
+
     </group>
-
-    <!--<item android:title="Communication">
-
-        <menu>
-            <item
-                android:id="@+id/contact"
-                android:icon="@android:drawable/sym_contact_card"
-                android:title="Contact" />
-            <item
-                android:id="@+id/menu_option_close_session"
-                android:icon="@android:drawable/ic_menu_share"
-                android:title="@string/menu_option_close_session" />
-
-        </menu>
-    </item>-->
 </menu>

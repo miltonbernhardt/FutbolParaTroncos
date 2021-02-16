@@ -27,17 +27,20 @@
 
     <!-- activity_comments_recycler -->
     <string-array name="spinnerSortComments">
-        <item>POR FECHA</item>
-        <item>POR PUNTAJE</item>
+        <item>MÁS NUEVOS</item>
+        <item>MÁS VIEJOS</item>
+        <item>MAYOR PUNTAJE</item>
+        <item>MENOR PUNTAJE</item>
     </string-array>
 
     <!-- activity_fields_recycler -->
     <string name="lblOrder">Ordenar por:</string>
     <string-array name="spinnerSortFields">
+        <item>MAYOR PUNTAJE</item>
+        <item>MENOR PUNTAJE</item>
         <item>SEGÚN EL NOMBRE DE LA CANCHA</item>
         <item>MÁS CERCANO</item>
         <item>MÁS LEJANO</item>
-        <item>SEGÚN EL PUNTAJE</item>
     </string-array>
 
     <!-- activity_menu -->
@@ -79,8 +82,13 @@
     <string name="btnLogin">Iniciar sesión</string>
     <string name="hintTextEmail">Email</string>
     <string name="hintTextPass">Contraseña</string>
+    <string name="hintUserName">Nombre de usuario</string>
     <string name="errorLogin">Revise el email o la contraseña</string>
     <string name="successfulLogin">Inicio de sesión exitoso</string>
+
+    <!-- activity_register_user -->
+    <string name="successfulRegister">Registración exitosa</string>
+    <string name="errorRegister">Error en la registración</string>
 
     <!-- AppRepository -->
     <string name="failedOperation">Operación fallida!</string>
@@ -105,6 +113,7 @@
     <string name="menu_option_close_session">CERRAR SESIÓN</string>
     <string name="menu_option_fields">CANCHAS</string>
     <string name="menu_option_reserves">RESERVAS PROPIAS</string>
+    <string name="menu_option_session">INICIAR SESIÓN</string>
     <string name="message_closing_session">CERRANDO SESIÓN</string>
     <string name="nav_drawer_open">ABRIR DRAW</string>
     <string name="nav_drawer_close">CERRAR DRAW</string>

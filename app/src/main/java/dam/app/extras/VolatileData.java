@@ -1,5 +1,8 @@
 package dam.app.extras;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,11 @@ public  class VolatileData {
         comments.get(4).setIdField(key);
 
         for (Comment c : comments) _REPOSITORY.writeNewObject(c);
+    }
+
+    public static void newUser(AppFirebase _REPOSITORY){
+        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
+
     }
     
     public static ArrayList<Field> getFields(){

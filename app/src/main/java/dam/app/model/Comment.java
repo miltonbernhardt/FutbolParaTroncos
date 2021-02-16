@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @IgnoreExtraProperties
-public class Comment implements Serializable {
+public class Comment implements Serializable{
     private String idReserve = "";
     private String idField = "";
 
@@ -60,7 +60,7 @@ public class Comment implements Serializable {
         this.comment = comment;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
