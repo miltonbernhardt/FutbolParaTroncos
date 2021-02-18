@@ -54,21 +54,21 @@ public class ActivityMaps extends FragmentActivity implements OnMapReadyCallback
     private String receivePositionX(){
         Bundle extras = getIntent().getExtras();
         String x = extras.getString("positionX");
-        Log.d("positionX", x);
+        Log.d("positionX", " "+x);
         return x;
     }
 
     private String receivePositionY(){
         Bundle extras = getIntent().getExtras();
         String y = extras.getString("positionY");
-        Log.d("positionY", y);
+        Log.d("positionY", " "+y);
         return y;
     }
 
     private String receiveFieldName(){
         Bundle extras = getIntent().getExtras();
-        String field = extras.getString("fieldName");
-        Log.d("fieldName", field);
-        return field;
+        String fieldName = extras.getString("nameField");
+        Log.d("positionY", " "+fieldName);
+        return fieldName;
     }
 }

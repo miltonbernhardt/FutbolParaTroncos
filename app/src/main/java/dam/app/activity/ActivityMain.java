@@ -78,26 +78,22 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             case R.id.menu_option_login:
                 startActivity(new Intent(_CONTEXT, ActivityLogin.class));
                 Log.d("on DrawerLayout", getResources().getString(R.string.activity_session));
-                finishAffinity();
                 break;
 
             case R.id.menu_option_register:
                 startActivity(new Intent(_CONTEXT, ActivityRegisterUser.class));
                 Log.d("on DrawerLayout", getResources().getString(R.string.activity_session));
-                finishAffinity();
                 break;
 
             case R.id.menu_option_fields:
                 startActivity(new Intent(_CONTEXT, ActivityFields.class));
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_fields));
-                finishAffinity();
                 break;
 
             case R.id.menu_option_reserves:
                 if(_FIREBASE.isLogged()) {
                     startActivity(new Intent(_CONTEXT, ActivityReserves.class));
                     Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
-                    finishAffinity();
                 }
                 break;
 
@@ -118,8 +114,14 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
         }
         else {
-            if(backToMenu)  startActivity(new Intent(_CONTEXT, ActivityMenu.class));
-            super.onBackPressed();
+            if(backToMenu)  {
+                startActivity(new Intent(_CONTEXT, ActivityMenu.class));
+                _CONTEXT.finishAffinity();
+            }
+            else{
+                super.onBackPressed();
+            }
+
         }
     }
 

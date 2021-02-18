@@ -8,6 +8,5 @@
     android:background="@color/colorPrimary"
     android:gravity="center|start"
     android:minHeight="?attr/actionBarSize"
-    android:theme="?attr/actionBarTheme"
-    app:theme="@style/ToolBarStyle"
+    android:theme="@style/ToolBarStyle"
     />
