@@ -199,8 +199,7 @@ public class AppFirebase {
                     userDB = dataSnapshot.getValue(User.class);
                     reserve.setIdUser(userDB.getId());
                     writeNewObject(reserve);
-                    Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
-                    _CONTEXT.finish();
+                    Toast.makeText(_CONTEXT, R.string.successfulRegister, Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -243,7 +242,6 @@ public class AppFirebase {
         updateReserveCommented(comment.getIdReserve());
 
         Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
-        _CONTEXT.finish();
     }
 
 
@@ -394,6 +392,7 @@ public class AppFirebase {
                     }
                 });
             }
+            else username.setText("Usuario no logueado");
         }
         else{
             username.setText(userDB.getUserName());
@@ -411,7 +410,7 @@ public class AppFirebase {
                         Toast.makeText(_CONTEXT, _CONTEXT.getResources().getString(R.string.successfulRegister), Toast.LENGTH_SHORT).show();
 
                         VolatileData.addFakeData(_CONTEXT._FIREBASE, userParam.getId());
-                        Toast.makeText(_CONTEXT, _CONTEXT.getResources().getString(R.string.addingFakeData), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(_CONTEXT, _CONTEXT.getResources().getString(R.string.addingFakeData), Toast.LENGTH_SHORT).show();
 
                         writeNewObject(userDB);
                         _CONTEXT.startActivity(new Intent(_CONTEXT, ActivityMenu.class));
@@ -437,6 +436,9 @@ public class AppFirebase {
         });
     }
     public void signOut() { FirebaseAuth.getInstance().signOut(); }
-    public boolean isLogged(){ return FirebaseAuth.getInstance().getCurrentUser() != null; }
+    public boolean isLogged(){
+        userFirebase = FirebaseAuth.getInstance().getCurrentUser();
+        return userFirebase != null;
+    }
 }
 

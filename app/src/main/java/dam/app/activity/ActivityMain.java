@@ -8,7 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 
 import dam.app.R;
 import dam.app.AppFirebase;
+import dam.app.extras.NotificationReserve;
 import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,7 +40,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private boolean backToMenu = false;
 
-    public void createDrawable(ActivityMain context, boolean backToMenu){
+    public void createDrawable(ActivityMain context, boolean backMenu){
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
 
@@ -59,8 +62,14 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         _CONTEXT = context;
         _FIREBASE = AppFirebase.getInstance(_CONTEXT);
-        _FIREBASE.updateHeaderDrawer(username);
-        this.backToMenu = backToMenu;
+        if(_FIREBASE.isLogged()) _FIREBASE.updateHeaderDrawer(username);//Funciona raro
+        backToMenu = backMenu;
+
+        BroadcastReceiver br = new NotificationReserve();
+        IntentFilter intent = new IntentFilter();
+        intent.addAction(NotificationReserve.idIntent);
+        _CONTEXT.getApplication().getApplicationContext().registerReceiver(br, intent);
+
     }
 
     @SuppressLint("NonConstantResourceId")

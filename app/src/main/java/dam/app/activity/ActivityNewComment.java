@@ -210,7 +210,7 @@ public class ActivityNewComment extends ActivityMain {
             c.setIdReserve(idReserve);
             c.setDateOfCommentFromDate(LocalDate.now());
             _FIREBASE.saveComment(c);
-
+            _CONTEXT.finish();
             /*Observable<String> observer = Observable.create(subscriber -> {
                 subscriber.onNext(_FIREBASE.saveComment(comment));
                 subscriber.onCompleted();

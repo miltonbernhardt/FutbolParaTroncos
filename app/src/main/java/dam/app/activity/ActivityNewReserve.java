@@ -1,7 +1,9 @@
 package dam.app.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,9 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.constraintlayout.widget.Guideline;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -19,7 +18,6 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,6 +28,14 @@ import dam.app.R;
 import dam.app.extras.EnumStateReserve;
 import dam.app.model.Field;
 import dam.app.model.Reserve;
+import dam.app.extras.NotificationReserve;
+import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 public class ActivityNewReserve extends ActivityMain {
     DatePickerDialog datePicker;
@@ -66,17 +72,7 @@ public class ActivityNewReserve extends ActivityMain {
         lblCostValue.setText("$ "+new DecimalFormat("##.##").format(field.getPrice()));
         lblFieldName.setText(field.getName());
 
-        LocalTime today = LocalTime.now();
-        int hourNow = today.getHour();
-        List<String> openingHours = new ArrayList<>();
-
-        while(hourNow < field.getOpeningTime()){
-            openingHours.add(String.format("%02d", hourNow)+":00");
-            hourNow++;
-        }
-        nextDay = (openingHours.size() == 0);
-
-
+        initSpinner();
         initCalendar();
 
         lblChosenDateValue.setOnClickListener(v -> datePicker.show(_CONTEXT.getSupportFragmentManager(), "Datepickerdialog"));
@@ -106,7 +102,9 @@ public class ActivityNewReserve extends ActivityMain {
         r.setPrice(field.getPrice());
         r.setAddress(field.getAddress());
         _FIREBASE.saveReserve(r);
-        //TODO añadir notificación de que se confirma la reserva
+        _CONTEXT.finish();
+
+        addNotification();
     }
 
     private void initSpinner(){
@@ -114,7 +112,10 @@ public class ActivityNewReserve extends ActivityMain {
         int hourNow = now.getHour();
         List<String> openingHours = new ArrayList<>();
 
-        while(hourNow < field.getOpeningTime()){
+        if(hourNow < field.getOpeningTime()){
+            hourNow = field.getOpeningTime();
+        }
+        while(hourNow < field.getClosingTime()){
             openingHours.add(String.format("%02d", hourNow)+":00");
             hourNow++;
         }
@@ -128,6 +129,7 @@ public class ActivityNewReserve extends ActivityMain {
                 hourNow++;
             }
         }
+
         spinnerStartingTime.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, openingHours));
         spinnerStartingTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -197,6 +199,37 @@ public class ActivityNewReserve extends ActivityMain {
             today = today.plusDays(1);
         }
         datePicker.setSelectableDays(days.toArray(new Calendar[days.size()]));
+    }
+
+    private void addNotification(){
+        Observable<Object> observable = Observable.create(subscriber -> {
+            subscriber.onNext(waitConfirmation());
+            subscriber.onCompleted();
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+
+        Subscriber<Object> subscriber = new Subscriber() {
+            @Override
+            public void onCompleted() {
+                Intent myIntention = new Intent();
+                myIntention.setAction(NotificationReserve.idIntent);
+                myIntention.putExtra("id", NotificationReserve.idIntent);
+                sendBroadcast(myIntention);
+            }
+            @Override
+            public void onError(Throwable e) { }
+            @Override
+            public void onNext(Object o) { }
+        };
+
+        _SUBSCRIPTION = observable.subscribe(subscriber);
+    }
+
+    private boolean waitConfirmation(){
+        try{
+            Thread.sleep(2000);
+        }catch(InterruptedException ignored){ }
+        return  true;
     }
 
     @Override

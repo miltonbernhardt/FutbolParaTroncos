@@ -1,8 +1,4 @@
 <resources>
-    <!-- clave de mapa -->
-    <string name="google_maps_key">AIzaSyCuYHwH_F4qzlVLJYDJWIR5FZWS_eN5loA</string>
-
-
     <string name="app_name">FPTs</string>
     <string name="name_title">Fútbol Para Troncos</string>
 
@@ -24,6 +20,9 @@
     <string name="activity_reserves_label">RESERVAS</string>
     <string name="activity_session">PANTALLA SESIÓN</string>
     <string name="activity_session_label">INICIAR SESIÓN</string>
+
+    <!-- key_map -->
+    <string name="google_maps_key">AIzaSyCuYHwH_F4qzlVLJYDJWIR5FZWS_eN5loA</string>
 
     <!-- activity_comments_recycler -->
     <string-array name="spinnerSortComments">
@@ -53,16 +52,13 @@
     <string name="hintComment">Comentario...</string>
     <string name="lblCommentAsk">¿Tenés alguna opinión que quieras dar?</string>
     <string name="lblNewComment">DAR OPINIÓN</string>
-
     <string name="lblUploadPhotoAsk">¿Deseas subir una imágen de la cancha?</string>
     <string name="lblRatingAsk">¿Cómo es tu valoración de la cancha?</string>
-
     <string name="errorCamera">Permiso de cámara denegado</string>
     <string name="errorGallery">Permiso de galería denegado</string>
     <string name="errorUploading">Hubo un error al subir la imágen de la cancha</string>
     <string name="errorSaveComment">Hubo un error al guardar la reseña</string>
     <string name="successfulSaveComment">La reseña se ha hecho con éxito</string>
-
 
     <!-- activity_new_reserve -->
     <string name="lblFieldTittle">TituloField</string>
@@ -76,22 +72,6 @@
     <string name="lblFinishTime">Hora de finalización:</string>
     <string name="btnChoseDate">Elegir fecha</string>
     <string name="successfulSaveReserve">La reserve se ha hecho con éxito</string>
-
-    <string-array name="spinnerStartingTime">
-        <item>09:00</item>
-        <item>10:00</item>
-        <item>11:00</item>
-        <item>12:00</item>
-        <item>13:00</item>
-        <item>14:00</item>
-        <item>15:00</item>
-        <item>16:00</item>
-        <item>17:00</item>
-        <item>18:00</item>
-        <item>19:00</item>
-        <item>20:00</item>
-        <item>21:00</item>
-    </string-array>
 
     <!-- activity_new_user -->
     <string name="tittleNewUser">Crear Cuenta</string>
@@ -160,7 +140,13 @@
     <string name="lblPriceValue">$ 500</string>
     <string name="lblStartingTimeValue">17:00</string>
     <string name="lblFinishTimeValue">18:00</string>
-    <string name="btnCancel">CANCELAR R.</string>
-    <string name="btnHasUsed">USAR R.</string>
+    <string name="btnCancel">CANCELAR</string>
+    <string name="btnHasUsed">USAR</string>
     <string name="btnReview">OPINAR</string>
+
+    <!-- NOTIFICATIONS -->
+    <string name="channel_name">CHANNEL_FPT</string>
+    <string name="channel_description">Canal para notificar las reservas confirmadas por los establecimientos</string>
+    <string name="title_notification_reserve">Su reserva fue recibida</string>
+    <string name="context_text_notification_reserve">El establecimineto confirmó su reserva para el día y horario elegido</string>
 </resources>

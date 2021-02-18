@@ -23,9 +23,7 @@
         android:theme="@style/Theme.FutbolParaTroncos.NoActionBar"
         android:usesCleartextTraffic="true">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/google_maps_key" />
 
         <activity android:name=".activity.ActivityMaps" android:label="@string/activity_maps_label" />
         <activity android:name="dam.app.activity.ActivityComments" android:screenOrientation="portrait" android:label="@string/activity_comments_label" />
@@ -38,12 +36,9 @@
         <activity android:name="dam.app.activity.ActivityMenu" android:label="@string/name_title" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
 
         <provider
             android:name="androidx.core.content.FileProvider"

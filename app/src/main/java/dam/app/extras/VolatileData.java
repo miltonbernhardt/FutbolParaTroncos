@@ -1,8 +1,5 @@
 package dam.app.extras;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +28,6 @@ public  class VolatileData {
         comments.get(4).setIdField(key);
 
         for (Comment c : comments) _REPOSITORY.writeNewObject(c);
-    }
-
-    public static void newUser(AppFirebase _REPOSITORY){
-        FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
-
     }
     
     public static ArrayList<Field> getFields(){
@@ -113,6 +105,8 @@ public  class VolatileData {
         c4.setComment("excelente la boca. Ni hablar las empanadas de choclo.");
         c5.setComment("encargue canelones de verdura y me llegaron sin salsa...tendrían que aclararlo en la selección del menú y brindar la opción se elegir la salsa para acompañar");
 
+        c1.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/reviews-images/field-El-fulbito-original-1.jpg");
+
         a.add(c1);
         a.add(c2);
         a.add(c3);
@@ -122,6 +116,8 @@ public  class VolatileData {
         return a;
     }
 
-    public static void addFakeData(AppFirebase firebase, String id) {
+    public static void addFakeData(AppFirebase firebase, String idUser) {
+        persist(firebase);
+        //por si quieren agregar datos
     }
 }

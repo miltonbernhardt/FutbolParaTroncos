@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.widget.Button;
 
 import dam.app.R;
-import dam.app.extras.VolatileData;
 
 import static android.view.View.GONE;
 
