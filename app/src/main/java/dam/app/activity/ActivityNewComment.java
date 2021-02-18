@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,14 +65,14 @@ public class ActivityNewComment extends ActivityMain {
 
         idField = getIntent().getStringExtra("idField");
         idReserve = getIntent().getStringExtra("idReserve");
-        fieldName = getIntent().getStringExtra("fieldName");
+        fieldName = getIntent().getStringExtra("nameField");
 
         btnAddComment = findViewById(R.id.btnAddComment);
         btnCamera = findViewById(R.id.btnCamera);
         btnDeleteImage = findViewById(R.id.btnDeleteImage);
         btnGallery = findViewById(R.id.btnGallery);
         imageUpload = findViewById(R.id.imageUpload);
-        lblNameField = findViewById(R.id.lblNameField);
+        lblNameField = findViewById(R.id.lblNameFieldValue);
         ratingBar = findViewById(R.id.ratingBar);
         textComment = findViewById(R.id.textComment);
 
@@ -201,18 +202,14 @@ public class ActivityNewComment extends ActivityMain {
 
         if(score == 0.0) Toast.makeText(_CONTEXT, R.string.should_rate, Toast.LENGTH_LONG).show();
         else{
-            Comment comment = new Comment();
-            comment.setComment(txtComment);
-            comment.setScore((int)score);
-            comment.setImagePath(IMAGE_PATH_FINAL);
-            comment.setIdField(idField);
-            comment.setIdReserve(idReserve);
-            comment.setDateOfCommentFromDate(LocalDate.now());
-
-            _FIREBASE.saveComment(comment);
-
-            Toast.makeText(_CONTEXT, R.string.successfulSaveComment, Toast.LENGTH_LONG).show();
-            finish();
+            Comment c = new Comment();
+            c.setComment(txtComment);
+            c.setScore((int)score);
+            c.setImagePath(IMAGE_PATH_FINAL);
+            c.setIdField(idField);
+            c.setIdReserve(idReserve);
+            c.setDateOfCommentFromDate(LocalDate.now());
+            _FIREBASE.saveComment(c);
 
             /*Observable<String> observer = Observable.create(subscriber -> {
                 subscriber.onNext(_FIREBASE.saveComment(comment));
@@ -233,5 +230,13 @@ public class ActivityNewComment extends ActivityMain {
                     } ,
                     error -> { error.printStackTrace(); Toast.makeText(_CONTEXT, R.string.errorSaveComment, Toast.LENGTH_LONG).show();});*/
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        navigationView.getMenu().getItem(2).setVisible(false);
+        navigationView.getMenu().getItem(3).setVisible(false);
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package dam.app.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,8 +29,6 @@ public class ActivityRegisterUser extends ActivityMain  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
         createDrawable(this, true);
-
-        setMenu(R.menu.menu_only_fields);
 
         mRegisterBtn = findViewById(R.id.btnRegisterUser);
         mUserName = findViewById(R.id.textUserName);
@@ -87,4 +86,12 @@ public class ActivityRegisterUser extends ActivityMain  {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        navigationView.getMenu().getItem(1).setVisible(false);
+        navigationView.getMenu().getItem(3).setVisible(false);
+        navigationView.getMenu().getItem(4).setVisible(false);
+        return true;
+    }
 }

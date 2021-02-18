@@ -3,6 +3,7 @@ package dam.app.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import dam.app.R;
 import dam.app.extras.EnumSortOption;
-import dam.app.recycler.FieldRecycler;
+import dam.app.adapters.FieldRecycler;
 
 public class ActivityFields extends ActivityMain {
     RecyclerView recyclerFields;
@@ -33,9 +34,6 @@ public class ActivityFields extends ActivityMain {
 
         if (ActivityCompat.checkSelfPermission(_CONTEXT, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(_CONTEXT, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_DIRECTORY);
-
-        if(_FIREBASE.isLogged()) setMenu(R.menu.menu_without_fields_with_session);
-        else setMenu(R.menu.menu_empty);
 
         spinnerSortFields = findViewById(R.id.spinnerSortFields);
         spinnerSortFields.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortFields)));
@@ -62,7 +60,7 @@ public class ActivityFields extends ActivityMain {
     }
 
     public void setFields(EnumSortOption sortBy) {
-        _FIREBASE.getAllFields(sortBy, recyclerFields);
+        _FIREBASE.setFieldsRecyclerView(sortBy, recyclerFields);
         /* - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
            - Esto quedo de haber implementado en un principio ROOM
         Observable<List<Field>> observer = Observable.create(subscriber -> {
@@ -83,6 +81,21 @@ public class ActivityFields extends ActivityMain {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) setFields(EnumSortOption.NOMBRE_ALFABETICO);
             else Toast.makeText(_CONTEXT, R.string.errorCamera, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        navigationView.getMenu().getItem(0).setVisible(false);
+        if (_FIREBASE.isLogged()){
+            navigationView.getMenu().getItem(2).setVisible(false);
+            navigationView.getMenu().getItem(3).setVisible(false);
+        }
+        else{
+            navigationView.getMenu().getItem(1).setVisible(false);
+            navigationView.getMenu().getItem(4).setVisible(false);
+        }
+        return true;
     }
 }
 

@@ -8,26 +8,25 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import dam.app.R;
 import dam.app.AppFirebase;
-import dam.app.model.User;
 import rx.Subscription;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
-    Menu menu;
     NavigationView navigationView;
     Toolbar toolbar;
 
@@ -35,20 +34,24 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     protected ActivityMain _CONTEXT;
     protected Subscription _SUBSCRIPTION;
-    protected FirebaseAuth _AUTH;
 
     private boolean backToMenu = false;
-
-    private User user;
 
     public void createDrawable(ActivityMain context, boolean backToMenu){
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer);
+
         navigationView = findViewById(R.id.navigation_view);
-        menu = findViewById(R.id.menu_all_options);
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.menu_all_options);
+        navigationView.setNavigationItemSelectedListener(this);
+        View v = navigationView.getHeaderView(0);
+        TextView username = v.findViewById(R.id.header_username);
+        TextView header_today = v.findViewById(R.id.header_today);
+        username.setText("Usuario no logueado");
+        header_today.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         setSupportActionBar(toolbar);
-        navigationView.setNavigationItemSelectedListener(this);
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -56,64 +59,45 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
         _CONTEXT = context;
         _FIREBASE = AppFirebase.getInstance(_CONTEXT);
-        _AUTH = FirebaseAuth.getInstance();
-
-
-
-
-
+        _FIREBASE.updateHeaderDrawer(username);
         this.backToMenu = backToMenu;
-        setMenu(R.menu.menu_all_options);
-    }
-
-    protected void setMenu(int menu){
-        navigationView.getMenu().clear();
-        navigationView.inflateMenu(menu);
     }
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.menu_option_session:
-                startActivity(new Intent(_CONTEXT, ActivityMenu.class));
-
+            case R.id.menu_option_login:
+                startActivity(new Intent(_CONTEXT, ActivityLogin.class));
                 Log.d("on DrawerLayout", getResources().getString(R.string.activity_session));
-
                 finishAffinity();
                 break;
+
+            case R.id.menu_option_register:
+                startActivity(new Intent(_CONTEXT, ActivityRegisterUser.class));
+                Log.d("on DrawerLayout", getResources().getString(R.string.activity_session));
+                finishAffinity();
+                break;
+
             case R.id.menu_option_fields:
-                Intent makeFieldsScreen = new Intent(_CONTEXT, ActivityFields.class);
-                startActivity(makeFieldsScreen);
-
+                startActivity(new Intent(_CONTEXT, ActivityFields.class));
                 Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_fields));
-
                 finishAffinity();
                 break;
+
             case R.id.menu_option_reserves:
                 if(_FIREBASE.isLogged()) {
-                    FirebaseUser u = FirebaseAuth.getInstance().getCurrentUser();
-                    Intent makeReviewScreen = new Intent(_CONTEXT, ActivityReserves.class);
-                    makeReviewScreen.putExtra("iduser", u.getUid());
-                    setResult(Activity.RESULT_OK, makeReviewScreen);
-                    startActivity(makeReviewScreen);
-
+                    startActivity(new Intent(_CONTEXT, ActivityReserves.class));
                     Log.d("on DrawerLayout", _CONTEXT.getResources().getString(R.string.activity_reserves));
-
-                    finish();
-
+                    finishAffinity();
                 }
-
                 break;
+
             case R.id.menu_option_close_session:
                 Toast.makeText(_CONTEXT, R.string.message_closing_session, Toast.LENGTH_SHORT).show();
-                _FIREBASE.signOut();
-
-                Intent intent = new Intent(_CONTEXT, ActivityMenu.class);
-                startActivity(intent);
-
                 Log.d("on DrawerLayout", getResources().getString(R.string.message_closing_session));
-
+                _FIREBASE.signOut();
+                startActivity(new Intent(_CONTEXT, ActivityMenu.class));
                 finishAffinity();
                 break;
         }
@@ -134,7 +118,6 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     @Override
     public void onStop() {
         super.onStop();
-        AppFirebase.close();
         if(_SUBSCRIPTION != null && !_SUBSCRIPTION.isUnsubscribed()) _SUBSCRIPTION.unsubscribe();
     }
 }

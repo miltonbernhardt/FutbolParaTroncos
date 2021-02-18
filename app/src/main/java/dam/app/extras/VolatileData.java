@@ -44,6 +44,7 @@ public  class VolatileData {
         Field f1 = new Field(), f2 = new Field(), f3 = new Field(), f4 = new Field();
 
         f1.setName("El Fúlbito");
+        f1.setPrice(1300);
         f1.setAddress("Lavaisse 610");
         f1.setPhoneOfContact("3459823462");
         f1.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_fulbito.jpg");
@@ -52,6 +53,7 @@ public  class VolatileData {
         f1.setRating(3.8f);
 
         f2.setName("Los Sin Sangre");
+        f2.setPrice(1200);
         f2.setAddress("Laprida 8990");
         f2.setPhoneOfContact("3426637869");
         f2.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_los_sin_sangre.jpg");
@@ -60,6 +62,7 @@ public  class VolatileData {
         f2.setRating(4.5f);
 
         f3.setName("El Nido de Perros");
+        f3.setPrice(1200);
         f3.setAddress("4 de Enero 3751");
         f3.setPhoneOfContact("3459829222");
         f3.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_nido_de_perros.jpg");
@@ -69,6 +72,7 @@ public  class VolatileData {
 
         f4.setName("El Salado");
         f4.setAddress("Gdor. Candioti 1700");
+        f4.setPrice(1400);
         f4.setPhoneOfContact("3432123469");
         f4.setImagePath("/storage/emulated/0/Android/data/dam.futbolparatroncos/files/images-fields-official/field_el_salado.jpg");
         f4.setPositionX("-31.640270");
@@ -115,9 +119,9 @@ public  class VolatileData {
         a.add(c4);
         a.add(c5);
 
-        //ToDo set idReserve
         return a;
     }
 
-    //ToDo hacer uno de reservas, que venzan al segundo de instalar y asi
+    public static void addFakeData(AppFirebase firebase, String id) {
+    }
 }

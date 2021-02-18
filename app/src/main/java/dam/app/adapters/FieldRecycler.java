@@ -1,4 +1,4 @@
-package dam.app.recycler;
+package dam.app.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,6 @@ import java.util.List;
 import dam.app.R;
 import dam.app.activity.ActivityComments;
 import dam.app.activity.ActivityMain;
-import dam.app.activity.ActivityNewComment;
 import dam.app.activity.ActivityNewReserve;
 import dam.app.activity.ActivityMaps;
 import dam.app.extras.EnumPaths;
@@ -149,8 +149,9 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         holder.btnReserve.setOnClickListener(view -> {
             if(_CONTEXT._FIREBASE.isLogged()){
                 Intent intent = new Intent(_CONTEXT, ActivityNewReserve.class);
-                intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
-                intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("field", list.get(holder.getAdapterPosition()));
+                intent.putExtras(bundle);
                 _CONTEXT.setResult(Activity.RESULT_OK, intent);
                 _CONTEXT.startActivity(intent);
                 Log.d("on ActivityReserves", _CONTEXT.getResources().getString(R.string.activity_new_reserves));
@@ -159,7 +160,6 @@ public class FieldRecycler extends RecyclerView.Adapter<FieldRecycler.FieldHolde
         });
 
         holder.btnReviews.setOnClickListener(view -> {
-            //TODO quitar
             Intent intent = new Intent(_CONTEXT, ActivityComments.class);
             intent.putExtra("idField", list.get(holder.getAdapterPosition()).getId());
             intent.putExtra("nameField", list.get(holder.getAdapterPosition()).getName());

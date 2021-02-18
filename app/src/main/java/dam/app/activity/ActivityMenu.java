@@ -24,17 +24,11 @@ public class ActivityMenu extends ActivityMain {
         btnLoginHome = findViewById(R.id.btnLoginHome);
         btnRegister = findViewById(R.id.btnRegister);
 
-        //VolatileData.persist(_FIREBASE);//Todo quitar o ver donde poner
-
         if(_FIREBASE.isLogged()){
-            //menu.findItem(R.id.menu_option_session).setEnabled(true);
-            //menu.findItem(R.id.menu_option_fields).setEnabled(false);
-            setMenu(R.menu.menu_all_options);
             btnLoginHome.setVisibility(GONE);
             btnRegister.setVisibility(GONE);
         }
         else {
-            setMenu(R.menu.menu_without_reserves_and_session);
             btnLoginHome.setOnClickListener(v -> {
                 Intent makeMenuScreen = new Intent(_CONTEXT, ActivityLogin.class);
                 startActivity(makeMenuScreen);
@@ -49,5 +43,17 @@ public class ActivityMenu extends ActivityMain {
                 finish();
             });
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        navigationView.getMenu().getItem(2).setVisible(false);
+        navigationView.getMenu().getItem(3).setVisible(false);
+        if (!_FIREBASE.isLogged()){
+            navigationView.getMenu().getItem(1).setVisible(false);
+            navigationView.getMenu().getItem(4).setVisible(false);
+        }
+        return true;
     }
 }

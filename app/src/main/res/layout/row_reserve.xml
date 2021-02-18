@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_container">
 
 
         <TextView
@@ -20,10 +21,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/bigger_padding_container"
-            android:text="@string/name_title"
+            android:text="@string/lblNameField"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintEnd_toStartOf="@id/lblNameFieldValue"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lblNameFieldValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/bigger_padding_container"
+            android:text="@string/name_title"
+            android:textAllCaps="false"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintStart_toEndOf="@id/lblNameField"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -35,10 +49,11 @@
             android:backgroundTint="@color/colorPrimary"
             android:padding="@dimen/padding_container"
             android:text="@string/lblStateReserve"
+            android:textColor="@color/fontColorLight"
             app:layout_constraintBottom_toTopOf="@id/guideline1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/lblNameField"
+            app:layout_constraintStart_toEndOf="@id/lblNameFieldValue"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -46,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.20" />
+            app:layout_constraintGuide_percent="0.17" />
 
         <TextView
             android:id="@+id/lblDateReserve"
@@ -54,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bigger_padding_container"
             android:text="@string/lblDateReserve"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/lblDateReserveValue"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +82,7 @@
             android:layout_marginStart="@dimen/padding_container"
             android:layout_marginEnd="@dimen/bigger_padding_container"
             android:text="@string/lblDateCommentRow"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/lblPrice"
             app:layout_constraintStart_toEndOf="@id/lblDateReserve"
@@ -79,6 +96,7 @@
             android:layout_marginStart="@dimen/bigger_padding_container"
             android:layout_marginEnd="@dimen/bigger_padding_container"
             android:text="@string/lblPrice"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/lblPriceValue"
             app:layout_constraintStart_toEndOf="@id/lblDateReserveValue"
@@ -90,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_container"
             android:text="@string/lblPriceValue"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/guideline2"
             app:layout_constraintStart_toEndOf="@id/lblPrice"
             app:layout_constraintTop_toBottomOf="@id/guideline1" />
@@ -99,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.37" />
+            app:layout_constraintGuide_percent="0.34" />
 
         <TextView
             android:id="@+id/lblStartingTime"
@@ -107,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bigger_padding_container"
             android:text="@string/lblStartingTime"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline3"
             app:layout_constraintEnd_toStartOf="@id/lblStartingTimeValue"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +139,7 @@
             android:layout_marginStart="@dimen/padding_container"
             android:layout_marginEnd="@dimen/bigger_padding_container"
             android:text="@string/lblStartingTimeValue"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/guideline3"
             app:layout_constraintEnd_toStartOf="@id/lblFinishTime"
             app:layout_constraintStart_toEndOf="@id/lblStartingTime"
@@ -132,6 +153,7 @@
             android:layout_marginStart="@dimen/bigger_padding_container"
             android:layout_marginEnd="@dimen/bigger_padding_container"
             android:text="@string/lblFinishTime"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline3"
             app:layout_constraintEnd_toStartOf="@id/lblFinishTimeValue"
             app:layout_constraintStart_toEndOf="@id/lblStartingTimeValue"
@@ -143,6 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_container"
             android:text="@string/lblFinishTimeValue"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/guideline3"
             app:layout_constraintStart_toEndOf="@id/lblFinishTime"
             app:layout_constraintTop_toBottomOf="@id/guideline2" />
@@ -152,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.54" />
+            app:layout_constraintGuide_percent="0.51" />
 
         <TextView
             android:id="@+id/lblLocation"
@@ -160,6 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/bigger_padding_container"
             android:text="@string/lblLocation"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/guideline4"
             app:layout_constraintEnd_toStartOf="@id/lblLocationValue"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,6 +196,7 @@
             android:layout_marginStart="@dimen/padding_container"
             android:text="@string/lblLocationValue"
             android:textAllCaps="false"
+            android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@id/guideline4"
             app:layout_constraintStart_toEndOf="@id/lblLocation"
             app:layout_constraintTop_toBottomOf="@id/guideline3"
@@ -182,17 +207,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.76" />
+            app:layout_constraintGuide_percent="0.68" />
 
         <Button
             android:id="@+id/btnCancel"
             style="@style/ButtonStyleTransparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_container"
             android:text="@string/btnCancel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnReview"
+            app:layout_constraintStart_toEndOf="@id/btnHasUsed"
             app:layout_constraintTop_toBottomOf="@id/guideline4" />
 
         <Button
@@ -200,10 +226,23 @@
             style="@style/ButtonStyleTransparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_container"
             android:text="@string/btnReview"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnCancel"
+            app:layout_constraintEnd_toStartOf="@id/btnHasUsed"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+
+        <Button
+            android:id="@+id/btnHasUsed"
+            style="@style/ButtonStyleTransparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_container"
+            android:text="@string/btnHasUsed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnCancel"
+            app:layout_constraintStart_toEndOf="@id/btnReview"
             app:layout_constraintTop_toBottomOf="@id/guideline4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

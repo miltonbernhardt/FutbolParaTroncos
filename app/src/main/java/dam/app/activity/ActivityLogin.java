@@ -1,14 +1,12 @@
 package dam.app.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import dam.app.R;
 
@@ -33,10 +31,9 @@ public class ActivityLogin extends ActivityMain {
         bntLogin.setOnClickListener(v -> {
             String email = mEmail.getText().toString();
             String password = mPassword.getText().toString();
-            signIn(email,password);
+            _FIREBASE.signIn(email,password);
         });
 
-        setMenu(R.menu.menu_only_fields);
     }
 
     private void addListenerTextView(TextView t){
@@ -55,17 +52,12 @@ public class ActivityLogin extends ActivityMain {
         });
     }
 
-    private void signIn(String email, String password){
-        _AUTH.signInWithEmailAndPassword(email, password).addOnCompleteListener(_CONTEXT, task -> {
-            if (task.isSuccessful()) {
-                Log.w("on ActivityLogin", _CONTEXT.getResources().getString(R.string.successfulLogin));
-                Toast.makeText(_CONTEXT, R.string.successfulLogin, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(_CONTEXT, ActivityMenu.class));
-                _CONTEXT.finish();
-            } else {
-                Log.w("on ActivityLogin", _CONTEXT.getResources().getString(R.string.errorLogin), task.getException());
-                Toast.makeText(_CONTEXT, R.string.errorLogin, Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        navigationView.getMenu().getItem(1).setVisible(false);
+        navigationView.getMenu().getItem(2).setVisible(false);
+        navigationView.getMenu().getItem(4).setVisible(false);
+        return true;
     }
 }

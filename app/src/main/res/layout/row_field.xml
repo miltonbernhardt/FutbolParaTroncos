@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/space"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/btnReserve"
                 android:textSize="@dimen/size_text_button" />
 
@@ -114,15 +114,10 @@
                 style="@style/ButtonStyleTransparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
+                android:layout_weight="1"
                 android:text="@string/btnOpinions"
                 android:textSize="@dimen/size_text_button"
                 app:iconTintMode="src_atop" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4" />
 
             <ImageButton
                 android:id="@+id/btnLocate"

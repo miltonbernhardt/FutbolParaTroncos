@@ -6,10 +6,6 @@
     <group
         android:id="@+id/menu_all_options"
         android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_option_session"
-            android:icon="@mipmap/icon_session"
-            android:title="@string/menu_option_session" />
 
         <item
             android:id="@+id/menu_option_fields"
@@ -23,9 +19,16 @@
             android:title="@string/menu_option_reserves" />
 
         <item
+            android:id="@+id/menu_option_login"
+            android:icon="@mipmap/icon_session"
+            android:title="@string/menu_option_login" />
+        <item
+            android:id="@+id/menu_option_register"
+            android:icon="@mipmap/icon_register_user"
+            android:title="@string/menu_option_register" />
+        <item
             android:id="@+id/menu_option_close_session"
             android:icon="@android:drawable/ic_menu_close_clear_cancel"
             android:title="@string/menu_option_close_session" />
-
     </group>
 </menu>

@@ -11,6 +11,11 @@ public class Reserve implements Serializable {
     private String idUser;
     private String idField;
 
+    private float price;
+    private String nameField;
+
+    private String address;
+
     private String id;
     private String dateOfReserve;
     private int startTime;
@@ -47,6 +52,22 @@ public class Reserve implements Serializable {
         this.id = id;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getDateOfReserve() {
         return dateOfReserve;
     }
@@ -79,11 +100,19 @@ public class Reserve implements Serializable {
         this.hasCommented = hasCommented;
     }
 
-    public String isUsed() {
+    public String getNameField() {
+        return nameField;
+    }
+
+    public void setNameField(String nameField) {
+        this.nameField = nameField;
+    }
+
+    public String getState() {
         return state;
     }
 
-    public void setUsed(String state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -97,7 +126,7 @@ public class Reserve implements Serializable {
     }
 
     @Exclude
-    public void setDateOfReserveFromDate(LocalDate dateOfReserve) {
+    public void setDateOfReserve(LocalDate dateOfReserve) {
         if (dateOfReserve == null) {
             this.dateOfReserve = "";
         } else {

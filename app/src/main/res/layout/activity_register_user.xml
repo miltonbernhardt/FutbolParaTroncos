@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tittleNewUser"
-                android:textSize="@dimen/size_sub_subtitle" />
+                android:textSize="@dimen/size_subtitle" />
 
             <Space
                 android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:ems="10"
                 android:gravity="center"
                 android:hint="@string/fui_email_hint"
-                android:inputType="textPersonName|textEmailAddress" />
+                android:inputType="textEmailAddress" />
 
             <Space
                 android:layout_width="match_parent"

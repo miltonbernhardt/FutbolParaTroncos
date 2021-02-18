@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +20,7 @@ import java.util.ArrayList;
 
 import dam.app.R;
 import dam.app.extras.EnumSortOption;
-import dam.app.model.Comment;
-import dam.app.recycler.CommentRecycler;
+import dam.app.adapters.CommentRecycler;
 
 public class ActivityComments extends ActivityMain {
     RecyclerView recyclerView;
@@ -29,7 +29,7 @@ public class ActivityComments extends ActivityMain {
     Spinner spinnerSortComments;
 
     private String idField;
-    private String fieldName;
+    private String nameField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,10 @@ public class ActivityComments extends ActivityMain {
         createDrawable(this, false);
 
         idField = getIntent().getStringExtra("idField");
-        fieldName = getIntent().getStringExtra("nameField");
+        nameField = getIntent().getStringExtra("nameField");
 
-        lblNameField = findViewById(R.id.lblNameField);
-        lblNameField.setText(fieldName);
+        lblNameField = findViewById(R.id.lblNameFieldValue);
+        lblNameField.setText(nameField);
 
         spinnerSortComments = findViewById(R.id.spinnerSortComments);
         spinnerSortComments.setAdapter(new ArrayAdapter<>(_CONTEXT, R.layout.spinner_layout, getResources().getStringArray(R.array.spinnerSortComments)));
@@ -63,18 +63,15 @@ public class ActivityComments extends ActivityMain {
         btnMakeOpinion = findViewById(R.id.btnMakeOpinion);
         btnMakeOpinion.setOnClickListener(v -> {
             if(_FIREBASE.isLogged()){
-                Intent intent = new Intent(_CONTEXT, ActivityNewComment.class);
+                Intent intent = new Intent(_CONTEXT, ActivityReserves.class);
                 intent.putExtra("idField", idField);
-                intent.putExtra("idReserve", idField);
-                intent.putExtra("fieldName", fieldName);
+                intent.putExtra("nameField", nameField);
                 setResult(Activity.RESULT_OK, intent);
                 startActivity(intent);
                 Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
             }
             else Toast.makeText(_CONTEXT, R.string.user_not_logged, Toast.LENGTH_LONG).show();
         });
-
-        if(!_FIREBASE.isLogged()) setMenu(R.menu.menu_only_fields);
 
         recyclerView = findViewById(R.id.recyclerComments);
         recyclerView.setHasFixedSize(true);
@@ -83,7 +80,7 @@ public class ActivityComments extends ActivityMain {
     }
 
     public void setComments(String idField, EnumSortOption sortBy) {
-        _FIREBASE.getCommentsFromField(idField, sortBy, recyclerView);
+        _FIREBASE.setCommentsRecyclerView(idField, sortBy, recyclerView);
         /*  - Técnicamente no se necesitaría de Observables y Subscriptions, porque la consulta de los datos a fireba se hace en segundo plano.
             - Esto quedo de haber implementado en un principio ROOM
 
@@ -96,7 +93,20 @@ public class ActivityComments extends ActivityMain {
                 fields -> recyclerView.setAdapter(new CommentRecycler(fields, _CONTEXT)) ,
                 error -> Toast.makeText(_CONTEXT, R.string.failedOperation, Toast.LENGTH_LONG).show());
         */
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        if(_FIREBASE.isLogged()) {
+            navigationView.getMenu().getItem(2).setVisible(false);
+            navigationView.getMenu().getItem(3).setVisible(false);
+        }
+        else{
+            navigationView.getMenu().getItem(1).setVisible(false);
+            navigationView.getMenu().getItem(4).setVisible(false);
+        }
+        return true;
     }
 }
 

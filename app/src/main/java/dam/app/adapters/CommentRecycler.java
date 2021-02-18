@@ -1,4 +1,4 @@
-package dam.app.recycler;
+package dam.app.adapters;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

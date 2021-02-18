@@ -81,10 +81,14 @@
         <item name="android:secondaryProgressTint">@color/dark_gray</item>
         <item name="android:stepSize">0.5</item>
         <item name="android:rating">3.5</item>
-    </style>
+    </style>MaterialAlertDialogBuilder
 
     <style name="ToolBarStyle" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/fontColorLight</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Body_ThemeOverlay.MaterialComponents.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="android:background">@color/colorOnSecondary</item>
     </style>
 </resources>
