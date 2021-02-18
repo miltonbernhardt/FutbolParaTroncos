@@ -102,9 +102,38 @@ public class ActivityNewReserve extends ActivityMain {
         r.setPrice(field.getPrice());
         r.setAddress(field.getAddress());
         _FIREBASE.saveReserve(r);
-        _CONTEXT.finish();
-
         addNotification();
+        _CONTEXT.finish();
+    }
+
+    private void addNotification(){
+        Observable<Object> observable = Observable.create(subscriber -> {
+            subscriber.onNext(waitConfirmation());
+            subscriber.onCompleted();
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+
+        Subscriber<Object> subscriber = new Subscriber() {
+            @Override
+            public void onCompleted() {
+                Intent myIntention = new Intent();
+                myIntention.setAction(NotificationReserve.idIntent);
+                myIntention.putExtra("id", NotificationReserve.idIntent);
+                sendBroadcast(myIntention);
+            }
+            @Override
+            public void onError(Throwable e) { }
+            @Override
+            public void onNext(Object o) { }
+        };
+
+        observable.subscribe(subscriber);
+    }
+
+    private boolean waitConfirmation(){
+        try{
+            Thread.sleep(2000);
+        }catch(InterruptedException ignored){ }
+        return  true;
     }
 
     private void initSpinner(){
@@ -199,37 +228,6 @@ public class ActivityNewReserve extends ActivityMain {
             today = today.plusDays(1);
         }
         datePicker.setSelectableDays(days.toArray(new Calendar[days.size()]));
-    }
-
-    private void addNotification(){
-        Observable<Object> observable = Observable.create(subscriber -> {
-            subscriber.onNext(waitConfirmation());
-            subscriber.onCompleted();
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-
-
-        Subscriber<Object> subscriber = new Subscriber() {
-            @Override
-            public void onCompleted() {
-                Intent myIntention = new Intent();
-                myIntention.setAction(NotificationReserve.idIntent);
-                myIntention.putExtra("id", NotificationReserve.idIntent);
-                sendBroadcast(myIntention);
-            }
-            @Override
-            public void onError(Throwable e) { }
-            @Override
-            public void onNext(Object o) { }
-        };
-
-        _SUBSCRIPTION = observable.subscribe(subscriber);
-    }
-
-    private boolean waitConfirmation(){
-        try{
-            Thread.sleep(2000);
-        }catch(InterruptedException ignored){ }
-        return  true;
     }
 
     @Override

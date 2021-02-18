@@ -44,7 +44,7 @@ public class NotificationReserve extends BroadcastReceiver {
         }
     }
 
-    private void createNotification(){
+    private void createNotification() {
         Intent intent = new Intent(_CONTEXT, ActivityReserves.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(_CONTEXT, 0, intent, 0);
@@ -55,21 +55,12 @@ public class NotificationReserve extends BroadcastReceiver {
         myBuilder.setContentText(_CONTEXT.getResources().getString(R.string.context_text_notification_reserve));
         myBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         myBuilder.setContentIntent(pendingIntent);
-        myBuilder.setLights(Color.MAGENTA, 1000,1000);
-        myBuilder.setVibrate(new long[]{1000,1000,1000});
+        myBuilder.setLights(Color.MAGENTA, 1000, 1000);
+        myBuilder.setVibrate(new long[]{1000, 1000, 1000});
         myBuilder.setDefaults(Notification.DEFAULT_SOUND);
         myBuilder.setAutoCancel(true);
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(_CONTEXT);
         notificationManagerCompat.notify(NOTIFICATION_ID, myBuilder.build());
     }
-}
-
-class NotificationPublisher extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String identificador = intent.getStringExtra(NotificationReserve.idIntent);
-        Log.i("broadcast", "Ingreso al escuchador");
-    }
-
 }

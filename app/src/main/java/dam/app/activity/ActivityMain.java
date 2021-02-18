@@ -34,9 +34,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
 
     public AppFirebase _FIREBASE = null;
-
+    public Subscription _SUBSCRIPTION;
     protected ActivityMain _CONTEXT;
-    protected Subscription _SUBSCRIPTION;
+
 
     private boolean backToMenu = false;
 
@@ -68,8 +68,7 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         BroadcastReceiver br = new NotificationReserve();
         IntentFilter intent = new IntentFilter();
         intent.addAction(NotificationReserve.idIntent);
-        _CONTEXT.getApplication().getApplicationContext().registerReceiver(br, intent);
-
+        getApplicationContext().registerReceiver(br, intent);
     }
 
     @SuppressLint("NonConstantResourceId")

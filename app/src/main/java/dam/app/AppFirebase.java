@@ -31,6 +31,7 @@ import dam.app.activity.ActivityMenu;
 import dam.app.extras.EnumPaths;
 import dam.app.extras.EnumSortOption;
 import dam.app.extras.EnumStateReserve;
+import dam.app.extras.NotificationReserve;
 import dam.app.extras.VolatileData;
 import dam.app.model.Comment;
 import dam.app.model.Field;
@@ -39,6 +40,10 @@ import dam.app.model.User;
 import dam.app.adapters.CommentRecycler;
 import dam.app.adapters.FieldRecycler;
 import dam.app.adapters.ReservesRecycler;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class AppFirebase {
     protected static ActivityMain _CONTEXT;
@@ -189,8 +194,6 @@ public class AppFirebase {
         });
     }
 
-
-
     public void saveReserve(Reserve reserve){
         if(userDB != null) {
             _FIREBASE.child("users").child(userDB.getId()).addValueEventListener(new ValueEventListener() {
@@ -200,6 +203,7 @@ public class AppFirebase {
                     reserve.setIdUser(userDB.getId());
                     writeNewObject(reserve);
                     Toast.makeText(_CONTEXT, R.string.successfulRegister, Toast.LENGTH_LONG).show();
+                    _CONTEXT.finish();
                 }
 
                 @Override

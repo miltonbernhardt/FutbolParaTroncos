@@ -50,7 +50,7 @@
                             android:ems="10"
                             android:gravity="center"
                             android:hint="@string/hintTextEmail"
-                            android:inputType="textPersonName" />
+                            android:inputType="textEmailAddress" />
 
                         <Space
                             android:layout_width="match_parent"

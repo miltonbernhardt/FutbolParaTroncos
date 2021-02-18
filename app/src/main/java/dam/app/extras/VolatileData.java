@@ -116,8 +116,9 @@ public  class VolatileData {
         return a;
     }
 
+    //Esto se ejecuta cuando se registra un usuario
     public static void addFakeData(AppFirebase firebase, String idUser) {
-        persist(firebase);
+        //persist(firebase);
         //por si quieren agregar datos
     }
 }
