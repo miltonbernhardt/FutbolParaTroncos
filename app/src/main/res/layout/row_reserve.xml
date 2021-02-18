@@ -13,237 +13,256 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/bigger_padding_container"
         android:paddingTop="@dimen/padding_container">
 
 
-        <TextView
-            android:id="@+id/lblNameField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/bigger_padding_container"
-            android:text="@string/lblNameField"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline1"
-            app:layout_constraintEnd_toStartOf="@id/lblNameFieldValue"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/padding_container"
+            app:layout_constraintBottom_toTopOf="@id/linear2"
+            app:layout_constraintEnd_toStartOf="@id/lblStateReserve"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/lblNameFieldValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/bigger_padding_container"
-            android:text="@string/name_title"
-            android:textAllCaps="false"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline1"
-            app:layout_constraintStart_toEndOf="@id/lblNameField"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/lblNameField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblNameField"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblNameFieldValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/name_title"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lblNameField"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/lblStateReserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/bigger_padding_container"
             android:background="@drawable/edit_text_background"
             android:backgroundTint="@color/colorPrimary"
             android:padding="@dimen/padding_container"
             android:text="@string/lblStateReserve"
             android:textColor="@color/fontColorLight"
-            app:layout_constraintBottom_toTopOf="@id/guideline1"
+            app:layout_constraintBottom_toTopOf="@id/linear2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@id/lblNameFieldValue"
+            app:layout_constraintStart_toEndOf="@id/linear1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
-
-        <TextView
-            android:id="@+id/lblDateReserve"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bigger_padding_container"
-            android:text="@string/lblDateReserve"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline2"
-            app:layout_constraintEnd_toStartOf="@+id/lblDateReserveValue"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/padding_container"
+            app:layout_constraintBottom_toTopOf="@id/linear3"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline1" />
+            app:layout_constraintTop_toBottomOf="@id/linear1">
 
-        <TextView
-            android:id="@+id/lblDateReserveValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_container"
-            android:layout_marginEnd="@dimen/bigger_padding_container"
-            android:text="@string/lblDateCommentRow"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline2"
-            app:layout_constraintEnd_toStartOf="@+id/lblPrice"
-            app:layout_constraintStart_toEndOf="@id/lblDateReserve"
-            app:layout_constraintTop_toBottomOf="@id/guideline1" />
+            <TextView
+                android:id="@+id/lblDateReserve"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblDateReserve"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/lblDateReserveValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblDateReserveValue"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/lblDateCommentRow"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/lblPrice"
+                app:layout_constraintStart_toEndOf="@id/lblDateReserve"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblPrice"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/lblPriceValue"
+                app:layout_constraintStart_toEndOf="@+id/lblDateReserveValue"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblPriceValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/lblPriceValue"
+                android:textStyle="italic"
+                app:layout_constraintBaseline_toBaselineOf="@+id/lblPrice"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lblPrice"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <TextView
-            android:id="@+id/lblPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bigger_padding_container"
-            android:layout_marginEnd="@dimen/bigger_padding_container"
-            android:text="@string/lblPrice"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline2"
-            app:layout_constraintEnd_toStartOf="@+id/lblPriceValue"
-            app:layout_constraintStart_toEndOf="@id/lblDateReserveValue"
-            app:layout_constraintTop_toBottomOf="@id/guideline1" />
-
-        <TextView
-            android:id="@+id/lblPriceValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_container"
-            android:text="@string/lblPriceValue"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline2"
-            app:layout_constraintStart_toEndOf="@id/lblPrice"
-            app:layout_constraintTop_toBottomOf="@id/guideline1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.34" />
-
-        <TextView
-            android:id="@+id/lblStartingTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bigger_padding_container"
-            android:text="@string/lblStartingTime"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline3"
-            app:layout_constraintEnd_toStartOf="@id/lblStartingTimeValue"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/padding_container"
+            app:layout_constraintBottom_toTopOf="@id/linear4"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+            app:layout_constraintTop_toBottomOf="@id/linear2">
 
-        <TextView
-            android:id="@+id/lblStartingTimeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_container"
-            android:layout_marginEnd="@dimen/bigger_padding_container"
-            android:text="@string/lblStartingTimeValue"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline3"
-            app:layout_constraintEnd_toStartOf="@id/lblFinishTime"
-            app:layout_constraintStart_toEndOf="@id/lblStartingTime"
-            app:layout_constraintTop_toBottomOf="@id/guideline2"
-            app:layout_goneMarginEnd="@dimen/bigger_padding_container" />
+            <TextView
+                android:id="@+id/lblStartingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblStartingTime"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/lblStartingTimeValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/lblStartingTimeValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/lblFinishTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bigger_padding_container"
-            android:layout_marginEnd="@dimen/bigger_padding_container"
-            android:text="@string/lblFinishTime"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline3"
-            app:layout_constraintEnd_toStartOf="@id/lblFinishTimeValue"
-            app:layout_constraintStart_toEndOf="@id/lblStartingTimeValue"
-            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+            <TextView
+                android:id="@+id/lblStartingTimeValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/lblStartingTimeValue"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/lblFinishTime"
+                app:layout_constraintStart_toEndOf="@+id/lblStartingTime"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/lblFinishTimeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_container"
-            android:text="@string/lblFinishTimeValue"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline3"
-            app:layout_constraintStart_toEndOf="@id/lblFinishTime"
-            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+            <TextView
+                android:id="@+id/lblFinishTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblFinishTime"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/lblFinishTimeValue"
+                app:layout_constraintStart_toEndOf="@+id/lblStartingTimeValue"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.51" />
+            <TextView
+                android:id="@+id/lblFinishTimeValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/lblFinishTimeValue"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lblFinishTime"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/lblLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bigger_padding_container"
-            android:text="@string/lblLocation"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"
-            app:layout_constraintEnd_toStartOf="@id/lblLocationValue"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/padding_container"
+            app:layout_constraintBottom_toTopOf="@id/linear5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+            app:layout_constraintTop_toBottomOf="@id/linear3">
 
-        <TextView
-            android:id="@+id/lblLocationValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_container"
-            android:text="@string/lblLocationValue"
-            android:textAllCaps="false"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@id/guideline4"
-            app:layout_constraintStart_toEndOf="@id/lblLocation"
-            app:layout_constraintTop_toBottomOf="@id/guideline3"
-            app:layout_goneMarginEnd="@dimen/bigger_padding_container" />
+            <TextView
+                android:id="@+id/lblLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblLocation"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/lblLocationValue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.68" />
+            <TextView
+                android:id="@+id/lblLocationValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_container"
+                android:text="@string/lblLocationValue"
+                android:textAllCaps="false"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/lblLocation"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/btnCancel"
-            style="@style/ButtonStyleTransparent"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linear5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_container"
-            android:text="@string/btnCancel"
+            android:layout_marginVertical="@dimen/padding_container"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnHasUsed"
-            app:layout_constraintTop_toBottomOf="@id/guideline4" />
-
-        <Button
-            android:id="@+id/btnReview"
-            style="@style/ButtonStyleTransparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_container"
-            android:text="@string/btnReview"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnHasUsed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+            app:layout_constraintTop_toBottomOf="@id/linear4">
 
-        <Button
-            android:id="@+id/btnHasUsed"
-            style="@style/ButtonStyleTransparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_container"
-            android:text="@string/btnHasUsed"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnCancel"
-            app:layout_constraintStart_toEndOf="@id/btnReview"
-            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+            <Button
+                android:id="@+id/btnHasUsed"
+                style="@style/ButtonStyleTransparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btnHasUsed"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnCancel"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                style="@style/ButtonStyleTransparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btnCancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnReview"
+                app:layout_constraintStart_toEndOf="@+id/btnHasUsed"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnReview"
+                style="@style/ButtonStyleTransparent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btnReview"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnCancel"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -59,10 +59,6 @@ public class ReservesRecycler extends RecyclerView.Adapter<ReservesRecycler.View
             btnCancel = v.findViewById(R.id.btnCancel);
             btnHasUsed = v.findViewById(R.id.btnHasUsed);
             btnReview = v.findViewById(R.id.btnReview);
-            guideline1 = v.findViewById(R.id.guideline1);
-            guideline2 = v.findViewById(R.id.guideline2);
-            guideline3 = v.findViewById(R.id.guideline3);
-            guideline4 = v.findViewById(R.id.guideline4);
             lblNameField = v.findViewById(R.id.lblNameFieldValue);
             lblStateReserve = v.findViewById(R.id.lblStateReserve);
             lblDateReserveValue = v.findViewById(R.id.lblDateReserveValue);
@@ -142,16 +138,6 @@ public class ReservesRecycler extends RecyclerView.Adapter<ReservesRecycler.View
                 Log.d("on ActivityComments", _CONTEXT.getResources().getString(R.string.activity_new_comment));
 
             });
-        }
-
-
-        if(holder.btnReview.getVisibility() == View.GONE &&
-                holder.btnHasUsed.getVisibility() == View.GONE &&
-                holder.btnCancel.getVisibility() == View.GONE){
-            holder.guideline1.setGuidelinePercent(0.25f);
-            holder.guideline2.setGuidelinePercent(0.50f);
-            holder.guideline3.setGuidelinePercent(0.75f);
-            holder.guideline4.setGuidelinePercent(1f);
         }
     }
 

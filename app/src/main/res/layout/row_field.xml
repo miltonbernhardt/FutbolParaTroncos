@@ -89,7 +89,8 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@mipmap/image_no_image_available"
+            android:src="@mipmap/icon_field_foreground"
+            app:srcCompat="@mipmap/icon_field_foreground"
             tools:ignore="ContentDescription" />
 
         <LinearLayout

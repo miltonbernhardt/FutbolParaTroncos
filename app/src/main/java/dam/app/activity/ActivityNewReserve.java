@@ -138,12 +138,13 @@ public class ActivityNewReserve extends ActivityMain {
 
     private void initSpinner(){
         LocalTime now = LocalTime.now();
-        int hourNow = now.getHour();
+        int hourNow = now.getHour()+1;
         List<String> openingHours = new ArrayList<>();
 
         if(hourNow < field.getOpeningTime()){
             hourNow = field.getOpeningTime();
         }
+
         while(hourNow < field.getClosingTime()){
             openingHours.add(String.format("%02d", hourNow)+":00");
             hourNow++;

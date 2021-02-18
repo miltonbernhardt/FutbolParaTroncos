@@ -368,6 +368,7 @@ public class AppFirebase {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Reserve reserve = dataSnapshot.getValue(Reserve.class);
                         reserve.setHasCommented(true);
+                        if(reserve.getState().equals(EnumStateReserve.ACTIVA.toString())) reserve.setState(EnumStateReserve.USADA.toString());
                         updateObject(reserve);
                     }
 
